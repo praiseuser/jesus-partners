@@ -10,10 +10,10 @@ export default function HomePage() {
     <>
       <HeroSection />
       <InfoBar />
-      {/* <AboutSection />
-      <NewsSection /> */}
+      <AboutSection />
+      <NewsSection />
       <DiscipleshipSection />
-      {/* <MaterialsSection /> */}
+      <MaterialsSection />
     </>
   );
 }
