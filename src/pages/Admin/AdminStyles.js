@@ -1,4 +1,4 @@
-import { colors, typography } from "../../../theme";
+import { colors, typography } from "../../theme";
 
 export const pageWrapper = {
   p: { xs: 2.5, md: 3.5 },
@@ -40,9 +40,7 @@ export const searchBar = {
   px: 1.8,
   py: 1.1,
   transition: "border-color 0.2s ease",
-  "&:focus-within": {
-    borderColor: `${colors.secondary.main}60`,
-  },
+  "&:focus-within": { borderColor: `${colors.secondary.main}60` },
 };
 
 export const filterSelect = {
@@ -57,10 +55,7 @@ export const filterSelect = {
   outline: "none",
   cursor: "pointer",
   minWidth: 160,
-  "& option": {
-    background: colors.primary.dark,
-    color: "#fff",
-  },
+  "& option": { background: colors.primary.dark, color: "#fff" },
 };
 
 export const categoryPill = {

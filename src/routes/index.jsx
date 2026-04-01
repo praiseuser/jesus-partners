@@ -10,10 +10,23 @@ import BlogPage from '../pages/Blog';
 import ResourcesPage from '../pages/Resources';
 import GivePage from '../pages/Give';
 import NotFoundPage from '../pages/NotFoundPage';
+import LoginPage from '../pages/public/login';
 import AdminDashboardPage from '../pages/Admin/Dashboard';
 import AdminBlogsPage from '../pages/Admin/Blog';
+import AdminActivitiesPage from '../pages/Admin/Activities';
+import AdminAnnouncementsPage from '../pages/Admin/Announcement';
+import AdminBibleStudiesPage from '../pages/Admin/BibleStudy';
+import AdminCategoriesPage from '../pages/Admin/Category';
+import AdminDailyDevotionPage from '../pages/Admin/DailyDevotion';
+import AdminDiscipleshipPage from '../pages/Admin/Discipleship';
+import AdminEventsPage from '../pages/Admin/Events';
+import AdminMediaPage from '../pages/Admin/Media';
 
 const router = createBrowserRouter([
+    {
+        path: '/login',
+        element: <LoginPage />,
+    },
     {
         path: '/',
         element: <MainLayout />,
@@ -42,14 +55,14 @@ const router = createBrowserRouter([
         children: [
             { index: true, element: <AdminDashboardPage /> },
             { path: 'blogs', element: <AdminBlogsPage /> },
-            { path: 'activities', element: <AdminDashboardPage /> },
-            { path: 'announcements', element: <AdminDashboardPage /> },
-            { path: 'bible-studies', element: <AdminDashboardPage /> },
-            { path: 'categories', element: <AdminDashboardPage /> },
-            { path: 'daily-devotion', element: <AdminDashboardPage /> },
-            { path: 'discipleship', element: <AdminDashboardPage /> },
-            { path: 'events', element: <AdminDashboardPage /> },
-            { path: 'media', element: <AdminDashboardPage /> },
+            { path: 'activities', element: <AdminActivitiesPage /> },
+            { path: 'announcements', element: <AdminAnnouncementsPage /> },
+            { path: 'bible-studies', element: <AdminBibleStudiesPage /> },
+            { path: 'categories', element: <AdminCategoriesPage /> },
+            { path: 'daily-devotion', element: <AdminDailyDevotionPage /> },
+            { path: 'discipleship', element: <AdminDiscipleshipPage /> },
+            { path: 'events', element: <AdminEventsPage /> },
+            { path: 'media', element: <AdminMediaPage /> },
             { path: 'messages', element: <AdminDashboardPage /> },
             { path: 'partners', element: <AdminDashboardPage /> },
             { path: 'payment-methods', element: <AdminDashboardPage /> },
