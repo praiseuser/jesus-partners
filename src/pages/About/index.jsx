@@ -42,22 +42,38 @@ const useReveal = (threshold = 0.08) => {
 };
 
 const STATS = [
-    { value: '2008', label: 'Year Founded', icon: EmojiEventsIcon, color: colors.secondary.main },
-    { value: '50+', label: 'Nations Reached', icon: PublicIcon, color: colors.accent.teal },
-    { value: '10,000+', label: 'Partners Worldwide', icon: GroupsIcon, color: colors.accent.green },
-    { value: '1000s', label: 'Lives Transformed', icon: FavoriteIcon, color: colors.accent.red },
+    { value: '2023', label: 'Formally Incorporated', icon: EmojiEventsIcon, color: colors.secondary.main },
+    { value: '400+', label: 'Widows Supported', icon: FavoriteIcon, color: colors.accent.red },
+    { value: '2', label: 'Boarding Schools', icon: GroupsIcon, color: colors.accent.green },
+    { value: '1000s', label: 'Lives Transformed', icon: PublicIcon, color: colors.accent.teal },
 ];
 
 const PILLARS = [
-    { icon: VisibilityIcon, color: colors.secondary.main, title: 'Our Vision', desc: 'To raise men and women who shall accompany Jesus and become true partners in fulfilling the Great Commission across every nation and generation.' },
-    { icon: FlagIcon, color: colors.accent.teal, title: 'Our Mission', desc: 'To raise revival and gospel altars across the nations of the world — partnering with Jesus to reveal Him so that men may possess their possession.' },
-    { icon: GroupsIcon, color: colors.accent.green, title: 'Who We Are', desc: 'Jesus Partners Outreach is a global outreach ministry on a divine mandate — dedicated to reaching every generation with the transforming power of the Gospel.' },
+    {
+        icon: VisibilityIcon,
+        color: colors.secondary.main,
+        title: 'Our Vision',
+        desc: 'To raise men and women who shall accompany Jesus and become true partners in fulfilling the Great Commission — reaching the lost, healing the broken, and transforming communities across every nation and generation.',
+    },
+    {
+        icon: FlagIcon,
+        color: colors.accent.teal,
+        title: 'Our Mission',
+        desc: 'To raise revival and gospel altars across the nations — partnering with Jesus through Crusades, Revivals, and practical outreaches to reveal Him so that men may possess their possession, and the vulnerable may find hope.',
+    },
+    {
+        icon: GroupsIcon,
+        color: colors.accent.green,
+        title: 'Who We Are',
+        desc: 'Jesus Partners Outreach is a Nigerian-incorporated ministry on a divine mandate. We serve orphans, widows, persecuted believers, and ministers in need — sharing the love of Christ in word and in deed.',
+    },
 ];
 
 export default function AboutPage() {
     const [heroRef, heroVis] = useReveal(0.05);
     const [statsRef, statsVis] = useReveal();
     const [pillarsRef, pillarsVis] = useReveal();
+    const [storyRef, storyVis] = useReveal();
     const [ctaRef, ctaVis] = useReveal();
 
     return (
@@ -90,7 +106,7 @@ export default function AboutPage() {
                             </Typography>
 
                             <Typography sx={{ fontFamily: typography.fontFamily.body, fontSize: { xs: '0.95rem', md: '1.05rem' }, color: 'rgba(255,255,255,0.55)', lineHeight: 1.9, maxWidth: 460, mb: 4, opacity: heroVis ? 1 : 0, animation: heroVis ? 'ab_rise .7s ease .26s both' : 'none' }}>
-                                Since 2008, Jesus Partners Outreach has been on a divine mandate — reaching the generations of the world with the Word, revealing Jesus so that men may truly possess their possession.
+                                For years, the founders of Jesus Partners Outreach quietly ministered under difficult conditions — feeding, clothing, training, and preaching the Gospel. In 2023, what began as a passionate calling was formally incorporated in Nigeria as Jesus Partners Outreach, bringing structure to years of faithful service.
                             </Typography>
 
                             <Box component={Link} to="/give" sx={{ display: 'inline-flex', alignItems: 'center', gap: 1.2, bgcolor: colors.secondary.main, color: 'white', px: 3.5, py: 1.6, borderRadius: '10px', textDecoration: 'none', fontFamily: typography.fontFamily.heading, fontSize: typography.fontSize.sm, fontWeight: 800, boxShadow: `0 8px 28px ${colors.secondary.main}44`, transition: 'all .3s cubic-bezier(.34,1.2,.64,1)', opacity: heroVis ? 1 : 0, animation: heroVis ? 'ab_rise .7s ease .34s both' : 'none', '&:hover': { transform: 'translateY(-4px) scale(1.04)', boxShadow: `0 16px 40px ${colors.secondary.main}55` } }}>
@@ -102,16 +118,13 @@ export default function AboutPage() {
                         {/* Right — animated logo */}
                         <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', opacity: heroVis ? 1 : 0, animation: heroVis ? 'ab_right .9s cubic-bezier(.34,1.2,.64,1) .3s both' : 'none' }}>
                             <Box sx={{ position: 'relative', width: { xs: 220, md: 300 }, height: { xs: 220, md: 300 } }}>
-                                {/* rings */}
                                 <Box sx={{ position: 'absolute', inset: '-18%', borderRadius: '50%', border: `1px dashed rgba(212,160,23,0.18)`, animation: 'ab_spin 22s linear infinite', pointerEvents: 'none' }}>
                                     <Box sx={{ position: 'absolute', top: '-5px', left: '46%', width: 10, height: 10, borderRadius: '50%', bgcolor: colors.secondary.main, boxShadow: `0 0 14px ${colors.secondary.main}` }} />
                                 </Box>
                                 <Box sx={{ position: 'absolute', inset: '-6%', borderRadius: '50%', border: `1px dashed rgba(14,165,233,0.14)`, animation: 'ab_spinR 15s linear infinite', pointerEvents: 'none' }}>
                                     <Box sx={{ position: 'absolute', bottom: '-4px', left: '46%', width: 8, height: 8, borderRadius: '50%', bgcolor: colors.accent.teal, boxShadow: `0 0 10px ${colors.accent.teal}` }} />
                                 </Box>
-                                {/* glow */}
                                 <Box sx={{ position: 'absolute', inset: 0, borderRadius: '50%', background: `radial-gradient(circle,${colors.secondary.main}20 0%,transparent 70%)`, animation: 'ab_glow 4s ease-in-out infinite', pointerEvents: 'none' }} />
-                                {/* logo */}
                                 <Box component="img" src="/jesus1.png" alt="JPO" sx={{ width: '100%', height: '100%', objectFit: 'contain', position: 'relative', zIndex: 2, animation: 'ab_float 5s ease-in-out infinite', filter: `drop-shadow(0 20px 50px ${colors.secondary.main}40)` }} />
                             </Box>
                         </Box>
@@ -168,7 +181,6 @@ export default function AboutPage() {
                             const Icon = p.icon;
                             return (
                                 <Box key={p.title} sx={{ bgcolor: colors.background.default, borderRadius: '22px', p: { xs: 3, md: 4 }, border: `1px solid ${colors.divider}`, position: 'relative', overflow: 'hidden', opacity: pillarsVis ? 1 : 0, animation: pillarsVis ? `ab_rise .65s cubic-bezier(.34,1.2,.64,1) ${i * .12}s both` : 'none', transition: 'transform .35s cubic-bezier(.34,1.2,.64,1), box-shadow .3s', '&:hover': { transform: 'translateY(-10px)', boxShadow: `0 30px 65px rgba(10,16,40,0.1), 0 0 0 1px ${p.color}30` }, '&::before': { content: '""', position: 'absolute', top: 0, bottom: 0, width: '55%', left: '-80%', zIndex: 5, pointerEvents: 'none', background: 'linear-gradient(105deg,transparent 30%,rgba(255,255,255,0.7) 50%,transparent 70%)' }, '&:hover::before': { animation: 'ab_shimmer .6s ease forwards' } }}>
-                                    {/* top accent */}
                                     <Box sx={{ position: 'absolute', top: 0, left: 0, right: 0, height: 3, background: `linear-gradient(90deg,${p.color},${p.color}55)` }} />
                                     <Box sx={{ width: 54, height: 54, borderRadius: '16px', bgcolor: `${p.color}14`, border: `2px solid ${p.color}28`, display: 'flex', alignItems: 'center', justifyContent: 'center', mb: 2.5, animation: 'ab_pulse 3s ease infinite' }}>
                                         <Icon sx={{ fontSize: 26, color: p.color }} />
@@ -182,18 +194,78 @@ export default function AboutPage() {
                 </Container>
             </Box>
 
+            {/* ══ OUR STORY ══ */}
+            <Box ref={storyRef} sx={{ bgcolor: colors.background.default, py: { xs: 8, md: 12 }, position: 'relative', overflow: 'hidden' }}>
+                <Box sx={{ position: 'absolute', top: '-10%', right: '-4%', width: 400, height: 400, borderRadius: '50%', background: `radial-gradient(circle,${colors.secondary.main}08 0%,transparent 70%)`, pointerEvents: 'none' }} />
+                <Container maxWidth="lg" sx={{ position: 'relative', zIndex: 1 }}>
+
+                    <Box sx={{ textAlign: 'center', mb: { xs: 6, md: 8 }, opacity: storyVis ? 1 : 0, animation: storyVis ? 'ab_rise .6s ease both' : 'none' }}>
+                        <Box sx={{ display: 'inline-flex', alignItems: 'center', gap: 1.5, mb: 1.5 }}>
+                            <Box sx={{ width: 28, height: 3, borderRadius: 2, bgcolor: colors.secondary.main }} />
+                            <Typography sx={{ fontFamily: typography.fontFamily.body, fontSize: typography.fontSize.xs, fontWeight: 700, color: colors.secondary.main, letterSpacing: 2.5, textTransform: 'uppercase' }}>How It Began</Typography>
+                            <Box sx={{ width: 28, height: 3, borderRadius: 2, bgcolor: colors.secondary.main }} />
+                        </Box>
+                        <Typography sx={{ fontFamily: typography.fontFamily.accent, fontSize: { xs: '1.9rem', md: '2.6rem' }, fontWeight: 900, color: colors.text.primary, lineHeight: 1.12 }}>
+                            A Story of Faithful Obedience
+                        </Typography>
+                    </Box>
+
+                    <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', md: '1fr 1fr' }, gap: { xs: 5, md: 8 }, alignItems: 'start' }}>
+                        <Box sx={{ opacity: storyVis ? 1 : 0, animation: storyVis ? 'ab_left .7s ease .1s both' : 'none' }}>
+                            <Typography sx={{ fontFamily: typography.fontFamily.body, fontSize: typography.fontSize.base, color: colors.text.secondary, lineHeight: 1.9, mb: 2.5 }}>
+                                The founders and presidents of Jesus Partners Outreach found themselves ministering under deeply challenging conditions — where feeding, clothing, and training of children was a serious burden. Yet they pressed on, driven by a love for the Gospel and for the vulnerable.
+                            </Typography>
+                            <Typography sx={{ fontFamily: typography.fontFamily.body, fontSize: typography.fontSize.base, color: colors.text.secondary, lineHeight: 1.9, mb: 2.5 }}>
+                                In 2007, a missionary brother from the USA came for a medical mission in Nkier-Gboko and was moved to partner with the family and ministry. His commitment has been unwavering ever since — a living testimony of God's provision.
+                            </Typography>
+                            <Typography sx={{ fontFamily: typography.fontFamily.body, fontSize: typography.fontSize.base, color: colors.text.secondary, lineHeight: 1.9 }}>
+                                Inspired by James 1:27 and the generosity shown to them, God spoke to the founders to share with others as He had done for them. Over the years they have served widows, orphans, churches, and ministers — going out for Gospel Crusades, Revivals, praying for the sick, and assisting those in need.
+                            </Typography>
+                        </Box>
+
+                        <Box sx={{ opacity: storyVis ? 1 : 0, animation: storyVis ? 'ab_right .7s ease .2s both' : 'none' }}>
+                            <Typography sx={{ fontFamily: typography.fontFamily.body, fontSize: typography.fontSize.base, color: colors.text.secondary, lineHeight: 1.9, mb: 2.5 }}>
+                                In 2023, what had been years of passionate, Spirit-led ministry was formally organised and incorporated in Nigeria — and Jesus Partners Outreach was born as an institution.
+                            </Typography>
+                            <Typography sx={{ fontFamily: typography.fontFamily.body, fontSize: typography.fontSize.base, color: colors.text.secondary, lineHeight: 1.9, mb: 3 }}>
+                                Today, the ministry reaches widows, orphans, persecuted believers, and displaced communities — especially those affected by security crises and attacks in Northern Nigeria. With practical care, Gospel proclamation, education support, and ministerial training, Jesus Partners Outreach continues to be the hands and feet of Christ.
+                            </Typography>
+
+                            {/* Key partnerships list */}
+                            <Box sx={{ bgcolor: 'white', borderRadius: '16px', p: 3, border: `1px solid ${colors.divider}` }}>
+                                <Typography sx={{ fontFamily: typography.fontFamily.heading, fontSize: typography.fontSize.sm, fontWeight: 800, color: colors.text.primary, mb: 2, textTransform: 'uppercase', letterSpacing: 1 }}>
+                                    Our Areas of Partnership
+                                </Typography>
+                                {[
+                                    'Crusades & Revivals',
+                                    'Widows & Orphans Care',
+                                    'Medical Outreaches',
+                                    'Pastors & Children Support',
+                                    'Ministerial Training',
+                                ].map((item, i) => (
+                                    <Box key={item} sx={{ display: 'flex', alignItems: 'center', gap: 1.5, py: 1, borderBottom: i < 4 ? `1px solid ${colors.divider}` : 'none' }}>
+                                        <Box sx={{ width: 8, height: 8, borderRadius: '50%', bgcolor: colors.secondary.main, flexShrink: 0 }} />
+                                        <Typography sx={{ fontFamily: typography.fontFamily.body, fontSize: typography.fontSize.sm, color: colors.text.secondary, fontWeight: 500 }}>{item}</Typography>
+                                    </Box>
+                                ))}
+                            </Box>
+                        </Box>
+                    </Box>
+                </Container>
+            </Box>
+
             {/* ══ SCRIPTURE QUOTE ══ */}
-            <Box sx={{ bgcolor: colors.background.default, py: { xs: 6, md: 8 } }}>
+            <Box sx={{ bgcolor: 'white', py: { xs: 6, md: 8 } }}>
                 <Container maxWidth="md">
                     <Box sx={{ bgcolor: colors.primary.dark, borderRadius: '24px', p: { xs: 4, md: 6 }, textAlign: 'center', position: 'relative', overflow: 'hidden', border: `1px solid rgba(212,160,23,0.18)` }}>
                         <Box sx={{ position: 'absolute', inset: 0, backgroundImage: `radial-gradient(rgba(212,160,23,0.05) 1px, transparent 1px)`, backgroundSize: '20px 20px', pointerEvents: 'none' }} />
                         <FormatQuoteIcon sx={{ fontSize: 48, color: `${colors.secondary.main}40`, mb: 1, position: 'relative', zIndex: 1 }} />
                         <Typography sx={{ fontFamily: typography.fontFamily.accent, fontSize: { xs: '1.1rem', md: '1.4rem' }, fontWeight: 700, color: 'rgba(255,255,255,0.82)', lineHeight: 1.8, fontStyle: 'italic', mb: 2, position: 'relative', zIndex: 1 }}>
-                            "Go into all the world and preach the gospel to all creation."
+                            "Religion that God our Father accepts as pure and faultless is this: to look after orphans and widows in their distress and to keep oneself from being polluted by the world."
                         </Typography>
                         <Box sx={{ display: 'inline-flex', alignItems: 'center', gap: 1, position: 'relative', zIndex: 1 }}>
                             <Box sx={{ width: 24, height: 2, bgcolor: colors.secondary.main, borderRadius: 2 }} />
-                            <Typography sx={{ fontFamily: typography.fontFamily.heading, fontSize: typography.fontSize.sm, fontWeight: 700, color: colors.secondary.main }}>Mark 16:15</Typography>
+                            <Typography sx={{ fontFamily: typography.fontFamily.heading, fontSize: typography.fontSize.sm, fontWeight: 700, color: colors.secondary.main }}>James 1:27</Typography>
                             <Box sx={{ width: 24, height: 2, bgcolor: colors.secondary.main, borderRadius: 2 }} />
                         </Box>
                     </Box>
@@ -208,8 +280,8 @@ export default function AboutPage() {
                         <Typography sx={{ fontFamily: typography.fontFamily.accent, fontSize: { xs: '1.9rem', md: '2.6rem' }, fontWeight: 900, color: 'white', lineHeight: 1.12, mb: 1.5 }}>
                             Ready to Partner with Jesus?
                         </Typography>
-                        <Typography sx={{ fontFamily: typography.fontFamily.body, fontSize: typography.fontSize.base, color: 'rgba(255,255,255,0.55)', mb: 4, maxWidth: 400, mx: 'auto', lineHeight: 1.85 }}>
-                            Join thousands of partners across 50+ nations and be part of the Great Commission.
+                        <Typography sx={{ fontFamily: typography.fontFamily.body, fontSize: typography.fontSize.base, color: 'rgba(255,255,255,0.55)', mb: 4, maxWidth: 480, mx: 'auto', lineHeight: 1.85 }}>
+                            Join us in reaching orphans, widows, persecuted believers, and the lost. Every partnership makes an eternal difference.
                         </Typography>
                         <Stack direction={{ xs: 'column', sm: 'row' }} gap={2} justifyContent="center">
                             <Box component={Link} to="/give" sx={{ display: 'inline-flex', alignItems: 'center', gap: 1, bgcolor: colors.secondary.main, color: 'white', px: 4, py: 1.7, borderRadius: '10px', textDecoration: 'none', fontFamily: typography.fontFamily.heading, fontSize: typography.fontSize.sm, fontWeight: 800, boxShadow: `0 8px 28px ${colors.secondary.main}44`, transition: 'all .3s cubic-bezier(.34,1.2,.64,1)', '&:hover': { transform: 'translateY(-4px) scale(1.04)', boxShadow: `0 16px 40px ${colors.secondary.main}55` } }}>

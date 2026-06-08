@@ -7,7 +7,7 @@ import GroupsIcon from '@mui/icons-material/Groups';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import AutoStoriesIcon from '@mui/icons-material/AutoStories';
-import EmojiPeopleIcon from '@mui/icons-material/EmojiPeople';
+import FavoriteIcon from '@mui/icons-material/Favorite';
 import { colors, typography } from '../../../../theme';
 import {
     keyframes, wrapSx, bgPatternSx, orbSx,
@@ -19,23 +19,23 @@ import {
 
 const MATERIALS = [
     {
-        icon: MenuBookIcon,
+        icon: FavoriteIcon,
         color: colors.secondary.main,
-        title: 'Bible Studies',
-        subtitle: 'A Journey of Spiritual Growth',
-        body: `Embark on a Journey of Spiritual Growth! Unveil the profound teachings of the Bible in our vibrant and enriching Bible Study Class! Join us as we delve into the timeless wisdom, share meaningful insights, and build a community bound by faith and love.\n\nExplore the Scriptures together, discover the beauty of God's word, and find inspiration for your daily life. Our Bible Study Class is a welcoming space where seekers, believers, and curious minds come together to grow spiritually and strengthen their connection with God.`,
-        features: ['Weekly Sessions', 'All Levels Welcome', 'Community Focused', 'Deep Scripture Study'],
-        link: '/resources',
+        title: 'Partner With Us',
+        subtitle: 'Do More and Better Together',
+        body: `Here is what we are given to doing and we request that you partner with us to do more and better.\n\nOver the years we have been sharing with widows, orphans, churches, ministers and their children. We have committed our lives to the word of Christ through Gospel Crusades and Revivals with great testimonies of salvation, praying for the sick and assisting some to get medical attention where needed.\n\nYour partnership makes all of this possible — together we can reach more lives with the love of Christ.`,
+        features: ['Crusades & Revivals', 'Widows & Orphans', 'Medical Outreaches', 'Education Assistance'],
+        link: '/partner',
         delay: 0.1,
     },
     {
         icon: GroupsIcon,
         color: colors.primary.light,
-        title: 'Discipleship Training',
-        subtitle: 'Ignite a Transformational Journey',
-        body: `Are you ready to deepen your understanding of faith and ignite a transformational journey?\n\nJoin our Discipleship Class and explore the profound teachings that nourish the soul. Every moment is an opportunity for growth, and every step forward is a step toward a more meaningful life.\n\nDon't miss out on this chance to embark on a journey that will leave you inspired, enlightened, and connected to a supportive community. Together, let's forge bonds that last a lifetime.`,
-        features: ['Faith Formation', 'Mentorship', 'Fellowship', 'Life Transformation'],
-        link: '/programs',
+        title: 'Ministerial Training',
+        subtitle: 'Grace College of Evangelism & Missions',
+        body: `Through Grace College of Evangelism and Missions in Abuja, we are raising and equipping ministers for the Gospel across Nigeria and beyond.\n\nWe provide scholarships, study materials, infrastructural development and a residence for students. Ministers and their children also receive tuition support, books and external exams support.\n\nJoin us in raising a generation of committed Gospel workers who will carry the fire of revival to the nations.`,
+        features: ['Scholarship Support', 'Study Materials', 'Infrastructural Development', 'Ministerial Support'],
+        link: '/what-we-do',
         delay: 0.22,
     },
 ];
@@ -75,9 +75,9 @@ export default function MaterialsSection() {
                     }}>
                         <Box sx={labelAccentSx} />
                         <Box>
-                            <Typography sx={labelTextSx}>Discipleship Materials</Typography>
+                            <Typography sx={labelTextSx}>Get Involved</Typography>
                             <Typography sx={{ fontFamily: typography.fontFamily.body, fontSize: typography.fontSize.sm, color: colors.text.secondary, mt: 0.5, lineHeight: 1.7 }}>
-                                Tools and resources to ground you in faith, community and purpose.
+                                Partner with us and be part of what God is doing through Jesus Partners Outreach.
                             </Typography>
                         </Box>
                     </Box>
@@ -129,7 +129,7 @@ export default function MaterialsSection() {
 
                                         {/* CTA button */}
                                         <Box component={Link} to={mat.link} sx={ctaBtnSx(mat.color)}>
-                                            Click Here to Join
+                                            Learn More
                                             <ArrowForwardIcon sx={{ fontSize: 16 }} />
                                         </Box>
                                     </Box>

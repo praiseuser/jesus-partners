@@ -13,6 +13,8 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import LoginIcon from '@mui/icons-material/Login';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import PublicIcon from '@mui/icons-material/Public';
+import VolunteerActivismIcon from '@mui/icons-material/VolunteerActivism';
+import HandshakeIcon from '@mui/icons-material/Handshake';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import { Link, useLocation } from 'react-router-dom';
 import { colors, typography } from '../../theme';
@@ -29,10 +31,12 @@ const MORE_ITEMS = [
 
 const NAV_LINKS = [
     { label: 'Home', path: '/', icon: HomeIcon, color: colors.secondary.main },
-    { label: 'Blog', path: '/blog', icon: ArticleIcon, color: colors.accent.teal },
-    { label: 'Resources', path: '/resources', icon: LibraryBooksIcon, color: colors.accent.purple },
-    { label: 'Contact', path: '/contact', icon: ContactMailIcon, color: colors.accent.green },
-    { label: 'About', path: '/about', icon: InfoIcon, color: colors.accent.red },
+    { label: 'What We Do', path: '/whatwedo', icon: VolunteerActivismIcon, color: colors.accent.teal },
+    { label: 'Blog', path: '/blog', icon: ArticleIcon, color: colors.accent.purple },
+    { label: 'Resources', path: '/resources', icon: LibraryBooksIcon, color: colors.accent.green },
+    { label: 'Contact', path: '/contact', icon: ContactMailIcon, color: colors.accent.red },
+    { label: 'About', path: '/about', icon: InfoIcon, color: colors.secondary.main },
+    { label: 'Partner With Us', path: '/partners', icon: HandshakeIcon, color: colors.accent.teal },
 ];
 
 const Logo = () => (
@@ -78,7 +82,7 @@ const MoreDropdown = ({ isActive }) => {
                     <Box sx={{ position: 'absolute', top: -7, right: 24, width: 14, height: 14, bgcolor: '#0D1117', border: '1px solid rgba(255,255,255,0.1)', borderBottom: 'none', borderRight: 'none', transform: 'rotate(45deg)' }} />
 
                     <Box sx={{ p: 1.5 }}>
-                        {MORE_ITEMS.map((item, i) => {
+                        {MORE_ITEMS.map((item) => {
                             const Icon = item.icon;
                             return (
                                 <Box key={item.label} component={Link} to={item.path} onClick={() => setOpen(false)}

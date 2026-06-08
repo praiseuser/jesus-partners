@@ -20,51 +20,11 @@ const keyframes = {
     '@keyframes bl_glow': { '0%,100%': { opacity: .4 }, '50%': { opacity: .75 } },
 };
 
-/* ── dummy data — replace with API call from admin ── */
-const BLOGS = [
-    {
-        id: 1, featured: true,
-        category: 'Word of God', categoryColor: colors.secondary.main,
-        title: 'The man departed, and told the Jews that it was Jesus, which had made him whole.',
-        excerpt: 'A powerful testimony of healing and the transforming power of encountering Jesus personally. When we encounter the living Word, nothing remains the same — bodies heal, minds are renewed, and destinies are realigned.',
-        author: 'Pastor JPO', date: 'January 15, 2025', readTime: '5 min read',
-        img: null, ref: 'John 5:15',
-    },
-    {
-        id: 2, featured: false,
-        category: 'Evangelism', categoryColor: colors.primary.light,
-        title: 'Reaching Nations: How the Gospel is Spreading Across Africa',
-        excerpt: 'A recap of our global outreach activities and the thousands of lives touched across 50+ nations through the power of the Gospel.',
-        author: 'Admin', date: 'February 3, 2025', readTime: '4 min read',
-        img: null, ref: null,
-    },
-    {
-        id: 3, featured: false,
-        category: 'Discipleship', categoryColor: colors.accent.teal,
-        title: 'Walking in Your Identity as a Child of God',
-        excerpt: 'Many believers live below their privileges. This article explores what it means to truly walk in the fullness of who God has called you to be.',
-        author: 'Pastor JPO', date: 'February 18, 2025', readTime: '6 min read',
-        img: null, ref: 'Romans 8:14',
-    },
-    {
-        id: 4, featured: false,
-        category: 'Faith', categoryColor: colors.accent.red,
-        title: 'Possessing Your Possession — Faith That Acts',
-        excerpt: 'Faith without works is dead. Discover how to move from intellectual belief to active, possessing faith that brings heaven to earth.',
-        author: 'Admin', date: 'March 1, 2025', readTime: '7 min read',
-        img: null, ref: 'James 2:17',
-    },
-    {
-        id: 5, featured: false,
-        category: 'Prayer', categoryColor: colors.accent.green,
-        title: 'The Power of Partnering with Jesus in Prayer',
-        excerpt: 'Prayer is not a monologue — it is a conversation. Learn how to partner with Jesus in intercession and see breakthrough in every area of life.',
-        author: 'Pastor JPO', date: 'March 10, 2025', readTime: '5 min read',
-        img: null, ref: 'John 15:7',
-    },
-];
+/* ── Blog posts come from admin dashboard ── */
+const BLOGS = [];
 
-const CATEGORIES = ['All', 'Word of God', 'Evangelism', 'Discipleship', 'Faith', 'Prayer'];
+/* ── Categories will grow as admin adds posts ── */
+const CATEGORIES = ['All', 'Crusades & Revivals', 'Widows & Orphans', 'Medical Outreach', 'Education', 'Ministerial Training', 'Testimonies'];
 
 const useReveal = () => {
     const ref = useRef(null);
@@ -96,7 +56,6 @@ const FeaturedCard = ({ post }) => (
             <Box sx={{ position: 'absolute', inset: 0, background: `radial-gradient(ellipse 80% 80% at 50% 50%, ${colors.secondary.main}20 0%, transparent 70%)` }} />
             <Box sx={{ position: 'absolute', width: '110%', height: '110%', borderRadius: '50%', border: `1px dashed rgba(212,160,23,0.15)`, animation: 'bl_gradShift 20s linear infinite', pointerEvents: 'none' }} />
             <ArticleIcon sx={{ fontSize: 90, color: `${colors.secondary.main}30`, position: 'relative', zIndex: 1 }} />
-            {/* Featured badge */}
             <Box sx={{ position: 'absolute', top: 16, left: 16, display: 'inline-flex', alignItems: 'center', gap: .8, bgcolor: 'rgba(212,160,23,0.9)', borderRadius: '8px', px: 1.8, py: .6 }}>
                 <NewReleasesIcon sx={{ fontSize: 13, color: 'white' }} />
                 <Typography sx={{ fontFamily: typography.fontFamily.body, fontSize: '0.62rem', fontWeight: 800, color: 'white', letterSpacing: 1.5, textTransform: 'uppercase' }}>Featured</Typography>
@@ -143,9 +102,7 @@ const BlogCard = ({ post, delay }) => (
         '&::before': { content: '""', position: 'absolute', top: 0, bottom: 0, width: '55%', left: '-80%', zIndex: 10, pointerEvents: 'none', background: 'linear-gradient(105deg,transparent 30%,rgba(255,255,255,0.55) 50%,transparent 70%)' },
         '&:hover::before': { animation: 'bl_shimmer .6s ease forwards' },
     }}>
-        {/* top color bar */}
         <Box sx={{ height: 4, background: `linear-gradient(90deg,${post.categoryColor},${post.categoryColor}55)` }} />
-        {/* image placeholder */}
         <Box sx={{ height: 160, bgcolor: `${colors.primary.dark}`, display: 'flex', alignItems: 'center', justifyContent: 'center', position: 'relative', overflow: 'hidden' }}>
             <Box sx={{ position: 'absolute', inset: 0, background: `radial-gradient(circle at 50% 50%, ${post.categoryColor}15 0%, transparent 70%)` }} />
             <ArticleIcon sx={{ fontSize: 60, color: `${post.categoryColor}35`, position: 'relative', zIndex: 1 }} />
@@ -207,13 +164,13 @@ export default function BlogPage() {
                             <Typography sx={{ fontFamily: typography.fontFamily.body, fontSize: '0.68rem', fontWeight: 700, color: colors.secondary.light, letterSpacing: 2.5, textTransform: 'uppercase' }}>Our Blog</Typography>
                         </Box>
                         <Typography sx={{ fontFamily: typography.fontFamily.accent, fontSize: { xs: '2.4rem', md: '3.4rem' }, fontWeight: 900, color: 'white', lineHeight: 1.1, mb: 1.5 }}>
-                            Word. Faith.{' '}
+                            Stories. Testimonies.{' '}
                             <Box component="span" sx={{ background: `linear-gradient(120deg,${colors.secondary.main},${colors.secondary.light})`, WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>
-                                Life.
+                                Updates.
                             </Box>
                         </Typography>
                         <Typography sx={{ fontFamily: typography.fontFamily.body, fontSize: typography.fontSize.base, color: 'rgba(255,255,255,0.55)', maxWidth: 500, lineHeight: 1.85 }}>
-                            Insights, teachings and testimonies to strengthen your faith and deepen your walk with God.
+                            Follow our journey — crusades, outreaches, testimonies of salvation, widows and orphans care, and everything God is doing through Jesus Partners Outreach.
                         </Typography>
                     </Box>
                 </Container>
@@ -251,7 +208,6 @@ export default function BlogPage() {
 
                     {featured && activeCategory === 'All' && !search && <FeaturedCard post={featured} />}
 
-
                     {filtered.length > 0 ? (
                         <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', sm: '1fr 1fr', lg: 'repeat(3,1fr)' }, gap: 3 }}>
                             {filtered.map((post, i) => <BlogCard key={post.id} post={post} delay={0.1 + i * 0.08} />)}
@@ -259,11 +215,20 @@ export default function BlogPage() {
                     ) : (
                         <Box sx={{ textAlign: 'center', py: { xs: 8, md: 12 } }}>
                             <ArticleIcon sx={{ fontSize: 64, color: colors.divider, mb: 2 }} />
-                            <Typography sx={{ fontFamily: typography.fontFamily.heading, fontSize: typography.fontSize.xl, fontWeight: 800, color: colors.text.primary, mb: 1 }}>No articles found</Typography>
-                            <Typography sx={{ fontFamily: typography.fontFamily.body, color: colors.text.secondary, mb: 3 }}>Try a different search or category.</Typography>
-                            <Box onClick={() => { setSearch(''); setActiveCategory('All'); }} sx={{ display: 'inline-flex', alignItems: 'center', gap: 1, bgcolor: colors.primary.main, color: 'white', px: 3, py: 1.3, borderRadius: '10px', cursor: 'pointer', fontFamily: typography.fontFamily.heading, fontWeight: 600, fontSize: typography.fontSize.sm, '&:hover': { bgcolor: colors.primary.light } }}>
-                                Clear filters
-                            </Box>
+                            <Typography sx={{ fontFamily: typography.fontFamily.heading, fontSize: typography.fontSize.xl, fontWeight: 800, color: colors.text.primary, mb: 1 }}>
+                                No articles yet
+                            </Typography>
+                            <Typography sx={{ fontFamily: typography.fontFamily.body, color: colors.text.secondary, mb: 1 }}>
+                                We are working on stories from our crusades, outreaches and testimonies.
+                            </Typography>
+                            <Typography sx={{ fontFamily: typography.fontFamily.body, color: colors.text.secondary, mb: 3, fontStyle: 'italic' }}>
+                                Check back soon — God is doing great things!
+                            </Typography>
+                            {(search || activeCategory !== 'All') && (
+                                <Box onClick={() => { setSearch(''); setActiveCategory('All'); }} sx={{ display: 'inline-flex', alignItems: 'center', gap: 1, bgcolor: colors.primary.main, color: 'white', px: 3, py: 1.3, borderRadius: '10px', cursor: 'pointer', fontFamily: typography.fontFamily.heading, fontWeight: 600, fontSize: typography.fontSize.sm, '&:hover': { bgcolor: colors.primary.light } }}>
+                                    Clear filters
+                                </Box>
+                            )}
                         </Box>
                     )}
 

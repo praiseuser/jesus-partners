@@ -14,31 +14,8 @@ import {
     readMoreSx, scriptureBannerSx, scriptureTextSx, scriptureRefSx,
 } from './styles';
 
-/* News will come from admin dashboard — using placeholder data for now */
-const NEWS = [
-    {
-        id: 1, featured: true,
-        category: 'Word of God', categoryColor: colors.secondary.main,
-        title: 'The man departed, and told the Jews that it was Jesus, which had made him whole.',
-        desc: 'A powerful testimony of healing and the transforming power of encountering Jesus personally in your daily walk.',
-        date: 'Jan 2025', img: null,
-        ref: 'John 5:15',
-    },
-    {
-        id: 2, featured: false,
-        category: 'Ministry', categoryColor: colors.accent.teal,
-        title: 'Reaching Nations: Our 2025 Outreach Report',
-        desc: 'A recap of our global outreach activities and the lives touched across continents.',
-        date: 'Feb 2025', img: null, ref: null,
-    },
-    {
-        id: 3, featured: false,
-        category: 'Events', categoryColor: colors.accent.red,
-        title: 'Upcoming Revival Conference — Register Now',
-        desc: 'Join thousands as we gather to seek the face of God and ignite revival fires.',
-        date: 'Mar 2025', img: null, ref: null,
-    },
-];
+/* News will come from admin dashboard */
+const NEWS = [];
 
 const useReveal = () => {
     const ref = useRef(null);
@@ -53,6 +30,17 @@ const useReveal = () => {
     }, []);
     return [ref, vis];
 };
+
+const EmptyNews = () => (
+    <Box sx={{
+        gridColumn: '1 / -1', textAlign: 'center', py: 8,
+        color: 'rgba(255,255,255,0.25)',
+        fontFamily: typography.fontFamily.body,
+        fontSize: '0.85rem',
+    }}>
+        No news at this time — check back soon.
+    </Box>
+);
 
 const NewsCard = ({ item, delay, featured = false }) => (
     <Box sx={{ ...(featured ? { gridColumn: { xs: '1', sm: '1 / -1', lg: '1 / 3' } } : {}), ...cardSx(delay) }} className="news-card">
@@ -111,9 +99,12 @@ export default function NewsSection() {
 
                     {/* ── Grid ── */}
                     <Box sx={gridSx}>
-                        {NEWS.map((item, i) => (
-                            <NewsCard key={item.id} item={item} delay={0.1 + i * 0.1} featured={item.featured} />
-                        ))}
+                        {NEWS.length === 0
+                            ? <EmptyNews />
+                            : NEWS.map((item, i) => (
+                                <NewsCard key={item.id} item={item} delay={0.1 + i * 0.1} featured={item.featured} />
+                            ))
+                        }
                     </Box>
 
                     {/* ── Scripture banner ── */}
@@ -121,9 +112,9 @@ export default function NewsSection() {
                         <Box sx={{ position: 'absolute', inset: 0, backgroundImage: `radial-gradient(rgba(212,160,23,0.06) 1px, transparent 1px)`, backgroundSize: '20px 20px', pointerEvents: 'none' }} />
                         <Box sx={{ position: 'relative', zIndex: 1 }}>
                             <Typography sx={scriptureTextSx}>
-                                "The man departed, and told the Jews that it was Jesus, which had made him whole."
+                                "Pure religion and undefiled before God and the Father is this, To visit the fatherless and widows in their affliction, and to keep himself unspotted from the world."
                             </Typography>
-                            <Typography sx={scriptureRefSx}>— John 5:15</Typography>
+                            <Typography sx={scriptureRefSx}>— James 1:27</Typography>
                         </Box>
                     </Box>
 

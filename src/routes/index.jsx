@@ -2,7 +2,9 @@ import { createBrowserRouter } from 'react-router-dom';
 import MainLayout from '../layout/MainLayout';
 import AdminLayout from '../layout/AdminLayout';
 import HomePage from '../pages/Home';
+import WhatWeDoPage from '../pages/Whatwedo';
 import AboutPage from '../pages/About';
+import PartnerPage from '../pages/Partnerwithus';
 import ProgramsPage from '../pages/Programs';
 import GalleryPage from '../pages/Gallery';
 import ContactPage from '../pages/Contact';
@@ -33,7 +35,9 @@ const router = createBrowserRouter([
         errorElement: <NotFoundPage />,
         children: [
             { index: true, element: <HomePage /> },
+            { path: 'whatwedo', element: <WhatWeDoPage /> },
             { path: 'about', element: <AboutPage /> },
+            {path: 'partners', element: <PartnerPage /> },
             { path: 'programs', element: <ProgramsPage /> },
             { path: 'gallery', element: <GalleryPage /> },
             { path: 'contact', element: <ContactPage /> },

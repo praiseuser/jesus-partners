@@ -6,12 +6,12 @@ import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import FlagIcon from '@mui/icons-material/Flag';
 import GroupsIcon from '@mui/icons-material/Groups';
+import HistoryIcon from '@mui/icons-material/History';
 import { colors } from '../../../../theme';
 import {
     keyframes, wrapSx, bgPatternSx, orbSx,
     sectionLabelSx, labelBarSx, labelTextSx,
     headingSx, headGoldSx, bodyTextSx,
-
     cardGridSx, cardSx, cardImgWrapSx, cardImgSx, cardOverlaySx,
     cardTopBarSx, cardBodySx, cardIconWrapSx, cardTitleSx, cardDescSx, cardLinkSx,
 } from './styles';
@@ -19,8 +19,8 @@ import {
 const CARDS = [
     {
         title: 'Who We Are',
-        desc: 'Jesus Partners Outreach is an outreach ministry dedicated to reaching every generation across the nations with the transforming power of the Gospel.',
-        img: '/jesus1.png', 
+        desc: 'Jesus Partners Outreach is a ministry incorporated in Nigeria, born out of years of passionately serving widows, orphans, churches and ministers. Formally organised in 2023, we are committed to sharing the love of Christ in practical ways.',
+        img: '/jesus1.png',
         icon: GroupsIcon,
         color: colors.secondary.main,
         link: '/about',
@@ -29,7 +29,7 @@ const CARDS = [
     },
     {
         title: 'Vision',
-        desc: 'To raise men and women who shall accompany Jesus and become true partners in fulfilling the Great Commission across every nation and generation.',
+        desc: 'To raise men and women who shall accompany Jesus and become true partners in fulfilling the Great Commission — sharing with widows, orphans, churches and ministers across every nation and generation.',
         img: '/image2.jpg',
         icon: VisibilityIcon,
         color: colors.accent.teal,
@@ -39,12 +39,22 @@ const CARDS = [
     },
     {
         title: 'Mission',
-        desc: 'To raise revival and gospel altars across the nations of the world — partnering with Jesus to reveal Him so that men may possess their possession.',
+        desc: 'To raise Gospel Crusades and Revivals with great testimonies of salvation, pray for the sick, assist the needy and share the love of Christ practically — as the Lord God spoke to us from James 1:27.',
         img: '/image1.jpg',
         icon: FlagIcon,
         color: colors.accent.red,
         link: '/about',
         delay: 0.34,
+        isLogo: false,
+    },
+    {
+        title: 'Our Story',
+        desc: 'In 2007, a Missionary brother from the USA came for a medical mission in Nkier-Gboko and decided to be a helping hand to our family and ministry. Since that year, the Lord spoke to us to share with others as He does to us — and we have never looked back.',
+        img: '/image1.jpg',
+        icon: HistoryIcon,
+        color: colors.accent.purple,
+        link: '/about',
+        delay: 0.46,
         isLogo: false,
     },
 ];
@@ -142,8 +152,10 @@ export default function AboutSection() {
                             </Typography>
                         </Box>
                         <Typography sx={{ ...bodyTextSx, maxWidth: 420, mb: 0 }}>
-                            A global outreach ministry on a divine mandate — partnering with Jesus to
-                            reach every generation, in every nation, with the living Word.
+                            Incorporated in Nigeria in 2023, Jesus Partners Outreach has been
+                            passionately serving widows, orphans, churches and ministers since 2007 —
+                            committed to sharing the love of Christ through crusades, medical
+                            outreaches, education assistance and ministerial training.
                         </Typography>
                     </Box>
                     <Box sx={{

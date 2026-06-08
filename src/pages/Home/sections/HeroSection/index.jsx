@@ -7,6 +7,7 @@ import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import PeopleIcon from '@mui/icons-material/People';
 import PublicIcon from '@mui/icons-material/Public';
 import MenuBookIcon from '@mui/icons-material/MenuBook';
+import ChurchIcon from '@mui/icons-material/Church';
 import { typography } from '../../../../theme';
 import {
     keyframes, heroWrapSx, bgImgSx, overlayLayersSx, decoCircleSx,
@@ -23,13 +24,6 @@ const PARTICLES = [
     { left: '75%', delay: 0.3, dur: 6.5 },
     { left: '88%', delay: 1.8, dur: 7.5 },
 ];
-
-const STATS = [
-    { icon: PeopleIcon, value: '10,000+', label: 'Partners' },
-    { icon: PublicIcon, value: '50+', label: 'Nations' },
-    { icon: MenuBookIcon, value: '1000s', label: 'Lives Changed' },
-];
-
 export default function HeroSection() {
     return (
         <>
@@ -52,7 +46,7 @@ export default function HeroSection() {
                         <Box sx={{ display: 'flex', justifyContent: 'center', mb: 0 }}>
                             <Box sx={eyebrowSx}>
                                 <Box sx={eyebrowDotSx} />
-                                <Typography sx={eyebrowTextSx}>Partnering with Jesus Since always</Typography>
+                                <Typography sx={eyebrowTextSx}>Incorporated in Nigeria · Serving Since 2007</Typography>
                             </Box>
                         </Box>
 
@@ -62,24 +56,26 @@ export default function HeroSection() {
                         </Typography>
 
                         <Typography sx={subtitleSx}>
-                            Reaching The Generations Of The World With The{' '}
-                            <Box component="span" sx={wordGoldSx}>Word!</Box>
+                            Sharing the Love of Christ in{' '}
+                            <Box component="span" sx={wordGoldSx}>Practical Ways!</Box>
                         </Typography>
 
                         <Box sx={dividerLineSx} />
 
                         <Typography sx={taglineSx}>
-                            Partnering with Jesus, revealing Jesus that men may possess their possession.
+                            Committed to widows, orphans, crusades, medical outreaches and ministerial
+                            training — partnering with Jesus to reach the lost, heal the sick and
+                            strengthen the body of Christ.
                         </Typography>
 
                         <Stack direction={{ xs: 'column', sm: 'row' }} gap={2} justifyContent="center" alignItems="center">
-                            <Box component={Link} to="/give" sx={btnPrimarySx}>
+                            <Box component={Link} to="/partners" sx={btnPrimarySx}>
                                 <FavoriteIcon sx={{ fontSize: 17 }} />
-                                Be a Partner
+                                Partner With Us
                             </Box>
-                            <Box component={Link} to="/about" sx={btnSecSx}>
+                            <Box component={Link} to="/whatwedo" sx={btnSecSx}>
                                 <PlayCircleIcon sx={{ fontSize: 17 }} />
-                                Our Mission
+                                What We Do
                             </Box>
                         </Stack>
                     </Box>

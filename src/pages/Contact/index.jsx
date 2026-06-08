@@ -40,10 +40,30 @@ const useReveal = (threshold = 0.07) => {
 };
 
 const INFO = [
-    { icon: EmailIcon, color: colors.secondary.main, title: 'Email Us', lines: ['info@jesuspartners.org', 'support@jesuspartners.org'] },
-    { icon: PhoneIcon, color: colors.accent.teal, title: 'Call Us', lines: ['+234 (0) 801 234 5678', 'Mon–Fri, 9am–6pm WAT'] },
-    { icon: LocationOnIcon, color: colors.accent.green, title: 'Find Us', lines: ['Lagos, Nigeria', 'Serving 50+ Nations Worldwide'] },
-    { icon: AccessTimeIcon, color: colors.accent.red, title: 'Hours', lines: ['Mon–Fri: 9am – 6pm', 'Sat: 10am – 2pm'] },
+    {
+        icon: EmailIcon,
+        color: colors.secondary.main,
+        title: 'Email Us',
+        lines: ['info@jesuspartnersoutreach.org', 'partnerships@jesuspartnersoutreach.org'],
+    },
+    {
+        icon: PhoneIcon,
+        color: colors.accent.teal,
+        title: 'Call Us',
+        lines: ['+234 (0) 800 000 0000', 'Mon–Fri, 9am–5pm WAT'],
+    },
+    {
+        icon: LocationOnIcon,
+        color: colors.accent.green,
+        title: 'Find Us',
+        lines: ['Abuja, Nigeria', 'Grace College of Evangelism & Missions'],
+    },
+    {
+        icon: AccessTimeIcon,
+        color: colors.accent.red,
+        title: 'Office Hours',
+        lines: ['Mon–Fri: 9am – 5pm WAT', 'Sat: 10am – 2pm WAT'],
+    },
 ];
 
 const SOCIAL = [
@@ -53,7 +73,19 @@ const SOCIAL = [
     { icon: YouTubeIcon, color: '#FF0000', label: 'YouTube', href: '#' },
 ];
 
-const SUBJECTS = ['General Enquiry', 'Partnership', 'Prayer Request', 'Media / Press', 'Events', 'Other'];
+const SUBJECTS = [
+    'General Enquiry',
+    'Partnership / Giving',
+    'Prayer Request',
+    'Crusades & Revivals',
+    'Widows & Orphans Care',
+    'Education Assistance',
+    'Medical Outreaches',
+    'Ministerial Training',
+    'Media / Press',
+    'Other',
+];
+
 const EMPTY = { name: '', email: '', phone: '', subject: '', message: '' };
 
 export default function ContactPage() {
@@ -99,8 +131,8 @@ export default function ContactPage() {
                                 Hear From You.
                             </Box>
                         </Typography>
-                        <Typography sx={{ fontFamily: typography.fontFamily.body, fontSize: { xs: '0.95rem', md: '1.05rem' }, color: 'rgba(255,255,255,0.5)', lineHeight: 1.9, maxWidth: 480, mx: 'auto' }}>
-                            Whether you have a question, prayer request, or want to become a partner — our team is ready.
+                        <Typography sx={{ fontFamily: typography.fontFamily.body, fontSize: { xs: '0.95rem', md: '1.05rem' }, color: 'rgba(255,255,255,0.5)', lineHeight: 1.9, maxWidth: 520, mx: 'auto' }}>
+                            Whether you have a question, a prayer request, want to partner with us, or support one of our programmes — our team at Jesus Partners Outreach is ready to hear from you.
                         </Typography>
                     </Box>
                 </Container>
@@ -140,26 +172,49 @@ export default function ContactPage() {
                 <Container maxWidth="lg">
                     <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', md: '1fr 1.6fr' }, gap: { xs: 4, md: 6 }, alignItems: 'start' }}>
 
-                        {/* Left — social + reply info */}
+                        {/* Left — social + info */}
                         <Box sx={{ opacity: bodyVis ? 1 : 0, animation: bodyVis ? 'ct_left .7s cubic-bezier(.34,1.2,.64,1) both' : 'none' }}>
                             {/* reply badge */}
                             <Box sx={{ display: 'inline-flex', alignItems: 'center', gap: 1, bgcolor: `${colors.accent.green}14`, border: `1px solid ${colors.accent.green}30`, borderRadius: '10px', px: 2, py: 1, mb: 3 }}>
                                 <AccessTimeIcon sx={{ fontSize: 15, color: colors.accent.green }} />
                                 <Typography sx={{ fontFamily: typography.fontFamily.body, fontSize: '0.75rem', fontWeight: 600, color: colors.accent.green }}>
-                                    Replies within 2 business hours
+                                    Replies within 2 business days
                                 </Typography>
                             </Box>
 
                             <Typography sx={{ fontFamily: typography.fontFamily.accent, fontSize: { xs: '1.5rem', md: '1.9rem' }, fontWeight: 900, color: colors.text.primary, lineHeight: 1.15, mb: 1 }}>
                                 Let's Start a Conversation
                             </Typography>
+                            <Typography sx={{ fontFamily: typography.fontFamily.body, fontSize: typography.fontSize.sm, color: colors.text.secondary, lineHeight: 1.85, mb: 1.5 }}>
+                                Have a question about our programmes? Want to partner with us for a Crusade, Widows Feast, or Education Assistance? We'd love to connect.
+                            </Typography>
                             <Typography sx={{ fontFamily: typography.fontFamily.body, fontSize: typography.fontSize.sm, color: colors.text.secondary, lineHeight: 1.85, mb: 3.5 }}>
                                 Fill the form and we'll get back to you. You can also reach us directly on any of our social channels.
                             </Typography>
 
+                            {/* What to reach out about */}
+                            <Box sx={{ bgcolor: 'white', borderRadius: '14px', p: 2.5, border: `1px solid ${colors.divider}`, mb: 3 }}>
+                                <Typography sx={{ fontFamily: typography.fontFamily.body, fontSize: '0.65rem', fontWeight: 700, color: colors.text.disabled, letterSpacing: 2.5, textTransform: 'uppercase', mb: 1.5 }}>You Can Reach Out About</Typography>
+                                <Stack gap={1}>
+                                    {[
+                                        'Crusades & Revivals Partnership',
+                                        'Widows & Orphans Support',
+                                        'Sponsoring a Child\'s Education',
+                                        'Medical Outreach Collaboration',
+                                        'Grace College Scholarships',
+                                        'Prayer Requests',
+                                    ].map((item) => (
+                                        <Box key={item} sx={{ display: 'flex', alignItems: 'center', gap: 1.2 }}>
+                                            <Box sx={{ width: 7, height: 7, borderRadius: '50%', bgcolor: colors.secondary.main, flexShrink: 0 }} />
+                                            <Typography sx={{ fontFamily: typography.fontFamily.body, fontSize: '0.78rem', color: colors.text.secondary, lineHeight: 1.6 }}>{item}</Typography>
+                                        </Box>
+                                    ))}
+                                </Stack>
+                            </Box>
+
                             {/* Social buttons */}
                             <Typography sx={{ fontFamily: typography.fontFamily.body, fontSize: '0.65rem', fontWeight: 700, color: colors.text.disabled, letterSpacing: 2.5, textTransform: 'uppercase', mb: 1.5 }}>Follow Us</Typography>
-                            <Box sx={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 1.5 }}>
+                            <Box sx={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 1.5, mb: 3 }}>
                                 {SOCIAL.map(s => {
                                     const Icon = s.icon;
                                     return (
@@ -172,11 +227,11 @@ export default function ContactPage() {
                             </Box>
 
                             {/* scripture */}
-                            <Box sx={{ mt: 3.5, bgcolor: colors.primary.dark, borderRadius: '14px', p: 2.5, border: '1px solid rgba(212,160,23,0.18)' }}>
+                            <Box sx={{ bgcolor: colors.primary.dark, borderRadius: '14px', p: 2.5, border: '1px solid rgba(212,160,23,0.18)' }}>
                                 <Typography sx={{ fontFamily: typography.fontFamily.accent, fontSize: '0.85rem', color: 'rgba(255,255,255,0.7)', lineHeight: 1.75, fontStyle: 'italic', mb: 1 }}>
-                                    "Call to me and I will answer you and tell you great and unsearchable things you do not know."
+                                    "Religion that God our Father accepts as pure and faultless is this: to look after orphans and widows in their distress."
                                 </Typography>
-                                <Typography sx={{ fontFamily: typography.fontFamily.heading, fontSize: '0.7rem', fontWeight: 700, color: colors.secondary.main, letterSpacing: 1 }}>— Jeremiah 33:3</Typography>
+                                <Typography sx={{ fontFamily: typography.fontFamily.heading, fontSize: '0.7rem', fontWeight: 700, color: colors.secondary.main, letterSpacing: 1 }}>— James 1:27</Typography>
                             </Box>
                         </Box>
 
@@ -190,9 +245,9 @@ export default function ContactPage() {
                                         <Box sx={{ animation: 'ct_checkPop .5s cubic-bezier(.34,1.2,.64,1) both' }}>
                                             <CheckCircleIcon sx={{ fontSize: 72, color: colors.accent.green }} />
                                         </Box>
-                                        <Typography sx={{ fontFamily: typography.fontFamily.heading, fontSize: { xs: '1.4rem', md: '1.8rem' }, fontWeight: 900, color: colors.text.primary, mt: 2.5, mb: 1.5 }}>Message Sent! 🎉</Typography>
-                                        <Typography sx={{ fontFamily: typography.fontFamily.body, fontSize: typography.fontSize.sm, color: colors.text.secondary, lineHeight: 1.85, mb: 4, maxWidth: 320, mx: 'auto' }}>
-                                            Thank you for reaching out. A member of our team will get back to you within 2 business hours.
+                                        <Typography sx={{ fontFamily: typography.fontFamily.heading, fontSize: { xs: '1.4rem', md: '1.8rem' }, fontWeight: 900, color: colors.text.primary, mt: 2.5, mb: 1.5 }}>Message Sent! 🙌</Typography>
+                                        <Typography sx={{ fontFamily: typography.fontFamily.body, fontSize: typography.fontSize.sm, color: colors.text.secondary, lineHeight: 1.85, mb: 4, maxWidth: 340, mx: 'auto' }}>
+                                            Thank you for reaching out to Jesus Partners Outreach. A member of our team will respond within 2 business days. God bless you!
                                         </Typography>
                                         <Box onClick={() => { setSent(false); setForm(EMPTY); }} sx={{ display: 'inline-flex', alignItems: 'center', gap: 1, bgcolor: colors.primary.main, color: 'white', px: 3.5, py: 1.4, borderRadius: '10px', cursor: 'pointer', fontFamily: typography.fontFamily.heading, fontSize: typography.fontSize.sm, fontWeight: 700, transition: 'all .25s ease', '&:hover': { bgcolor: colors.primary.light, transform: 'translateY(-2px)' } }}>
                                             Send Another Message
@@ -201,7 +256,9 @@ export default function ContactPage() {
                                 ) : (
                                     <>
                                         <Typography sx={{ fontFamily: typography.fontFamily.heading, fontSize: { xs: '1.4rem', md: '1.7rem' }, fontWeight: 900, color: colors.text.primary, mb: .5 }}>Send Us a Message</Typography>
-                                        <Typography sx={{ fontFamily: typography.fontFamily.body, fontSize: typography.fontSize.sm, color: colors.text.secondary, lineHeight: 1.8, mb: 3.5 }}>Fill in the form and we will get back to you shortly.</Typography>
+                                        <Typography sx={{ fontFamily: typography.fontFamily.body, fontSize: typography.fontSize.sm, color: colors.text.secondary, lineHeight: 1.8, mb: 3.5 }}>
+                                            Whether it's about partnership, giving, prayer, or any of our programmes — fill in the form and we'll get back to you.
+                                        </Typography>
 
                                         <Stack spacing={2.5}>
                                             <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', sm: '1fr 1fr' }, gap: 2.5 }}>
@@ -232,8 +289,8 @@ export default function ContactPage() {
 
                                             <Box>
                                                 <Typography sx={{ display: 'block', fontFamily: typography.fontFamily.body, fontSize: '0.78rem', fontWeight: 700, color: colors.text.primary, mb: '7px' }}>Message *</Typography>
-                                                <Box component="textarea" placeholder="Tell us how we can help…" value={form.message} onChange={set('message')}
-                                                    sx={{ width: '100%', boxSizing: 'border-box', px: 2.2, py: 1.6, minHeight: 130, bgcolor: colors.background.default, border: `1.5px solid ${colors.divider}`, borderRadius: '12px', fontFamily: typography.fontFamily.body, fontSize: '0.9rem', color: colors.text.primary, outline: 'none', resize: 'none', transition: 'border-color .25s, box-shadow .25s', '&:focus': { borderColor: colors.secondary.main, boxShadow: `0 0 0 4px ${colors.secondary.main}14` }, '&::placeholder': { color: colors.text.disabled } }} />
+                                                <Box component="textarea" placeholder="Tell us how we can help, which programme you're interested in, or share your prayer request…" value={form.message} onChange={set('message')}
+                                                    sx={{ width: '100%', boxSizing: 'border-box', px: 2.2, py: 1.6, minHeight: 140, bgcolor: colors.background.default, border: `1.5px solid ${colors.divider}`, borderRadius: '12px', fontFamily: typography.fontFamily.body, fontSize: '0.9rem', color: colors.text.primary, outline: 'none', resize: 'none', transition: 'border-color .25s, box-shadow .25s', '&:focus': { borderColor: colors.secondary.main, boxShadow: `0 0 0 4px ${colors.secondary.main}14` }, '&::placeholder': { color: colors.text.disabled } }} />
                                             </Box>
 
                                             <Box component="button" onClick={handleSubmit} disabled={sending || !valid}
@@ -242,7 +299,7 @@ export default function ContactPage() {
                                             </Box>
 
                                             <Typography sx={{ fontFamily: typography.fontFamily.body, fontSize: '0.7rem', color: colors.text.disabled, textAlign: 'center', lineHeight: 1.7 }}>
-                                                We respect your privacy. Your information is never shared.
+                                                We respect your privacy. Your information is never shared with third parties.
                                             </Typography>
                                         </Stack>
                                     </>

@@ -9,6 +9,9 @@ import VideocamIcon      from '@mui/icons-material/Videocam';
 import MailOutlineIcon   from '@mui/icons-material/MailOutline';
 import SendIcon          from '@mui/icons-material/Send';
 import AutoStoriesIcon   from '@mui/icons-material/AutoStories';
+import ChurchIcon        from '@mui/icons-material/Church';
+import SchoolIcon        from '@mui/icons-material/School';
+import VolunteerActivismIcon from '@mui/icons-material/VolunteerActivism';
 import { colors, typography } from '../../../../theme';
 import {
   keyframes, wrapSx, bgSx, orbSx,
@@ -19,22 +22,22 @@ import {
 
 const TOOLS = [
   {
-    icon: MenuBookIcon, color: colors.secondary.main,
-    title: 'Daily Devotionals',
-    desc: 'Start every day grounded in the Word. Our devotionals are designed to feed your spirit and strengthen your walk with God.',
-    link: '/resources', delay: 0.1,
+    icon: ChurchIcon, color: colors.secondary.main,
+    title: 'Gospel Crusades & Revivals',
+    desc: 'We carry out city-wide and local crusades in conjunction with Christian churches — from planning to execution and follow-up of believers, bringing healing to the sick and saving the lost.',
+    link: '/what-we-do', delay: 0.1,
   },
   {
-    icon: HeadsetIcon, color: colors.accent.teal,
-    title: 'Audio Sermons',
-    desc: 'Listen to powerful messages from our ministers on the go — faith-building sermons for every season of life.',
-    link: '/resources', delay: 0.2,
+    icon: VolunteerActivismIcon, color: colors.accent.teal,
+    title: 'Widows & Orphans Outreach',
+    desc: 'Sharing the love of Christ with widows and orphans through meals, fellowship, financial support, clothing and identifying their needs as God provides — our target is 400 widows.',
+    link: '/what-we-do', delay: 0.2,
   },
   {
-    icon: VideocamIcon, color: colors.accent.red,
-    title: 'Video Messages',
-    desc: 'Watch life-transforming video teachings that will deepen your understanding of the scriptures.',
-    link: '/resources', delay: 0.3,
+    icon: SchoolIcon, color: colors.accent.red,
+    title: 'Ministerial Training',
+    desc: 'Through Grace College of Evangelism and Missions, Abuja — we provide scholarships, study materials, infrastructural development and training to equip ministers for the Gospel.',
+    link: '/what-we-do', delay: 0.3,
   },
 ];
 
@@ -79,12 +82,13 @@ export default function DiscipleshipSection() {
             <Box sx={sectionLabelSx}>
               <Box sx={labelAccentSx} />
               <Box>
-                <Typography sx={labelTextSx}>Evangelism &</Typography>
-                <Typography sx={labelTextSx}>Discipleship Tools</Typography>
+                <Typography sx={labelTextSx}>What We Do</Typography>
+                <Typography sx={labelTextSx}>Our Key Programmes</Typography>
               </Box>
             </Box>
             <Typography sx={{ fontFamily: typography.fontFamily.body, fontSize: typography.fontSize.base, color: colors.text.secondary, mt: 1.5, maxWidth: 500, lineHeight: 1.8 }}>
-              Resources to equip believers, fuel evangelism and deepen discipleship across every nation.
+              From crusades and revivals to widows, orphans, medical outreaches and ministerial training —
+              partnering with Jesus to share His love in practical ways across Nigeria and beyond.
             </Typography>
           </Box>
 
@@ -101,7 +105,7 @@ export default function DiscipleshipSection() {
                       <Typography sx={toolTitleSx}>{tool.title}</Typography>
                       <Typography sx={toolDescSx}>{tool.desc}</Typography>
                       <Box component={Link} to={tool.link} sx={toolBtnSx(tool.color)}>
-                        Explore <ArrowForwardIcon sx={{ fontSize: 14 }} />
+                        Learn More <ArrowForwardIcon sx={{ fontSize: 14 }} />
                       </Box>
                     </Box>
                   );
@@ -110,10 +114,10 @@ export default function DiscipleshipSection() {
                 <Box sx={emptyStateSx}>
                   <AutoStoriesIcon sx={{ fontSize: 56, color: colors.divider, mb: 2 }} />
                   <Typography sx={{ fontFamily: typography.fontFamily.heading, fontSize: typography.fontSize.md, fontWeight: 800, color: colors.text.disabled, mb: 0.5 }}>
-                    No devotional found
+                    No programmes found
                   </Typography>
                   <Typography sx={{ fontFamily: typography.fontFamily.body, fontSize: typography.fontSize.sm, color: colors.text.disabled }}>
-                    Check back soon — new resources are being added.
+                    Check back soon — new content is being added.
                   </Typography>
                 </Box>
               )
@@ -137,10 +141,10 @@ export default function DiscipleshipSection() {
           </Box>
 
           <Typography sx={{ fontFamily: typography.fontFamily.accent, fontSize:{ xs:'1.7rem', md:'2.2rem' }, fontWeight:900, color:'white', lineHeight:1.15, mb:1.5 }}>
-            Subscribe to the Riches of Christ
+            Partner With Jesus Partners Outreach
           </Typography>
           <Typography sx={{ fontFamily: typography.fontFamily.body, fontSize: typography.fontSize.base, color:'rgba(255,255,255,0.6)', mb:3.5, maxWidth:440, mx:'auto', lineHeight:1.8, fontStyle:'italic' }}>
-            "To enrich your life, faith and destiny."
+            "Subscribe to receive updates on our crusades, outreaches and how you can partner with us."
           </Typography>
 
           {subscribed ? (
