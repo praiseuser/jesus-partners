@@ -74,6 +74,7 @@ export default function AboutPage() {
     const [statsRef, statsVis] = useReveal();
     const [pillarsRef, pillarsVis] = useReveal();
     const [storyRef, storyVis] = useReveal();
+    const [certRef, certVis] = useReveal();
     const [ctaRef, ctaVis] = useReveal();
 
     return (
@@ -254,6 +255,95 @@ export default function AboutPage() {
                 </Container>
             </Box>
 
+            {/* ══ CERTIFICATE ══ */}
+            <Box ref={certRef} sx={{ bgcolor: 'white', py: { xs: 8, md: 12 }, position: 'relative', overflow: 'hidden' }}>
+                <Box sx={{ position: 'absolute', inset: 0, backgroundImage: `radial-gradient(${colors.divider} 1px, transparent 1px)`, backgroundSize: '24px 24px', opacity: .5, pointerEvents: 'none' }} />
+                <Box sx={{ position: 'absolute', top: '10%', left: '-5%', width: 350, height: 350, borderRadius: '50%', background: `radial-gradient(circle,${colors.secondary.main}07 0%,transparent 70%)`, pointerEvents: 'none' }} />
+                <Box sx={{ position: 'absolute', bottom: '10%', right: '-5%', width: 300, height: 300, borderRadius: '50%', background: `radial-gradient(circle,${colors.accent.teal}07 0%,transparent 70%)`, pointerEvents: 'none' }} />
+                <Container maxWidth="md" sx={{ position: 'relative', zIndex: 1 }}>
+
+                    {/* heading */}
+                    <Box sx={{ textAlign: 'center', mb: { xs: 5, md: 7 }, opacity: certVis ? 1 : 0, animation: certVis ? 'ab_rise .6s ease both' : 'none' }}>
+                        <Box sx={{ display: 'inline-flex', alignItems: 'center', gap: 1.5, mb: 1.5 }}>
+                            <Box sx={{ width: 28, height: 3, borderRadius: 2, bgcolor: colors.secondary.main }} />
+                            <Typography sx={{ fontFamily: typography.fontFamily.body, fontSize: typography.fontSize.xs, fontWeight: 700, color: colors.secondary.main, letterSpacing: 2.5, textTransform: 'uppercase' }}>Official Recognition</Typography>
+                            <Box sx={{ width: 28, height: 3, borderRadius: 2, bgcolor: colors.secondary.main }} />
+                        </Box>
+                        <Typography sx={{ fontFamily: typography.fontFamily.accent, fontSize: { xs: '1.9rem', md: '2.6rem' }, fontWeight: 900, color: colors.text.primary, lineHeight: 1.12 }}>
+                            Our Certificate of Incorporation
+                        </Typography>
+                        <Typography sx={{ fontFamily: typography.fontFamily.body, fontSize: typography.fontSize.base, color: colors.text.secondary, mt: 1.5, maxWidth: 480, mx: 'auto', lineHeight: 1.8 }}>
+                            Jesus Partners Outreach is a duly registered and incorporated ministry in Nigeria.
+                        </Typography>
+                    </Box>
+
+                    <Box sx={{ mx: 'auto', maxWidth: 600, position: 'relative', opacity: certVis ? 1 : 0, animation: certVis ? 'ab_rise .8s cubic-bezier(.34,1.2,.64,1) .15s both' : 'none' }}>
+                        <Box sx={{ position: 'absolute', inset: '-12px', borderRadius: '28px', background: `linear-gradient(135deg,${colors.secondary.main}30,${colors.secondary.dark}10,${colors.secondary.main}20)`, filter: 'blur(18px)', pointerEvents: 'none' }} />
+
+                        <Box sx={{
+                            position: 'relative',
+                            borderRadius: '22px',
+                            p: '5px',
+                            background: `linear-gradient(135deg, ${colors.secondary.dark}, ${colors.secondary.main}, #fff8e1, ${colors.secondary.main}, ${colors.secondary.dark})`,
+                            boxShadow: `0 30px 80px rgba(10,16,40,0.18), 0 0 0 1px ${colors.secondary.main}40`,
+                        }}>
+                            <Box sx={{
+                                bgcolor: '#fffdf5',
+                                borderRadius: '18px',
+                                p: { xs: 2.5, md: 4 },
+                                border: `2px solid ${colors.secondary.main}22`,
+                                position: 'relative',
+                                overflow: 'hidden',
+                            }}>
+                                {[
+                                    { top: 10, left: 10, borderTop: `3px solid ${colors.secondary.main}`, borderLeft: `3px solid ${colors.secondary.main}` },
+                                    { top: 10, right: 10, borderTop: `3px solid ${colors.secondary.main}`, borderRight: `3px solid ${colors.secondary.main}` },
+                                    { bottom: 10, left: 10, borderBottom: `3px solid ${colors.secondary.main}`, borderLeft: `3px solid ${colors.secondary.main}` },
+                                    { bottom: 10, right: 10, borderBottom: `3px solid ${colors.secondary.main}`, borderRight: `3px solid ${colors.secondary.main}` },
+                                ].map((style, i) => (
+                                    <Box key={i} sx={{ position: 'absolute', width: 28, height: 28, borderRadius: '3px', ...style, pointerEvents: 'none' }} />
+                                ))}
+
+                                {/* label above */}
+                                <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 1.5, mb: 2.5 }}>
+                                    <Box sx={{ flex: 1, height: '1px', background: `linear-gradient(90deg,transparent,${colors.secondary.main}60)` }} />
+                                    <EmojiEventsIcon sx={{ color: colors.secondary.main, fontSize: 22 }} />
+                                    <Typography sx={{ fontFamily: typography.fontFamily.heading, fontSize: typography.fontSize.sm, fontWeight: 800, color: colors.secondary.dark, letterSpacing: 2, textTransform: 'uppercase' }}>
+                                        Certified & Registered
+                                    </Typography>
+                                    <EmojiEventsIcon sx={{ color: colors.secondary.main, fontSize: 22 }} />
+                                    <Box sx={{ flex: 1, height: '1px', background: `linear-gradient(90deg,${colors.secondary.main}60,transparent)` }} />
+                                </Box>
+
+                                {/* certificate image */}
+                                <Box
+                                    component="img"
+                                    src="/outreach.jpeg"
+                                    alt="Jesus Partners Outreach Certificate of Incorporation"
+                                    sx={{
+                                        width: '100%',
+                                        height: 'auto',
+                                        display: 'block',
+                                        borderRadius: '10px',
+                                        boxShadow: '0 8px 32px rgba(10,16,40,0.12)',
+                                    }}
+                                />
+
+                                {/* label below */}
+                                <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 1.5, mt: 2.5 }}>
+                                    <Box sx={{ flex: 1, height: '1px', background: `linear-gradient(90deg,transparent,${colors.secondary.main}60)` }} />
+                                    <Typography sx={{ fontFamily: typography.fontFamily.body, fontSize: typography.fontSize.xs, fontWeight: 700, color: colors.text.secondary, letterSpacing: 1.5, textTransform: 'uppercase' }}>
+                                        Incorporated in Nigeria · 2023
+                                    </Typography>
+                                    <Box sx={{ flex: 1, height: '1px', background: `linear-gradient(90deg,${colors.secondary.main}60,transparent)` }} />
+                                </Box>
+                            </Box>
+                        </Box>
+                    </Box>
+
+                </Container>
+            </Box>
+
             {/* ══ SCRIPTURE QUOTE ══ */}
             <Box sx={{ bgcolor: 'white', py: { xs: 6, md: 8 } }}>
                 <Container maxWidth="md">
@@ -272,7 +362,6 @@ export default function AboutPage() {
                 </Container>
             </Box>
 
-            {/* ══ CTA ══ */}
             <Box ref={ctaRef} sx={{ background: `linear-gradient(120deg,${colors.primary.dark} 0%,#0F3460 55%,${colors.primary.light} 100%)`, py: { xs: 8, md: 11 }, position: 'relative', overflow: 'hidden' }}>
                 <Box sx={{ position: 'absolute', inset: 0, backgroundImage: `radial-gradient(rgba(255,255,255,0.04) 1px, transparent 1px)`, backgroundSize: '22px 22px', pointerEvents: 'none' }} />
                 <Container maxWidth="md" sx={{ position: 'relative', zIndex: 1, textAlign: 'center' }}>

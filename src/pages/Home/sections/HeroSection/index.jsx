@@ -62,13 +62,7 @@ export default function HeroSection() {
 
                         <Box sx={dividerLineSx} />
 
-                        <Typography sx={taglineSx}>
-                            Committed to widows, orphans, crusades, medical outreaches and ministerial
-                            training — partnering with Jesus to reach the lost, heal the sick and
-                            strengthen the body of Christ.
-                        </Typography>
-
-                        <Stack direction={{ xs: 'column', sm: 'row' }} gap={2} justifyContent="center" alignItems="center">
+                        <Stack direction={{ xs: 'column', sm: 'row' }} gap={8} justifyContent="center" marginTop={7} alignItems="center">
                             <Box component={Link} to="/partners" sx={btnPrimarySx}>
                                 <FavoriteIcon sx={{ fontSize: 17 }} />
                                 Partner With Us

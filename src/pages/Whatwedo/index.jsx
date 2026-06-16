@@ -84,7 +84,6 @@ const PROGRAMMES = [
         desc: 'Following the example of the missionary brother who first came to Nkier-Gboko for a medical mission in 2007, we continue to bring medical attention to communities in need. Where resources are available as God provides, we offer healthcare to the vulnerable — especially in underserved and displaced communities.',
         points: [
             'Medical care for displaced and vulnerable communities',
-            'Support for IDP camp residents',
             'Healthcare alongside Gospel proclamation',
             'Partnering with medical professionals and missionaries',
         ],
@@ -98,11 +97,11 @@ const PROGRAMMES = [
         subtitle: 'Safety, Learning & A Future for Every Child',
         desc: 'We are placing children in boarding schools owned by our members — Heavens Colony Academy and a Skills Acquisition school — where they receive not only education but safekeeping, Christian nurturing, trauma counselling, meals, and medical care. This removes children from the dangers of IDP camps and provides stability.',
         points: [
-            'Placement at Heavens Colony Academy',
-            'Skills Acquisition training for older students',
-            'Full boarding: tuition, uniforms, books, provisions',
-            'Trauma counselling and Christian nurturing',
-            'Solar, internet, and learning resources provided',
+            // 'Placement at Heavens Colony Academy',
+            // 'Skills Acquisition training for older students',
+            // 'Full boarding: tuition, uniforms, books, provisions',
+            // 'Trauma counselling and Christian nurturing',
+            // 'Solar, internet, and learning resources provided',
         ],
         note: 'Targeting orphans and widows\' children — those most vulnerable to trafficking, child labour, and exploitation.',
     },
@@ -117,7 +116,6 @@ const PROGRAMMES = [
             'Tuition and books support for ministers\' children',
             'External exams support (WAEC, NECO, etc.)',
             'Practical care packages for pastors in need',
-            'Encouragement and fellowship for isolated ministers',
         ],
         note: 'A ministry born out of the founders\' own experience of ministry under hardship.',
     },
@@ -129,9 +127,6 @@ const PROGRAMMES = [
         subtitle: 'Grace College of Evangelism & Missions',
         desc: 'Through Grace College of Evangelism and Missions in Abuja, we train the next generation of evangelists and missionaries. The college needs scholarships, infrastructure, study materials, and residential facilities to fulfil its mandate of raising Gospel workers equipped for the harvest.',
         points: [
-            'Scholarship support (₦100,000 per student × 4)',
-            '4 Laptops needed for student training',
-            'Computers for E-library and digital study',
             'Physical accommodation complex development',
             'Study materials and curriculum resources',
         ],
@@ -141,8 +136,8 @@ const PROGRAMMES = [
 
 const SUMMARY_STATS = [
     { value: '6', label: 'Active Programmes', color: colors.secondary.main },
-    { value: '400', label: 'Widows Targeted', color: colors.accent.red },
-    { value: '2', label: 'Schools Supported', color: colors.accent.green },
+    { value: '1000+', label: 'Widows Targeted', color: colors.accent.red },
+    { value: '3', label: 'Schools Supported', color: colors.accent.green },
     { value: '1', label: 'Training College', color: colors.accent.teal },
 ];
 

@@ -3,61 +3,12 @@ import { Box, Container, Typography, Stack } from '@mui/material';
 import { GlobalStyles } from '@mui/material';
 import { Link } from 'react-router-dom';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
-import VisibilityIcon from '@mui/icons-material/Visibility';
-import FlagIcon from '@mui/icons-material/Flag';
-import GroupsIcon from '@mui/icons-material/Groups';
-import HistoryIcon from '@mui/icons-material/History';
 import { colors } from '../../../../theme';
 import {
     keyframes, wrapSx, bgPatternSx, orbSx,
     sectionLabelSx, labelBarSx, labelTextSx,
     headingSx, headGoldSx, bodyTextSx,
-    cardGridSx, cardSx, cardImgWrapSx, cardImgSx, cardOverlaySx,
-    cardTopBarSx, cardBodySx, cardIconWrapSx, cardTitleSx, cardDescSx, cardLinkSx,
 } from './styles';
-
-const CARDS = [
-    {
-        title: 'Who We Are',
-        desc: 'Jesus Partners Outreach is a ministry incorporated in Nigeria, born out of years of passionately serving widows, orphans, churches and ministers. Formally organised in 2023, we are committed to sharing the love of Christ in practical ways.',
-        img: '/jesus1.png',
-        icon: GroupsIcon,
-        color: colors.secondary.main,
-        link: '/about',
-        delay: 0.1,
-        isLogo: true,
-    },
-    {
-        title: 'Vision',
-        desc: 'To raise men and women who shall accompany Jesus and become true partners in fulfilling the Great Commission — sharing with widows, orphans, churches and ministers across every nation and generation.',
-        img: '/image2.jpg',
-        icon: VisibilityIcon,
-        color: colors.accent.teal,
-        link: '/about',
-        delay: 0.22,
-        isLogo: false,
-    },
-    {
-        title: 'Mission',
-        desc: 'To raise Gospel Crusades and Revivals with great testimonies of salvation, pray for the sick, assist the needy and share the love of Christ practically — as the Lord God spoke to us from James 1:27.',
-        img: '/image1.jpg',
-        icon: FlagIcon,
-        color: colors.accent.red,
-        link: '/about',
-        delay: 0.34,
-        isLogo: false,
-    },
-    {
-        title: 'Our Story',
-        desc: 'In 2007, a Missionary brother from the USA came for a medical mission in Nkier-Gboko and decided to be a helping hand to our family and ministry. Since that year, the Lord spoke to us to share with others as He does to us — and we have never looked back.',
-        img: '/image1.jpg',
-        icon: HistoryIcon,
-        color: colors.accent.purple,
-        link: '/about',
-        delay: 0.46,
-        isLogo: false,
-    },
-];
 
 const useReveal = () => {
     const ref = useRef(null);
@@ -72,52 +23,6 @@ const useReveal = () => {
     }, []);
     return [ref, vis];
 };
-
-const LogoCard = ({ card }) => (
-    <Box sx={cardSx(card.delay)} className="card-root">
-        <Box sx={cardTopBarSx(card.color)} />
-        <Box sx={{ ...cardImgWrapSx, height: 210, bgcolor: colors.primary.dark, display: 'flex', alignItems: 'center', justifyContent: 'center', position: 'relative', overflow: 'hidden' }}>
-            <Box sx={{ position: 'absolute', inset: 0, background: `radial-gradient(ellipse 80% 80% at 50% 50%, ${colors.secondary.main}18 0%, transparent 70%)` }} />
-            <Box sx={{ position: 'absolute', width: '110%', height: '110%', borderRadius: '50%', border: `1px dashed rgba(212,160,23,0.15)`, animation: 'ab_spin 20s linear infinite', pointerEvents: 'none' }} />
-            <Box sx={{ position: 'absolute', width: '80%', height: '80%', borderRadius: '50%', border: `1px dashed rgba(212,160,23,0.1)`, animation: 'ab_spin 14s linear infinite reverse', pointerEvents: 'none' }} />
-            <Box component="img" src="/jesus1.png" alt="JPO Logo"
-                sx={{ width: 180, height: 180, objectFit: 'contain', position: 'relative', zIndex: 2, animation: 'ab_imgFloat 5s ease-in-out infinite', filter: `drop-shadow(0 10px 30px ${colors.secondary.main}55)` }}
-            />
-            <Box sx={cardOverlaySx} />
-        </Box>
-        <Box sx={cardBodySx}>
-            <Box sx={cardIconWrapSx(card.color)}>
-                <card.icon sx={{ fontSize: 22, color: card.color }} />
-            </Box>
-            <Typography sx={cardTitleSx}>{card.title}</Typography>
-            <Typography sx={cardDescSx}>{card.desc}</Typography>
-            <Box component={Link} to={card.link} sx={cardLinkSx(card.color)}>
-                Learn More <ArrowForwardIcon sx={{ fontSize: 15 }} />
-            </Box>
-        </Box>
-    </Box>
-);
-
-const ImgCard = ({ card }) => (
-    <Box sx={cardSx(card.delay)} className="card-root">
-        <Box sx={cardTopBarSx(card.color)} />
-        <Box sx={cardImgWrapSx}>
-            <Box component="img" src={card.img} alt={card.title} sx={cardImgSx}
-                onError={(e) => { e.target.style.display = 'none'; }} />
-            <Box sx={cardOverlaySx} />
-        </Box>
-        <Box sx={cardBodySx}>
-            <Box sx={cardIconWrapSx(card.color)}>
-                <card.icon sx={{ fontSize: 22, color: card.color }} />
-            </Box>
-            <Typography sx={cardTitleSx}>{card.title}</Typography>
-            <Typography sx={cardDescSx}>{card.desc}</Typography>
-            <Box component={Link} to={card.link} sx={cardLinkSx(card.color)}>
-                Learn More <ArrowForwardIcon sx={{ fontSize: 15 }} />
-            </Box>
-        </Box>
-    </Box>
-);
 
 export default function AboutSection() {
     const [ref, vis] = useReveal();
@@ -139,6 +44,7 @@ export default function AboutSection() {
                         opacity: vis ? 1 : 0,
                         animation: vis ? 'ab_rise .7s cubic-bezier(.34,1.2,.64,1) both' : 'none',
                     }}>
+                        {/* Left — heading */}
                         <Box>
                             <Box sx={sectionLabelSx}>
                                 <Box sx={labelBarSx} />
@@ -151,27 +57,36 @@ export default function AboutSection() {
                                 <br />Outreach
                             </Typography>
                         </Box>
-                        <Typography sx={{ ...bodyTextSx, maxWidth: 420, mb: 0 }}>
-                            Incorporated in Nigeria in 2023, Jesus Partners Outreach has been
-                            passionately serving widows, orphans, churches and ministers since 2007 —
-                            committed to sharing the love of Christ through crusades, medical
-                            outreaches, education assistance and ministerial training.
-                        </Typography>
+
+                        {/* Right — text + Read More button */}
+                        <Box sx={{ maxWidth: 420 }}>
+                            <Typography sx={{ ...bodyTextSx, mb: 2.5 }}>
+                                Incorporated in Nigeria in 2023, Jesus Partners Outreach has been
+                                passionately serving widows, orphans, churches and ministers since 2007 —
+                                committed to sharing the love of Christ through crusades, medical
+                                outreaches, education assistance and ministerial training.
+                            </Typography>
+                            <Box component={Link} to="/about" sx={{
+                                display: 'inline-flex', alignItems: 'center', gap: 1,
+                                bgcolor: colors.secondary.main, color: 'white',
+                                px: 3, py: 1.4, borderRadius: '10px',
+                                textDecoration: 'none',
+                                fontFamily: 'inherit', fontSize: '0.85rem', fontWeight: 700,
+                                boxShadow: `0 8px 24px ${colors.secondary.main}44`,
+                                transition: 'all .3s cubic-bezier(.34,1.2,.64,1)',
+                                '&:hover': { transform: 'translateY(-3px) scale(1.04)', boxShadow: `0 14px 36px ${colors.secondary.main}55` }
+                            }}>
+                                Read More <ArrowForwardIcon sx={{ fontSize: 15 }} />
+                            </Box>
+                        </Box>
                     </Box>
+
                     <Box sx={{
                         height: 1, mt: 2,
                         background: `linear-gradient(90deg, ${colors.secondary.main}60, transparent)`,
                         opacity: vis ? 1 : 0,
                         animation: vis ? 'ab_rise .5s ease .2s both' : 'none',
                     }} />
-
-                    <Box sx={cardGridSx}>
-                        {CARDS.map((card) =>
-                            card.isLogo
-                                ? <LogoCard key={card.title} card={card} />
-                                : <ImgCard key={card.title} card={card} />
-                        )}
-                    </Box>
 
                 </Container>
             </Box>
