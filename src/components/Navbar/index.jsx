@@ -8,13 +8,11 @@ import ArticleIcon from '@mui/icons-material/Article';
 import LibraryBooksIcon from '@mui/icons-material/LibraryBooks';
 import ContactMailIcon from '@mui/icons-material/ContactMail';
 import InfoIcon from '@mui/icons-material/Info';
-import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import FavoriteIcon from '@mui/icons-material/Favorite';
-import LoginIcon from '@mui/icons-material/Login';
-import DashboardIcon from '@mui/icons-material/Dashboard';
 import PublicIcon from '@mui/icons-material/Public';
 import VolunteerActivismIcon from '@mui/icons-material/VolunteerActivism';
 import HandshakeIcon from '@mui/icons-material/Handshake';
+import CollectionsIcon from '@mui/icons-material/Collections';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import { Link, useLocation } from 'react-router-dom';
 import { colors, typography } from '../../theme';
@@ -25,17 +23,16 @@ import {
 } from './styles';
 
 const MORE_ITEMS = [
-    { label: 'Login', path: '/login', icon: LoginIcon, color: colors.secondary.main, desc: 'Access your account' },
-    { label: 'Our Nations', path: '/nations', icon: PublicIcon, color: colors.accent.purple, desc: 'Countries we\'ve reached' },
+    { label: 'Blog', path: '/blog', icon: ArticleIcon, color: colors.accent.purple, desc: 'Stories, testimonies & updates' },
+    { label: 'Resources', path: '/resources', icon: LibraryBooksIcon, color: colors.accent.green, desc: 'Sermons, teachings & study materials' },
 ];
 
 const NAV_LINKS = [
     { label: 'Home', path: '/', icon: HomeIcon, color: colors.secondary.main },
     { label: 'What We Do', path: '/whatwedo', icon: VolunteerActivismIcon, color: colors.accent.teal },
-    { label: 'Blog', path: '/blog', icon: ArticleIcon, color: colors.accent.purple },
-    { label: 'Resources', path: '/resources', icon: LibraryBooksIcon, color: colors.accent.green },
-    { label: 'Contact', path: '/contact', icon: ContactMailIcon, color: colors.accent.red },
-    { label: 'About', path: '/about', icon: InfoIcon, color: colors.secondary.main },
+    { label: 'About', path: '/about', icon: InfoIcon, color: colors.accent.red },
+    { label: 'Gallery', path: '/gallery', icon: CollectionsIcon, color: colors.accent.purple },
+    { label: 'Contact', path: '/contact', icon: ContactMailIcon, color: colors.accent.green },
     { label: 'Partner With Us', path: '/partners', icon: HandshakeIcon, color: colors.accent.teal },
 ];
 
@@ -68,17 +65,15 @@ const MoreDropdown = ({ isActive }) => {
                 <KeyboardArrowDownIcon sx={{ fontSize: 16, transition: 'transform .25s ease', transform: open ? 'rotate(180deg)' : 'none' }} />
             </Box>
 
-            {/* Dropdown panel */}
             {open && (
                 <Box sx={{
                     position: 'absolute', top: 'calc(100% + 16px)', right: 0,
-                    width: 240, borderRadius: '16px', overflow: 'hidden',
+                    width: 260, borderRadius: '16px', overflow: 'hidden',
                     bgcolor: '#0D1117', border: '1px solid rgba(255,255,255,0.1)',
                     boxShadow: '0 24px 60px rgba(0,0,0,0.6)',
                     animation: 'nav_dropIn .25s cubic-bezier(.34,1.2,.64,1) both',
                     zIndex: 100,
                 }}>
-                    {/* arrow */}
                     <Box sx={{ position: 'absolute', top: -7, right: 24, width: 14, height: 14, bgcolor: '#0D1117', border: '1px solid rgba(255,255,255,0.1)', borderBottom: 'none', borderRight: 'none', transform: 'rotate(45deg)' }} />
 
                     <Box sx={{ p: 1.5 }}>
@@ -86,10 +81,7 @@ const MoreDropdown = ({ isActive }) => {
                             const Icon = item.icon;
                             return (
                                 <Box key={item.label} component={Link} to={item.path} onClick={() => setOpen(false)}
-                                    sx={{
-                                        display: 'flex', alignItems: 'center', gap: 1.5, px: 1.8, py: 1.4, borderRadius: '10px', textDecoration: 'none', transition: 'all .2s ease',
-                                        '&:hover': { bgcolor: `${item.color}15`, '& .dd-icon': { bgcolor: item.color }, '& .dd-label': { color: 'white' } }
-                                    }}>
+                                    sx={{ display: 'flex', alignItems: 'center', gap: 1.5, px: 1.8, py: 1.4, borderRadius: '10px', textDecoration: 'none', transition: 'all .2s ease', '&:hover': { bgcolor: `${item.color}15`, '& .dd-icon': { bgcolor: item.color }, '& .dd-label': { color: 'white' } } }}>
                                     <Box className="dd-icon" sx={{ width: 34, height: 34, borderRadius: '9px', bgcolor: `${item.color}18`, border: `1px solid ${item.color}25`, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, transition: 'all .2s ease' }}>
                                         <Icon sx={{ fontSize: 17, color: item.color }} />
                                     </Box>
@@ -147,7 +139,7 @@ export default function Navbar() {
                                     {l.label}
                                 </Box>
                             ))}
-                            <MoreDropdown isActive={isActive('/login') || isActive('/admin') || isActive('/nations')} />
+                            <MoreDropdown isActive={isActive('/blog') || isActive('/resources')} />
                         </Stack>
 
                         <Stack direction="row" alignItems="center" gap={1.5}>
@@ -206,6 +198,7 @@ export default function Navbar() {
                                 <Typography sx={{ ...drawerLinkTextSx, color: active ? 'white' : 'rgba(255,255,255,0.75)', fontWeight: active ? 700 : 500 }}>
                                     {l.label}
                                 </Typography>
+                                {active && <Box sx={{ ml: 'auto', width: 6, height: 6, borderRadius: '50%', bgcolor: l.color }} />}
                             </Box>
                         );
                     })}

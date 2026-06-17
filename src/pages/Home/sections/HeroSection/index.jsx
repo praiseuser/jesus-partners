@@ -4,16 +4,12 @@ import { Link } from 'react-router-dom';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import PlayCircleIcon from '@mui/icons-material/PlayCircle';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
-import PeopleIcon from '@mui/icons-material/People';
-import PublicIcon from '@mui/icons-material/Public';
-import MenuBookIcon from '@mui/icons-material/MenuBook';
-import ChurchIcon from '@mui/icons-material/Church';
 import { typography } from '../../../../theme';
 import {
-    keyframes, heroWrapSx, bgImgSx, overlayLayersSx, decoCircleSx,
+    keyframes, heroWrapSx, bgImgLayerSx, overlayLayersSx, decoCircleSx,
     particleSx, contentWrapSx, eyebrowSx, eyebrowDotSx, eyebrowTextSx,
     titleSx, titleGoldSx, subtitleSx, wordGoldSx, dividerLineSx,
-    taglineSx, btnPrimarySx, btnSecSx, scrollIndicatorSx, statsRowSx, statItemSx,
+    btnPrimarySx, btnSecSx, scrollIndicatorSx,
 } from './styles';
 
 const PARTICLES = [
@@ -24,13 +20,23 @@ const PARTICLES = [
     { left: '75%', delay: 0.3, dur: 6.5 },
     { left: '88%', delay: 1.8, dur: 7.5 },
 ];
+
+const GALLERY_IMAGES = [24, 86, 79, 72, 51];
+const CYCLE_DURATION = 7; 
+const SLOT = CYCLE_DURATION / GALLERY_IMAGES.length; 
+
 export default function HeroSection() {
     return (
         <>
             <GlobalStyles styles={keyframes} />
             <Box sx={heroWrapSx}>
 
-                <Box sx={bgImgSx} />
+                {GALLERY_IMAGES.map((num, i) => (
+                    <Box
+                        key={num}
+                        sx={bgImgLayerSx(`/img/gallery/img${num}.png`, i * SLOT - CYCLE_DURATION, CYCLE_DURATION)}
+                    />
+                ))}
 
                 {overlayLayersSx.map((sx, i) => <Box key={i} sx={sx} />)}
 

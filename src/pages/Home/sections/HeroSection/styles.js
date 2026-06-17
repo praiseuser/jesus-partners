@@ -60,6 +60,13 @@ export const keyframes = {
     "0%,100%": { transform: "translateY(0) translateX(-50%)" },
     "50%": { transform: "translateY(8px) translateX(-50%)" },
   },
+  // Crossfade "in and out" — image fades in, holds, then fades out
+  "@keyframes hero_imgCrossfade": {
+    "0%": { opacity: 0 },
+    "8%": { opacity: 1 },
+    "92%": { opacity: 1 },
+    "100%": { opacity: 0 },
+  },
 };
 
 export const heroWrapSx = {
@@ -71,16 +78,22 @@ export const heroWrapSx = {
   overflow: "hidden",
 };
 
-export const bgImgSx = {
+// Base layer style for each crossfading background image.
+// Each image gets the same animation but a different negative delay
+// (passed in) so they take turns being visible — true "in and out" crossfade,
+// not a sliding carousel.
+export const bgImgLayerSx = (url, delay, duration) => ({
   position: "absolute",
   inset: 0,
-  backgroundImage: "url(/hero.png)",
+  backgroundImage: `url(${url})`,
   backgroundSize: "cover",
   backgroundPosition: "center top",
   backgroundRepeat: "no-repeat",
   transform: "scale(1.05)",
-  animation: "hero_float 12s ease-in-out infinite",
-};
+  opacity: 0,
+  animation: `hero_imgCrossfade ${duration}s ease-in-out ${delay}s infinite, hero_float 12s ease-in-out infinite`,
+  willChange: "opacity",
+});
 
 export const overlayLayersSx = [
   /* deep navy gradient from bottom */
@@ -89,6 +102,7 @@ export const overlayLayersSx = [
     inset: 0,
     background:
       "linear-gradient(to top, rgba(10,16,40,0.92) 0%, rgba(10,16,40,0.55) 40%, rgba(10,16,40,0.15) 70%, transparent 100%)",
+    zIndex: 1,
   },
   /* subtle top darkening for navbar contrast */
   {
@@ -96,6 +110,7 @@ export const overlayLayersSx = [
     inset: 0,
     background:
       "linear-gradient(to bottom, rgba(10,16,40,0.55) 0%, transparent 30%)",
+    zIndex: 1,
   },
   /* center radial light burst */
   {
@@ -103,6 +118,7 @@ export const overlayLayersSx = [
     inset: 0,
     background:
       "radial-gradient(ellipse 70% 60% at 50% 42%, rgba(255,255,255,0.07) 0%, transparent 70%)",
+    zIndex: 1,
   },
 ];
 
@@ -118,6 +134,7 @@ export const decoCircleSx = (size, top, left, right, bottom, delay) => ({
   pointerEvents: "none",
   border: "1px solid rgba(212,160,23,0.18)",
   animation: `hero_pulse ${5 + delay}s ease-in-out ${delay}s infinite`,
+  zIndex: 2,
 });
 
 export const crossDecoSx = (size, top, left, right, bottom, delay) => ({
@@ -131,6 +148,7 @@ export const crossDecoSx = (size, top, left, right, bottom, delay) => ({
   pointerEvents: "none",
   opacity: 0.15,
   animation: `hero_crossSpin ${18 + delay * 4}s linear ${delay}s infinite`,
+  zIndex: 2,
   "&::before, &::after": {
     content: '""',
     position: "absolute",
@@ -152,6 +170,7 @@ export const particleSx = (left, delay, duration) => ({
   boxShadow: "0 0 8px rgba(212,160,23,0.8)",
   animation: `hero_particleFloat ${duration}s ease-in-out ${delay}s infinite`,
   pointerEvents: "none",
+  zIndex: 2,
 });
 
 export const contentWrapSx = {
