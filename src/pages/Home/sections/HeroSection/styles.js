@@ -77,11 +77,6 @@ export const heroWrapSx = {
   justifyContent: "center",
   overflow: "hidden",
 };
-
-// Base layer style for each crossfading background image.
-// Each image gets the same animation but a different negative delay
-// (passed in) so they take turns being visible — true "in and out" crossfade,
-// not a sliding carousel.
 export const bgImgLayerSx = (url, delay, duration) => ({
   position: "absolute",
   inset: 0,

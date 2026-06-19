@@ -23,19 +23,12 @@ const PARTICLES = [
 
 const GALLERY_IMAGES = [79, 72, 51];
 
-const DISPLAY_SECS  = 20;                            // how long each image is visible
-const FADE_SECS     = 1.5;                           // crossfade duration
+const DISPLAY_SECS  = 20;                   
+const FADE_SECS     = 1.5;                        
 const TOTAL         = GALLERY_IMAGES.length;
-const CYCLE         = TOTAL * DISPLAY_SECS;          // 5 × 20 = 100s full cycle
+const CYCLE         = TOTAL * DISPLAY_SECS;      
 
-/*
-  Animation per layer — keyframes as percentages of the full cycle:
-    0%           → invisible (opacity 0)
-    fade-in end  → fully visible (opacity 1)
-    hold end     → still visible (opacity 1)
-    fade-out end → invisible again (opacity 0)
-    100%         → invisible (opacity 0)
-*/
+
 const bgSlideKeyframe = (index) => {
     const fadeInStart  = (index * DISPLAY_SECS) / CYCLE * 100;
     const fadeInEnd    = ((index * DISPLAY_SECS) + FADE_SECS) / CYCLE * 100;
@@ -127,7 +120,7 @@ export default function HeroSection() {
                         <Stack direction={{ xs: 'column', sm: 'row' }} gap={8} justifyContent="center" marginTop={7} alignItems="center">
                             <Box component={Link} to="/partners" sx={btnPrimarySx}>
                                 <FavoriteIcon sx={{ fontSize: 17 }} />
-                                Partner With Us
+                                Who We Are
                             </Box>
                             <Box component={Link} to="/whatwedo" sx={btnSecSx}>
                                 <PlayCircleIcon sx={{ fontSize: 17 }} />

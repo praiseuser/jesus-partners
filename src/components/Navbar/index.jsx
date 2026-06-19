@@ -33,6 +33,7 @@ const NAV_LINKS = [
     { label: 'About', path: '/about', icon: InfoIcon, color: colors.accent.red },
     { label: 'Gallery', path: '/gallery', icon: CollectionsIcon, color: colors.accent.purple },
     { label: 'Contact', path: '/contact', icon: ContactMailIcon, color: colors.accent.green },
+    { label: 'Current Programs', path: '/program', icon: ContactMailIcon, color: colors.accent.green },
     { label: 'Partner With Us', path: '/partners', icon: HandshakeIcon, color: colors.accent.teal },
 ];
 

@@ -11,7 +11,12 @@ import LocalHospitalIcon from '@mui/icons-material/LocalHospital';
 import SchoolIcon from '@mui/icons-material/School';
 import MenuBookIcon from '@mui/icons-material/MenuBook';
 import PeopleAltIcon from '@mui/icons-material/PeopleAlt';
+import HandshakeIcon from '@mui/icons-material/Handshake';
+import AutoStoriesIcon from '@mui/icons-material/AutoStories';
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import GroupsIcon from '@mui/icons-material/Groups';
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
+import CloseIcon from '@mui/icons-material/Close';
 import { colors, typography } from '../../theme';
 
 const keyframes = {
@@ -26,6 +31,8 @@ const keyframes = {
     '@keyframes wd_spin': { to: { transform: 'rotate(360deg)' } },
     '@keyframes wd_spinR': { to: { transform: 'rotate(-360deg)' } },
     '@keyframes wd_countUp': { from: { opacity: 0, transform: 'translateY(20px)' }, to: { opacity: 1, transform: 'none' } },
+    '@keyframes wd_fadeIn': { from: { opacity: 0 }, to: { opacity: 1 } },
+    '@keyframes wd_slideUp': { from: { opacity: 0, transform: 'translateY(40px) scale(0.97)' }, to: { opacity: 1, transform: 'none' } },
 };
 
 const useReveal = (threshold = 0.08) => {
@@ -42,115 +49,230 @@ const useReveal = (threshold = 0.08) => {
     return [ref, vis];
 };
 
-const PROGRAMMES = [
+// ─── Core mandate (the 5 "what we do" points) ─────────────────────────────────
+const MANDATE = [
+    { icon: CampaignIcon, color: colors.secondary.main, text: 'Preach and teach the word of Christ through gospel and revival outreaches in partnership with churches and communities' },
+    { icon: HandshakeIcon, color: colors.accent.teal, text: 'Raise and administer support for needy churches and ministers in challenged areas' },
+    { icon: VolunteerActivismIcon, color: colors.accent.red, text: 'Support and empower widows, orphans, and the vulnerable' },
+    { icon: MenuBookIcon, color: '#8B5CF6', text: 'Train Christian ministers through sound biblical and theological education' },
+    { icon: LocalHospitalIcon, color: colors.accent.green, text: 'Facilitate medical care through partnerships with accredited healthcare organizations' },
+];
+
+// ─── Programs & Activities — teaser (3 sentences) + full content for modal ────
+const PROGRAMS = [
     {
-        id: 1,
+        id: 'crusades',
         icon: CampaignIcon,
         color: colors.secondary.main,
-        title: 'Crusades & Revivals',
-        subtitle: 'Taking the Gospel to Every Corner',
-        desc: 'We organise city-wide and local Gospel Crusades in partnership with willing Christian churches — from planning to execution and follow-up of new believers. City-wide crusades draw participants from across a city and neighbouring communities. Local outreaches serve individual churches, villages, towns, or localities.',
-        points: [
-            'City-wide crusades in partnership with local churches',
-            'Local church and village outreaches',
-            'Street outreaches in security-challenged Northern Nigeria',
-            'Follow-up and discipleship of new believers',
-            'Fellowship meals, clothing & shoes shared during outreaches',
-        ],
-        note: 'Especially active in areas where persecution and displacement have closed churches for months or years.',
+        title: 'Crusades',
+        teaser: 'Our Gospel and revival outreaches are prayer-backed programs to preach salvation, pray for the sick, bring deliverance, and provide material support. We go with the WORD, WORKS, and WORTH — reaching spiritual, physical, and material needs through Christ\u2019s love. From city-wide crusades to personal discipleship, every outreach is shaped to meet people exactly where they are.',
+        full: {
+            intro: 'Our Gospel and revival outreaches are prayer-backed programs to preach salvation, pray for the sick, bring deliverance, and provide material support. We go with the WORD, WORKS, and WORTH — reaching spiritual, physical, and material needs through Christ\u2019s love.',
+            pillars: [
+                { label: 'WORD', desc: 'Preach and teach the Word' },
+                { label: 'WORKS', desc: 'Heal the sick and cast out demons' },
+                { label: 'WORTH', desc: 'Provide for the needy' },
+            ],
+            listTitle: 'Four types of outreaches',
+            list: [
+                { title: 'City-wide', desc: 'Draws participants from across cities. Done with all willing churches.' },
+                { title: 'Local Outreaches', desc: 'Serve a village, town, or local church. Lower cost with our technical, media, and ministerial teams.' },
+                { title: 'Street Outreaches', desc: 'Prayerfully chosen locations within towns or institutions.' },
+                { title: 'Personal Evangelism & Discipleship Training', desc: '' },
+            ],
+        },
     },
     {
-        id: 2,
+        id: 'widows',
         icon: VolunteerActivismIcon,
         color: colors.accent.red,
-        title: 'Widows & Orphans Care',
-        subtitle: 'Honouring James 1:27 in Action',
-        desc: 'Our target is to reach 400 widows — women left as sole providers after attacks and persecution. We host a Widows Outreach Feast where widows receive fellowship, a good meal, counselling, prayers, gifts, financial support, and practical help. We also care for orphans whose parents were lost to attacks and persecution.',
-        points: [
-            'Widows Outreach Feast with meals, fellowship & counselling',
-            'Gifts of clothing, food stuff, and financial support',
-            'Business empowerment support for widows',
-            'Care for orphans (both parents lost in attacks)',
-            'Food sharing: rice, beans, corn, cassava flour, oil, salt',
-        ],
-        note: 'Special outreach hosted in July — the most difficult month when food is scarce and expensive.',
+        title: 'Widows & Orphans Support',
+        teaser: 'We honour James 1:27 through practical, sustained care for widows and orphans across our communities. This includes an annual feast of fellowship and gifts, full boarding-school support for vulnerable children, and seed funding that helps widows build their own businesses. Every initiative is designed to restore dignity, not just meet a one-time need.',
+        full: {
+            intro: 'We honour James 1:27 through practical, sustained care for widows and orphans across our communities — restoring dignity, not just meeting a one-time need.',
+            listTitle: 'Our support includes',
+            list: [
+                { title: 'Widows Outreach Feast', desc: 'An annual gathering with widows to share fellowship, meals, counselling, and gifts. Usually held in February — over 400 widows attended in 2026.' },
+                { title: 'Orphans School Support', desc: 'Education, safety, Christian nurturing, meals, and medical care in boarding schools for displaced and vulnerable children.' },
+                { title: 'Widows Business Empowerment', desc: 'Seed capital, fertilizer, sewing machines, water pumps, and grinding machines to support widows\u2019 businesses.' },
+            ],
+        },
     },
     {
-        id: 3,
-        icon: LocalHospitalIcon,
-        color: colors.accent.teal,
-        title: 'Medical Outreaches',
-        subtitle: 'Healing the Body, Touching the Soul',
-        desc: 'Following the example of the missionary brother who first came to Nkier-Gboko for a medical mission in 2007, we continue to bring medical attention to communities in need. Where resources are available as God provides, we offer healthcare to the vulnerable — especially in underserved and displaced communities.',
-        points: [
-            'Medical care for displaced and vulnerable communities',
-            'Healthcare alongside Gospel proclamation',
-            'Partnering with medical professionals and missionaries',
-        ],
-        note: 'Inspired by the 2007 medical mission that sparked the broader ministry partnership.',
-    },
-    {
-        id: 4,
-        icon: SchoolIcon,
-        color: colors.accent.green,
-        title: 'Education Assistance',
-        subtitle: 'Safety, Learning & A Future for Every Child',
-        desc: 'We are placing children in boarding schools owned by our members — Heavens Colony Academy and a Skills Acquisition school — where they receive not only education but safekeeping, Christian nurturing, trauma counselling, meals, and medical care. This removes children from the dangers of IDP camps and provides stability.',
-        points: [
-            // 'Placement at Heavens Colony Academy',
-            // 'Skills Acquisition training for older students',
-            // 'Full boarding: tuition, uniforms, books, provisions',
-            // 'Trauma counselling and Christian nurturing',
-            // 'Solar, internet, and learning resources provided',
-        ],
-        note: 'Targeting orphans and widows\' children — those most vulnerable to trafficking, child labour, and exploitation.',
-    },
-    {
-        id: 5,
+        id: 'ministers',
         icon: PeopleAltIcon,
         color: '#8B5CF6',
-        title: 'Pastors & Children Support',
-        subtitle: 'Strengthening Those Who Serve',
-        desc: 'We support ministers and their children who are serving under difficult conditions with limited resources. Knowing the burden of ministry first-hand, we come alongside pastors to ensure their children have access to quality education and that ministers can continue their calling without being overwhelmed by financial need.',
-        points: [
-            'Tuition and books support for ministers\' children',
-            'External exams support (WAEC, NECO, etc.)',
-            'Practical care packages for pastors in need',
-        ],
-        note: 'A ministry born out of the founders\' own experience of ministry under hardship.',
+        title: "Ministers & Ministers' Children Support",
+        teaser: 'We come alongside pastors and their families who are serving under difficult conditions with limited resources. This means covering tuition, books, and exam fees for ministers\u2019 children, offering scholarships for ministerial training, and investing in infrastructure that strengthens local ministry. It is support born from understanding the real cost of a life devoted to ministry.',
+        full: {
+            intro: 'We come alongside pastors and their families serving under difficult conditions with limited resources — support born from understanding the real cost of a life devoted to ministry.',
+            listTitle: 'Our support includes',
+            list: [
+                { title: 'Tuition, Books & Exam Fees', desc: 'Covering school costs and external exam fees for ministers\u2019 children.' },
+                { title: 'Ministerial Training Scholarships', desc: 'Helping called ministers access sound theological education.' },
+                { title: 'Infrastructure Development', desc: 'Investing in the physical resources that strengthen local ministry.' },
+            ],
+        },
     },
     {
-        id: 6,
+        id: 'gcem',
         icon: MenuBookIcon,
-        color: colors.secondary.main,
-        title: 'Ministerial Training',
-        subtitle: 'Grace College of Evangelism & Missions',
-        desc: 'Through Grace College of Evangelism and Missions in Abuja, we train the next generation of evangelists and missionaries. The college needs scholarships, infrastructure, study materials, and residential facilities to fulfil its mandate of raising Gospel workers equipped for the harvest.',
-        points: [
-            'Physical accommodation complex development',
-            'Study materials and curriculum resources',
-        ],
-        note: 'Based in Abuja — equipping ministers to reach the nations.',
+        color: colors.accent.teal,
+        title: 'Grace College of Evangelism & Missions',
+        teaser: 'We undertake ministerial development through Grace College of Evangelism & Missions, where we run an MA program in partnership with Puritan Reformed Theological Seminary, USA. The college is raising the next generation of evangelists and missionaries through rigorous biblical training. It stands as one of our longest-term investments in the future of Gospel work across the region.',
+        full: {
+            intro: 'We undertake ministerial development through Grace College of Evangelism & Missions, where we run an MA program in partnership with Puritan Reformed Theological Seminary, USA — one of our longest-term investments in the future of Gospel work across the region.',
+            listTitle: 'What the college needs to grow',
+            list: [
+                { title: 'Scholarships', desc: 'Helping qualified students access the MA program regardless of financial background.' },
+                { title: 'Infrastructure', desc: 'Physical accommodation and learning facilities for resident students.' },
+                { title: 'Study Materials', desc: 'Curriculum resources and library materials for theological training.' },
+            ],
+        },
     },
 ];
 
 const SUMMARY_STATS = [
-    { value: '6', label: 'Active Programmes', color: colors.secondary.main },
-    { value: '1000+', label: 'Widows Targeted', color: colors.accent.red },
-    { value: '3', label: 'Schools Supported', color: colors.accent.green },
+    { value: '4', label: 'Core Programs', color: colors.secondary.main },
+    { value: '400+', label: 'Widows Reached (2026)', color: colors.accent.red },
     { value: '1', label: 'Training College', color: colors.accent.teal },
+    { value: '2007', label: 'Serving Since', color: '#8B5CF6' },
 ];
+
+// ─── Read More Modal ───────────────────────────────────────────────────────
+function ProgramModal({ program, onClose }) {
+    useEffect(() => {
+        if (program) document.body.style.overflow = 'hidden';
+        else document.body.style.overflow = '';
+        return () => { document.body.style.overflow = ''; };
+    }, [program]);
+
+    if (!program) return null;
+    const Icon = program.icon;
+
+    return (
+        <Box
+            onClick={onClose}
+            sx={{
+                position: 'fixed', inset: 0, zIndex: 9999,
+                display: 'flex', alignItems: { xs: 'flex-end', sm: 'center' }, justifyContent: 'center',
+                bgcolor: 'rgba(5,10,30,0.72)', backdropFilter: 'blur(6px)',
+                animation: 'wd_fadeIn .2s ease both', p: { xs: 0, sm: 3 },
+            }}
+        >
+            <Box
+                onClick={(e) => e.stopPropagation()}
+                sx={{
+                    width: '100%', maxWidth: 640, maxHeight: { xs: '90vh', sm: '85vh' },
+                    bgcolor: 'white',
+                    borderRadius: { xs: '24px 24px 0 0', sm: '20px' },
+                    display: 'flex', flexDirection: 'column',
+                    animation: 'wd_slideUp .35s cubic-bezier(.34,1.2,.64,1) both',
+                    overflow: 'hidden',
+                }}
+            >
+                {/* Header */}
+                <Box sx={{
+                    px: { xs: 3, sm: 4 }, py: 3, flexShrink: 0,
+                    background: `linear-gradient(135deg, ${program.color}10, transparent)`,
+                    borderBottom: `1px solid ${program.color}20`,
+                    position: 'relative',
+                }}>
+                    <Box component="button" onClick={onClose}
+                        sx={{ position: 'absolute', top: 16, right: 16, width: 34, height: 34, borderRadius: '50%', bgcolor: 'rgba(0,0,0,0.05)', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', '&:hover': { bgcolor: 'rgba(0,0,0,0.1)' } }}>
+                        <CloseIcon sx={{ fontSize: 18, color: colors.text.secondary }} />
+                    </Box>
+                    <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, pr: 5 }}>
+                        <Box sx={{ width: 52, height: 52, borderRadius: '14px', bgcolor: `${program.color}18`, border: `1.5px solid ${program.color}35`, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                            <Icon sx={{ fontSize: 26, color: program.color }} />
+                        </Box>
+                        <Typography sx={{ fontFamily: typography.fontFamily.accent, fontSize: { xs: '1.3rem', sm: '1.5rem' }, fontWeight: 900, color: colors.text.primary, lineHeight: 1.2 }}>
+                            {program.title}
+                        </Typography>
+                    </Box>
+                </Box>
+
+                {/* Body */}
+                <Box sx={{ flex: 1, overflowY: 'auto', px: { xs: 3, sm: 4 }, py: 3.5 }}>
+                    <Typography sx={{ fontFamily: typography.fontFamily.body, fontSize: '0.95rem', color: colors.text.secondary, lineHeight: 1.9, mb: program.full.pillars || program.full.list ? 3 : 0 }}>
+                        {program.full.intro}
+                    </Typography>
+
+                    {/* WORD / WORKS / WORTH pillars (crusades only) */}
+                    {program.full.pillars && (
+                        <Stack gap={1.5} mb={3.5}>
+                            {program.full.pillars.map((p) => (
+                                <Box key={p.label} sx={{ display: 'flex', alignItems: 'center', gap: 2, p: 2, borderRadius: '12px', bgcolor: `${program.color}08`, border: `1px solid ${program.color}20` }}>
+                                    <Typography sx={{ fontFamily: typography.fontFamily.heading, fontSize: '0.78rem', fontWeight: 900, color: program.color, letterSpacing: 1.5, minWidth: 64 }}>
+                                        {p.label}
+                                    </Typography>
+                                    <Typography sx={{ fontFamily: typography.fontFamily.body, fontSize: '0.88rem', color: colors.text.primary }}>
+                                        {p.desc}
+                                    </Typography>
+                                </Box>
+                            ))}
+                        </Stack>
+                    )}
+
+                    {/* Detail list */}
+                    {program.full.list && (
+                        <>
+                            <Typography sx={{ fontFamily: typography.fontFamily.heading, fontSize: '0.72rem', fontWeight: 800, color: program.color, letterSpacing: 2, textTransform: 'uppercase', mb: 2 }}>
+                                {program.full.listTitle}
+                            </Typography>
+                            <Stack gap={2}>
+                                {program.full.list.map((item, idx) => (
+                                    <Box key={item.title} sx={{ display: 'flex', gap: 1.5 }}>
+                                        <Box sx={{ width: 24, height: 24, borderRadius: '7px', bgcolor: `${program.color}15`, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, mt: '1px' }}>
+                                            <Typography sx={{ fontFamily: typography.fontFamily.heading, fontSize: '0.68rem', fontWeight: 900, color: program.color }}>{idx + 1}</Typography>
+                                        </Box>
+                                        <Box>
+                                            <Typography sx={{ fontFamily: typography.fontFamily.heading, fontSize: '0.88rem', fontWeight: 800, color: colors.text.primary, lineHeight: 1.4 }}>
+                                                {item.title}
+                                            </Typography>
+                                            {item.desc && (
+                                                <Typography sx={{ fontFamily: typography.fontFamily.body, fontSize: '0.85rem', color: colors.text.secondary, lineHeight: 1.7, mt: .4 }}>
+                                                    {item.desc}
+                                                </Typography>
+                                            )}
+                                        </Box>
+                                    </Box>
+                                ))}
+                            </Stack>
+                        </>
+                    )}
+                </Box>
+
+                {/* Footer CTA */}
+                <Box sx={{ px: { xs: 3, sm: 4 }, py: 2.5, borderTop: '1px solid rgba(0,0,0,0.06)', flexShrink: 0, display: 'flex', gap: 1.5 }}>
+                    <Box component={Link} to="/partners" onClick={onClose}
+                        sx={{ flex: 1, display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: 1, bgcolor: program.color, color: 'white', px: 3, py: 1.4, borderRadius: '10px', textDecoration: 'none', fontFamily: typography.fontFamily.heading, fontSize: '0.85rem', fontWeight: 800, boxShadow: `0 8px 22px ${program.color}40`, transition: 'all .25s ease', '&:hover': { transform: 'translateY(-2px)' } }}>
+                        <FavoriteBorderIcon sx={{ fontSize: 15 }} /> Support This
+                    </Box>
+                    <Box component="button" onClick={onClose}
+                        sx={{ px: 3, py: 1.4, borderRadius: '10px', border: '1.5px solid rgba(0,0,0,0.12)', bgcolor: 'transparent', color: colors.text.secondary, fontFamily: typography.fontFamily.heading, fontSize: '0.85rem', fontWeight: 700, cursor: 'pointer' }}>
+                        Close
+                    </Box>
+                </Box>
+            </Box>
+        </Box>
+    );
+}
 
 export default function WhatWeDoPage() {
     const [heroRef, heroVis] = useReveal(0.05);
+    const [mandateRef, mandateVis] = useReveal();
     const [statsRef, statsVis] = useReveal();
     const [progsRef, progsVis] = useReveal();
     const [quoteRef, quoteVis] = useReveal();
     const [ctaRef, ctaVis] = useReveal();
 
+    const [activeProgram, setActiveProgram] = useState(null);
+
     return (
         <>
             <GlobalStyles styles={keyframes} />
+            <ProgramModal program={activeProgram} onClose={() => setActiveProgram(null)} />
 
             {/* ══ HERO ══ */}
             <Box sx={{ bgcolor: colors.primary.dark, pt: { xs: 14, md: 18 }, pb: { xs: 10, md: 14 }, position: 'relative', overflow: 'hidden' }}>
@@ -161,7 +283,6 @@ export default function WhatWeDoPage() {
                 <Container maxWidth="lg" sx={{ position: 'relative', zIndex: 1 }}>
                     <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', md: '1fr 1fr' }, gap: { xs: 8, md: 6 }, alignItems: 'center' }}>
 
-                        {/* Left — text */}
                         <Box ref={heroRef}>
                             <Box sx={{ display: 'inline-flex', alignItems: 'center', gap: 1, bgcolor: 'rgba(212,160,23,0.1)', border: '1px solid rgba(212,160,23,0.28)', borderRadius: '100px', px: 2.2, py: .75, mb: 3, opacity: heroVis ? 1 : 0, animation: heroVis ? 'wd_rise .6s ease both' : 'none' }}>
                                 <Box sx={{ width: 6, height: 6, borderRadius: '50%', bgcolor: colors.secondary.main, animation: 'wd_pulse 2s ease infinite' }} />
@@ -186,24 +307,20 @@ export default function WhatWeDoPage() {
                                     <FavoriteIcon sx={{ fontSize: 16 }} /> Support a Programme
                                 </Box>
                                 <Box component="a" href="#programmes" sx={{ display: 'inline-flex', alignItems: 'center', gap: 1, bgcolor: 'rgba(255,255,255,0.08)', color: 'rgba(255,255,255,0.8)', border: '1.5px solid rgba(255,255,255,0.18)', px: 3.5, py: 1.6, borderRadius: '10px', textDecoration: 'none', fontFamily: typography.fontFamily.heading, fontSize: typography.fontSize.sm, fontWeight: 700, transition: 'all .3s ease', '&:hover': { bgcolor: 'rgba(255,255,255,0.14)', transform: 'translateY(-2px)' } }}>
-                                    See All Programmes <ArrowForwardIcon sx={{ fontSize: 16 }} />
+                                    See Programs <ArrowForwardIcon sx={{ fontSize: 16 }} />
                                 </Box>
                             </Stack>
                         </Box>
 
-                        {/* Right — icon grid */}
                         <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', opacity: heroVis ? 1 : 0, animation: heroVis ? 'wd_right .9s cubic-bezier(.34,1.2,.64,1) .3s both' : 'none' }}>
                             <Box sx={{ position: 'relative', width: { xs: 260, md: 340 }, height: { xs: 260, md: 340 } }}>
-                                {/* Orbit rings */}
                                 <Box sx={{ position: 'absolute', inset: '-18%', borderRadius: '50%', border: `1px dashed rgba(212,160,23,0.18)`, animation: 'wd_spin 22s linear infinite', pointerEvents: 'none' }}>
                                     <Box sx={{ position: 'absolute', top: '-5px', left: '46%', width: 10, height: 10, borderRadius: '50%', bgcolor: colors.secondary.main, boxShadow: `0 0 14px ${colors.secondary.main}` }} />
                                 </Box>
                                 <Box sx={{ position: 'absolute', inset: '-6%', borderRadius: '50%', border: `1px dashed rgba(14,165,233,0.14)`, animation: 'wd_spinR 15s linear infinite', pointerEvents: 'none' }}>
                                     <Box sx={{ position: 'absolute', bottom: '-4px', left: '46%', width: 8, height: 8, borderRadius: '50%', bgcolor: colors.accent.teal, boxShadow: `0 0 10px ${colors.accent.teal}` }} />
                                 </Box>
-                                {/* Glow */}
                                 <Box sx={{ position: 'absolute', inset: 0, borderRadius: '50%', background: `radial-gradient(circle,${colors.secondary.main}18 0%,transparent 70%)`, animation: 'wd_glow 4s ease-in-out infinite', pointerEvents: 'none' }} />
-                                {/* Centre icon cluster */}
                                 <Box sx={{ position: 'absolute', inset: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 2 }}>
                                     <Box sx={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 2, animation: 'wd_float 5s ease-in-out infinite' }}>
                                         {[
@@ -224,7 +341,6 @@ export default function WhatWeDoPage() {
                     </Box>
                 </Container>
 
-                {/* wave */}
                 <Box sx={{ position: 'absolute', bottom: -1, left: 0, right: 0, lineHeight: 0, zIndex: 2 }}>
                     <svg viewBox="0 0 1440 60" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" style={{ width: '100%', display: 'block' }}>
                         <path d="M0,30 C360,60 720,0 1080,36 C1260,52 1380,18 1440,30 L1440,60 L0,60 Z" fill={colors.background.default} />
@@ -232,12 +348,51 @@ export default function WhatWeDoPage() {
                 </Box>
             </Box>
 
+            {/* ══ WHAT WE DO — Core Mandate ══ */}
+            <Box ref={mandateRef} sx={{ bgcolor: colors.background.default, py: { xs: 8, md: 12 } }}>
+                <Container maxWidth="lg">
+                    <Box sx={{ textAlign: 'center', mb: { xs: 5, md: 7 }, opacity: mandateVis ? 1 : 0, animation: mandateVis ? 'wd_rise .6s ease both' : 'none' }}>
+                        <Box sx={{ display: 'inline-flex', alignItems: 'center', gap: 1.5, mb: 1.5 }}>
+                            <Box sx={{ width: 28, height: 3, borderRadius: 2, bgcolor: colors.secondary.main }} />
+                            <Typography sx={{ fontFamily: typography.fontFamily.body, fontSize: typography.fontSize.xs, fontWeight: 700, color: colors.secondary.main, letterSpacing: 2.5, textTransform: 'uppercase' }}>What We Do</Typography>
+                            <Box sx={{ width: 28, height: 3, borderRadius: 2, bgcolor: colors.secondary.main }} />
+                        </Box>
+                        <Typography sx={{ fontFamily: typography.fontFamily.accent, fontSize: { xs: '1.8rem', md: '2.4rem' }, fontWeight: 900, color: colors.text.primary, lineHeight: 1.15, maxWidth: 640, mx: 'auto' }}>
+                            Our Mandate, In Five Parts
+                        </Typography>
+                    </Box>
+
+                    <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', sm: '1fr 1fr', md: 'repeat(5, 1fr)' }, gap: 2.5 }}>
+                        {MANDATE.map((m, i) => {
+                            const Icon = m.icon;
+                            return (
+                                <Box key={i} sx={{
+                                    bgcolor: 'white', borderRadius: '18px', p: 3,
+                                    border: `1px solid ${colors.divider}`,
+                                    opacity: mandateVis ? 1 : 0,
+                                    animation: mandateVis ? `wd_rise .6s ease ${i * .08}s both` : 'none',
+                                    transition: 'transform .3s ease, box-shadow .3s',
+                                    '&:hover': { transform: 'translateY(-6px)', boxShadow: `0 16px 40px ${m.color}22` },
+                                }}>
+                                    <Box sx={{ width: 44, height: 44, borderRadius: '12px', bgcolor: `${m.color}15`, border: `1.5px solid ${m.color}30`, display: 'flex', alignItems: 'center', justifyContent: 'center', mb: 2 }}>
+                                        <Icon sx={{ fontSize: 22, color: m.color }} />
+                                    </Box>
+                                    <Typography sx={{ fontFamily: typography.fontFamily.body, fontSize: '0.85rem', color: colors.text.secondary, lineHeight: 1.7 }}>
+                                        {m.text}
+                                    </Typography>
+                                </Box>
+                            );
+                        })}
+                    </Box>
+                </Container>
+            </Box>
+
             {/* ══ SUMMARY STATS ══ */}
-            <Box ref={statsRef} sx={{ bgcolor: colors.background.default, py: { xs: 7, md: 10 } }}>
+            <Box ref={statsRef} sx={{ bgcolor: 'white', py: { xs: 7, md: 10 } }}>
                 <Container maxWidth="lg">
                     <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr 1fr', md: 'repeat(4,1fr)' }, gap: { xs: 3, md: 2 } }}>
                         {SUMMARY_STATS.map((s, i) => (
-                            <Box key={s.label} sx={{ textAlign: 'center', bgcolor: 'white', borderRadius: '20px', p: { xs: 2.5, md: 3.5 }, border: `1px solid ${colors.divider}`, opacity: statsVis ? 1 : 0, animation: statsVis ? `wd_countUp .6s ease ${i * .1}s both` : 'none', transition: 'transform .3s ease, box-shadow .3s', '&:hover': { transform: 'translateY(-6px)', boxShadow: `0 20px 50px rgba(10,16,40,0.1), 0 0 0 1px ${s.color}30` } }}>
+                            <Box key={s.label} sx={{ textAlign: 'center', bgcolor: colors.background.default, borderRadius: '20px', p: { xs: 2.5, md: 3.5 }, border: `1px solid ${colors.divider}`, opacity: statsVis ? 1 : 0, animation: statsVis ? `wd_countUp .6s ease ${i * .1}s both` : 'none', transition: 'transform .3s ease, box-shadow .3s', '&:hover': { transform: 'translateY(-6px)', boxShadow: `0 20px 50px rgba(10,16,40,0.1), 0 0 0 1px ${s.color}30` } }}>
                                 <Typography sx={{ fontFamily: typography.fontFamily.accent, fontSize: { xs: '2rem', md: '2.6rem' }, fontWeight: 900, color: s.color, lineHeight: 1 }}>{s.value}</Typography>
                                 <Typography sx={{ fontFamily: typography.fontFamily.body, fontSize: typography.fontSize.xs, color: colors.text.secondary, fontWeight: 600, mt: .5, textTransform: 'uppercase', letterSpacing: 1 }}>{s.label}</Typography>
                             </Box>
@@ -246,98 +401,72 @@ export default function WhatWeDoPage() {
                 </Container>
             </Box>
 
-            {/* ══ PROGRAMMES ══ */}
-            <Box id="programmes" ref={progsRef} sx={{ bgcolor: 'white', py: { xs: 8, md: 14 }, position: 'relative', overflow: 'hidden' }}>
+            {/* ══ PROGRAMS & ACTIVITIES ══ */}
+            <Box id="programmes" ref={progsRef} sx={{ bgcolor: colors.background.default, py: { xs: 8, md: 14 }, position: 'relative', overflow: 'hidden' }}>
                 <Box sx={{ position: 'absolute', inset: 0, backgroundImage: `radial-gradient(${colors.divider} 1px, transparent 1px)`, backgroundSize: '24px 24px', opacity: .5, pointerEvents: 'none' }} />
                 <Container maxWidth="lg" sx={{ position: 'relative', zIndex: 1 }}>
 
-                    {/* Section header */}
                     <Box sx={{ textAlign: 'center', mb: { xs: 7, md: 10 }, opacity: progsVis ? 1 : 0, animation: progsVis ? 'wd_rise .6s ease both' : 'none' }}>
                         <Box sx={{ display: 'inline-flex', alignItems: 'center', gap: 1.5, mb: 1.5 }}>
                             <Box sx={{ width: 28, height: 3, borderRadius: 2, bgcolor: colors.secondary.main }} />
-                            <Typography sx={{ fontFamily: typography.fontFamily.body, fontSize: typography.fontSize.xs, fontWeight: 700, color: colors.secondary.main, letterSpacing: 2.5, textTransform: 'uppercase' }}>Programmes & Projects</Typography>
+                            <Typography sx={{ fontFamily: typography.fontFamily.body, fontSize: typography.fontSize.xs, fontWeight: 700, color: colors.secondary.main, letterSpacing: 2.5, textTransform: 'uppercase' }}>Programs & Activities</Typography>
                             <Box sx={{ width: 28, height: 3, borderRadius: 2, bgcolor: colors.secondary.main }} />
                         </Box>
                         <Typography sx={{ fontFamily: typography.fontFamily.accent, fontSize: { xs: '1.9rem', md: '2.6rem' }, fontWeight: 900, color: colors.text.primary, lineHeight: 1.12, mb: 1.5 }}>
-                            Six Ways We Serve
+                            How We Carry Out the Mandate
                         </Typography>
-                        <Typography sx={{ fontFamily: typography.fontFamily.body, fontSize: typography.fontSize.base, color: colors.text.secondary, maxWidth: 520, mx: 'auto', lineHeight: 1.85 }}>
-                            Each programme is a direct response to a real need — shaped by years of on-the-ground ministry across Nigeria and beyond.
+                        <Typography sx={{ fontFamily: typography.fontFamily.body, fontSize: typography.fontSize.base, color: colors.text.secondary, maxWidth: 540, mx: 'auto', lineHeight: 1.85 }}>
+                            Each program below is a direct, practical expression of our mandate. Tap any card to read the full detail.
                         </Typography>
                     </Box>
 
-                    {/* Programme cards — alternating layout */}
-                    <Stack gap={{ xs: 6, md: 10 }}>
-                        {PROGRAMMES.map((prog, i) => {
+                    <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', md: '1fr 1fr' }, gap: { xs: 3, md: 4 } }}>
+                        {PROGRAMS.map((prog, i) => {
                             const Icon = prog.icon;
-                            const isEven = i % 2 === 0;
                             return (
-                                <Box key={prog.id} sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', md: '1fr 1fr' }, gap: { xs: 4, md: 8 }, alignItems: 'center', opacity: progsVis ? 1 : 0, animation: progsVis ? `wd_rise .7s ease ${i * .08}s both` : 'none' }}>
-
-                                    {/* Text side */}
-                                    <Box sx={{ order: { xs: 2, md: isEven ? 1 : 2 } }}>
-                                        {/* Number badge */}
-                                        <Box sx={{ display: 'inline-flex', alignItems: 'center', gap: 1, mb: 2 }}>
-                                            <Box sx={{ width: 32, height: 32, borderRadius: '10px', bgcolor: `${prog.color}18`, border: `1.5px solid ${prog.color}30`, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                                                <Typography sx={{ fontFamily: typography.fontFamily.heading, fontSize: '0.7rem', fontWeight: 900, color: prog.color }}>0{prog.id}</Typography>
-                                            </Box>
-                                            <Typography sx={{ fontFamily: typography.fontFamily.body, fontSize: typography.fontSize.xs, fontWeight: 700, color: prog.color, letterSpacing: 2, textTransform: 'uppercase' }}>{prog.subtitle}</Typography>
+                                <Box key={prog.id} sx={{
+                                    bgcolor: 'white', borderRadius: '22px', p: { xs: 3, md: 3.5 },
+                                    border: `1px solid ${colors.divider}`,
+                                    display: 'flex', flexDirection: 'column',
+                                    opacity: progsVis ? 1 : 0,
+                                    animation: progsVis ? `wd_rise .7s ease ${i * .08}s both` : 'none',
+                                    transition: 'transform .3s ease, box-shadow .3s',
+                                    '&:hover': { transform: 'translateY(-5px)', boxShadow: `0 20px 50px ${prog.color}1A` },
+                                }}>
+                                    <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, mb: 2.5 }}>
+                                        <Box sx={{ width: 48, height: 48, borderRadius: '14px', bgcolor: `${prog.color}15`, border: `1.5px solid ${prog.color}30`, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                                            <Icon sx={{ fontSize: 24, color: prog.color }} />
                                         </Box>
-
-                                        <Typography sx={{ fontFamily: typography.fontFamily.accent, fontSize: { xs: '1.6rem', md: '2rem' }, fontWeight: 900, color: colors.text.primary, lineHeight: 1.15, mb: 1.5 }}>
+                                        <Typography sx={{ fontFamily: typography.fontFamily.accent, fontSize: { xs: '1.15rem', md: '1.3rem' }, fontWeight: 900, color: colors.text.primary, lineHeight: 1.2 }}>
                                             {prog.title}
                                         </Typography>
-                                        <Typography sx={{ fontFamily: typography.fontFamily.body, fontSize: typography.fontSize.base, color: colors.text.secondary, lineHeight: 1.9, mb: 3 }}>
-                                            {prog.desc}
-                                        </Typography>
-
-                                        {/* Points */}
-                                        <Stack gap={1} mb={2.5}>
-                                            {prog.points.map((pt) => (
-                                                <Box key={pt} sx={{ display: 'flex', alignItems: 'flex-start', gap: 1.2 }}>
-                                                    <CheckCircleOutlineIcon sx={{ fontSize: 18, color: prog.color, mt: '2px', flexShrink: 0 }} />
-                                                    <Typography sx={{ fontFamily: typography.fontFamily.body, fontSize: typography.fontSize.sm, color: colors.text.secondary, lineHeight: 1.7 }}>{pt}</Typography>
-                                                </Box>
-                                            ))}
-                                        </Stack>
-
-                                        {/* Note */}
-                                        <Box sx={{ bgcolor: `${prog.color}0D`, border: `1px solid ${prog.color}25`, borderLeft: `3px solid ${prog.color}`, borderRadius: '0 10px 10px 0', px: 2.5, py: 1.5 }}>
-                                            <Typography sx={{ fontFamily: typography.fontFamily.body, fontSize: typography.fontSize.xs, color: colors.text.secondary, lineHeight: 1.7, fontStyle: 'italic' }}>
-                                                {prog.note}
-                                            </Typography>
-                                        </Box>
                                     </Box>
 
-                                    {/* Visual side */}
-                                    <Box sx={{ order: { xs: 1, md: isEven ? 2 : 1 }, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                                        <Box sx={{ position: 'relative', width: { xs: 200, md: 260 }, height: { xs: 200, md: 260 } }}>
-                                            {/* Background glow */}
-                                            <Box sx={{ position: 'absolute', inset: '-10%', borderRadius: '50%', background: `radial-gradient(circle,${prog.color}10 0%,transparent 70%)`, animation: 'wd_glow 5s ease-in-out infinite', pointerEvents: 'none' }} />
-                                            {/* Outer dashed ring */}
-                                            <Box sx={{ position: 'absolute', inset: '-12%', borderRadius: '50%', border: `1px dashed ${prog.color}22`, animation: 'wd_spin 20s linear infinite', pointerEvents: 'none' }}>
-                                                <Box sx={{ position: 'absolute', top: '-5px', left: '46%', width: 9, height: 9, borderRadius: '50%', bgcolor: prog.color, opacity: 0.6, boxShadow: `0 0 10px ${prog.color}` }} />
-                                            </Box>
-                                            {/* Inner ring */}
-                                            <Box sx={{ position: 'absolute', inset: '0%', borderRadius: '50%', border: `1px solid ${prog.color}12`, animation: 'wd_spinR 12s linear infinite', pointerEvents: 'none' }} />
-                                            {/* Centre card */}
-                                            <Box sx={{ position: 'absolute', inset: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 2 }}>
-                                                <Box sx={{ width: { xs: 120, md: 150 }, height: { xs: 120, md: 150 }, borderRadius: '30px', bgcolor: `${prog.color}12`, border: `2px solid ${prog.color}28`, display: 'flex', alignItems: 'center', justifyContent: 'center', backdropFilter: 'blur(8px)', animation: 'wd_float 5s ease-in-out infinite', boxShadow: `0 20px 60px ${prog.color}20` }}>
-                                                    <Icon sx={{ fontSize: { xs: 52, md: 68 }, color: prog.color, opacity: 0.85 }} />
-                                                </Box>
-                                            </Box>
-                                        </Box>
-                                    </Box>
+                                    <Typography sx={{ fontFamily: typography.fontFamily.body, fontSize: typography.fontSize.sm, color: colors.text.secondary, lineHeight: 1.85, mb: 3, flex: 1 }}>
+                                        {prog.teaser}
+                                    </Typography>
 
+                                    <Box component="button" onClick={() => setActiveProgram(prog)}
+                                        sx={{
+                                            display: 'inline-flex', alignItems: 'center', gap: 1, alignSelf: 'flex-start',
+                                            bgcolor: `${prog.color}10`, color: prog.color,
+                                            border: `1.5px solid ${prog.color}35`, px: 2.5, py: 1.1, borderRadius: '10px',
+                                            cursor: 'pointer',
+                                            fontFamily: typography.fontFamily.heading, fontSize: '0.82rem', fontWeight: 800,
+                                            transition: 'all .25s ease',
+                                            '&:hover': { bgcolor: prog.color, color: 'white', transform: 'translateX(2px)' },
+                                        }}>
+                                        Read More <ArrowForwardIcon sx={{ fontSize: 15 }} />
+                                    </Box>
                                 </Box>
                             );
                         })}
-                    </Stack>
+                    </Box>
                 </Container>
             </Box>
 
             {/* ══ SCRIPTURE QUOTE ══ */}
-            <Box ref={quoteRef} sx={{ bgcolor: colors.background.default, py: { xs: 6, md: 8 } }}>
+            <Box ref={quoteRef} sx={{ bgcolor: 'white', py: { xs: 6, md: 8 } }}>
                 <Container maxWidth="md">
                     <Box sx={{ bgcolor: colors.primary.dark, borderRadius: '24px', p: { xs: 4, md: 6 }, textAlign: 'center', position: 'relative', overflow: 'hidden', border: `1px solid rgba(212,160,23,0.18)`, opacity: quoteVis ? 1 : 0, animation: quoteVis ? 'wd_rise .7s ease both' : 'none' }}>
                         <Box sx={{ position: 'absolute', inset: 0, backgroundImage: `radial-gradient(rgba(212,160,23,0.05) 1px, transparent 1px)`, backgroundSize: '20px 20px', pointerEvents: 'none' }} />
@@ -354,7 +483,7 @@ export default function WhatWeDoPage() {
                 </Container>
             </Box>
 
-            {/* ══ CTA ══ */}
+
             <Box ref={ctaRef} sx={{ background: `linear-gradient(120deg,${colors.primary.dark} 0%,#0F3460 55%,${colors.primary.light} 100%)`, py: { xs: 8, md: 11 }, position: 'relative', overflow: 'hidden' }}>
                 <Box sx={{ position: 'absolute', inset: 0, backgroundImage: `radial-gradient(rgba(255,255,255,0.04) 1px, transparent 1px)`, backgroundSize: '22px 22px', pointerEvents: 'none' }} />
                 <Container maxWidth="md" sx={{ position: 'relative', zIndex: 1, textAlign: 'center' }}>
@@ -363,7 +492,7 @@ export default function WhatWeDoPage() {
                             Join Us in the Field
                         </Typography>
                         <Typography sx={{ fontFamily: typography.fontFamily.body, fontSize: typography.fontSize.base, color: 'rgba(255,255,255,0.55)', mb: 4, maxWidth: 480, mx: 'auto', lineHeight: 1.85 }}>
-                            Every programme listed here needs your support — in prayer, in giving, and in partnership. Together we can do more and better.
+                            Every program listed here needs your support — in prayer, in giving, and in partnership. Together we can do more and better.
                         </Typography>
                         <Stack direction={{ xs: 'column', sm: 'row' }} gap={2} justifyContent="center">
                             <Box component={Link} to="/give" sx={{ display: 'inline-flex', alignItems: 'center', gap: 1, bgcolor: colors.secondary.main, color: 'white', px: 4, py: 1.7, borderRadius: '10px', textDecoration: 'none', fontFamily: typography.fontFamily.heading, fontSize: typography.fontSize.sm, fontWeight: 800, boxShadow: `0 8px 28px ${colors.secondary.main}44`, transition: 'all .3s cubic-bezier(.34,1.2,.64,1)', '&:hover': { transform: 'translateY(-4px) scale(1.04)', boxShadow: `0 16px 40px ${colors.secondary.main}55` } }}>

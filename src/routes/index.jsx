@@ -3,6 +3,7 @@ import MainLayout from '../layout/MainLayout';
 import AdminLayout from '../layout/AdminLayout';
 import HomePage from '../pages/Home';
 import WhatWeDoPage from '../pages/Whatwedo';
+import ProgramPage from '../pages/CurrentPrograms';
 import AboutPage from '../pages/About';
 import PartnerPage from '../pages/Partnerwithus';
 import ProgramsPage from '../pages/Programs';
@@ -36,6 +37,7 @@ const router = createBrowserRouter([
         children: [
             { index: true, element: <HomePage /> },
             { path: 'whatwedo', element: <WhatWeDoPage /> },
+            { path: 'program', element: <ProgramPage /> },
             { path: 'about', element: <AboutPage /> },
             {path: 'partners', element: <PartnerPage /> },
             { path: 'programs', element: <ProgramsPage /> },

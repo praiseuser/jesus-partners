@@ -10,6 +10,10 @@ import GroupsIcon from '@mui/icons-material/Groups';
 import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import FormatQuoteIcon from '@mui/icons-material/FormatQuote';
+import MusicNoteIcon from '@mui/icons-material/MusicNote';
+import VolunteerActivismIcon from '@mui/icons-material/VolunteerActivism';
+import HistoryEduIcon from '@mui/icons-material/HistoryEdu';
+import CloseIcon from '@mui/icons-material/Close';
 import { colors, typography } from '../../theme';
 
 const keyframes = {
@@ -25,6 +29,8 @@ const keyframes = {
     '@keyframes ab_lineGrow': { from: { width: 0 }, to: { width: '100%' } },
     '@keyframes ab_shimmer': { from: { left: '-80%' }, to: { left: '130%' } },
     '@keyframes ab_countUp': { from: { opacity: 0, transform: 'translateY(20px)' }, to: { opacity: 1, transform: 'none' } },
+    '@keyframes ab_modalIn': { from: { opacity: 0, transform: 'scale(0.94) translateY(20px)' }, to: { opacity: 1, transform: 'none' } },
+    '@keyframes ab_fadeIn': { from: { opacity: 0 }, to: { opacity: 1 } },
 };
 
 const useReveal = (threshold = 0.08) => {
@@ -48,38 +54,124 @@ const STATS = [
     { value: '1000s', label: 'Lives Transformed', icon: PublicIcon, color: colors.accent.teal },
 ];
 
+// ── Pillars — short preview + full text shown in modal ───────────────
 const PILLARS = [
     {
+        key: 'vision',
         icon: VisibilityIcon,
         color: colors.secondary.main,
         title: 'Our Vision',
-        desc: 'To raise men and women who shall accompany Jesus and become true partners in fulfilling the Great Commission — reaching the lost, healing the broken, and transforming communities across every nation and generation.',
+        preview: 'Reaching the generations of the world with the word and love of Christ that men may possess their inheritance in Christ.',
+        full: `Reaching the generations of the world with the word and love of Christ that men may possess their inheritance in Christ.`,
     },
     {
+        key: 'mission',
         icon: FlagIcon,
         color: colors.accent.teal,
         title: 'Our Mission',
-        desc: 'To raise revival and gospel altars across the nations — partnering with Jesus through Crusades, Revivals, and practical outreaches to reveal Him so that men may possess their possession, and the vulnerable may find hope.',
+        preview: 'To preach and teach biblical truth for salvation; raise godly disciples; and demonstrate the love of Christ to the needy in practical ways.',
+        full: `To preach and teach biblical truth for salvation; raise godly disciples; train men and women for acceptable and fruitful ministry; and demonstrate the love of Christ to the needy in practical ways.`,
     },
     {
-        icon: GroupsIcon,
+        key: 'anthem',
+        icon: MusicNoteIcon,
+        color: colors.accent.red,
+        title: 'Anthem',
+        preview: 'Partnering with Christ, advancing the gospel beyond the Pulpit-Pew to the troubled needy, meeting spiritual and physical needs.',
+        full: `Partnering with Christ, advancing the gospel beyond the Pulpit-Pew to the troubled needy, meeting spiritual and physical needs, with the helping hand of God, lifting the despised vulnerable hopeless out of mere survival into their God-given inheritance in Christ.`,
+    },
+    {
+        key: 'prayer',
+        icon: VolunteerActivismIcon,
         color: colors.accent.green,
-        title: 'Who We Are',
-        desc: 'Jesus Partners Outreach is a Nigerian-incorporated ministry on a divine mandate. We serve orphans, widows, persecuted believers, and ministers in need — sharing the love of Christ in word and in deed.',
+        title: 'JPO Prayer',
+        preview: 'Oh, Lord of all creation, we pray that no child should grow up without family care, no widow without support.',
+        full: `Oh, Lord of all creation, we pray that no child should grow up without family care, no widow without support, and no generation without the word and hope of Christ.`,
+    },
+    {
+        key: 'story',
+        icon: HistoryEduIcon,
+        color: '#8B5CF6',
+        title: 'Our Story',
+        preview: 'As a couple in ministry, we found ourselves serving under crushing conditions. In 2007, God sent help through John Kanis, a missionary brother from the USA.',
+        full: `As a couple in ministry, we found ourselves serving under crushing conditions. Feeding, clothing, and training children felt impossible. Ministry was frustrating.
+
+In 2007, God sent help through John Kanis, a missionary brother from the USA who came for a medical mission in Mkar-Gboko. He chose to stand with our family and ministry. Since then, he has been a faithful vessel of Christ's love — supporting us in ways only God could orchestrate.
+
+Then the Lord spoke clearly: "Share with others as I share with you." James 1:27 became our compass: "Pure religion before God is this: to visit orphans and widows in their trouble…"
+
+Over the years, we have shared with widows, orphans, churches, and ministers. We've committed our lives to Christ through Gospel Crusades and Revivals with testimonies of salvation, praying for the sick, and assisting families with medical care as God provides.
+
+This is the core of all we do: seeking the salvation of the lost, discipling them for Christ, and meeting needs under God's gracious provision. Brother John Kanis has been a key supporter in this journey for over 17 years.
+
+In 2023, we formally organized what we'd been passionately doing for years. Here we have JESUS PARTNERS OUTREACH today.`,
     },
 ];
+
+// ── Modal ──────────────────────────────────────────────────────────
+function PillarModal({ pillar, onClose }) {
+    if (!pillar) return null;
+    const Icon = pillar.icon;
+
+    useEffect(() => {
+        const fn = (e) => { if (e.key === 'Escape') onClose(); };
+        window.addEventListener('keydown', fn);
+        document.body.style.overflow = 'hidden';
+        return () => { window.removeEventListener('keydown', fn); document.body.style.overflow = ''; };
+    }, [onClose]);
+
+    return (
+        <Box sx={{ position: 'fixed', inset: 0, zIndex: 9999, display: 'flex', alignItems: 'center', justifyContent: 'center', p: { xs: 1.5, md: 3 } }}>
+            <Box onClick={onClose} sx={{ position: 'absolute', inset: 0, bgcolor: 'rgba(0,0,0,0.7)', backdropFilter: 'blur(6px)', animation: 'ab_fadeIn .2s ease both' }} />
+
+            <Box sx={{
+                position: 'relative', width: '100%', maxWidth: 620, maxHeight: '85vh',
+                bgcolor: 'white', borderRadius: '22px', overflow: 'hidden',
+                display: 'flex', flexDirection: 'column',
+                animation: 'ab_modalIn .35s cubic-bezier(.34,1.2,.64,1) both',
+                boxShadow: '0 40px 100px rgba(0,0,0,0.4)',
+            }}>
+                <Box sx={{ height: 4, background: `linear-gradient(90deg,${pillar.color},${pillar.color}66)`, flexShrink: 0 }} />
+
+                <Box sx={{ px: { xs: 3, md: 4 }, py: 3, display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: 2, flexShrink: 0, borderBottom: `1px solid ${colors.divider}` }}>
+                    <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.8 }}>
+                        <Box sx={{ width: 46, height: 46, borderRadius: '14px', bgcolor: `${pillar.color}14`, border: `1.5px solid ${pillar.color}30`, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                            <Icon sx={{ fontSize: 22, color: pillar.color }} />
+                        </Box>
+                        <Typography sx={{ fontFamily: typography.fontFamily.heading, fontSize: { xs: '1.2rem', md: '1.4rem' }, fontWeight: 900, color: colors.text.primary }}>
+                            {pillar.title}
+                        </Typography>
+                    </Box>
+                    <Box onClick={onClose} sx={{ width: 34, height: 34, borderRadius: '10px', bgcolor: colors.background.default, display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', flexShrink: 0, '&:hover': { bgcolor: colors.divider } }}>
+                        <CloseIcon sx={{ fontSize: 18, color: colors.text.secondary }} />
+                    </Box>
+                </Box>
+
+                <Box sx={{ px: { xs: 3, md: 4 }, py: 3, overflowY: 'auto', '&::-webkit-scrollbar': { width: 4 }, '&::-webkit-scrollbar-thumb': { bgcolor: `${pillar.color}40`, borderRadius: 2 } }}>
+                    {pillar.full.split('\n\n').map((para, i) => (
+                        <Typography key={i} sx={{ fontFamily: typography.fontFamily.body, fontSize: typography.fontSize.base, color: colors.text.secondary, lineHeight: 1.95, mb: i < pillar.full.split('\n\n').length - 1 ? 2.2 : 0 }}>
+                            {para}
+                        </Typography>
+                    ))}
+                </Box>
+            </Box>
+        </Box>
+    );
+}
 
 export default function AboutPage() {
     const [heroRef, heroVis] = useReveal(0.05);
     const [statsRef, statsVis] = useReveal();
     const [pillarsRef, pillarsVis] = useReveal();
-    const [storyRef, storyVis] = useReveal();
     const [certRef, certVis] = useReveal();
     const [ctaRef, ctaVis] = useReveal();
+    const [activePillar, setActivePillar] = useState(null);
 
     return (
         <>
             <GlobalStyles styles={keyframes} />
+
+            <PillarModal pillar={activePillar} onClose={() => setActivePillar(null)} />
 
             {/* ══ HERO ══ */}
             <Box sx={{ bgcolor: colors.primary.dark, pt: { xs: 14, md: 18 }, pb: { xs: 10, md: 14 }, position: 'relative', overflow: 'hidden' }}>
@@ -90,7 +182,6 @@ export default function AboutPage() {
                 <Container maxWidth="lg" sx={{ position: 'relative', zIndex: 1 }}>
                     <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', md: '1fr 1fr' }, gap: { xs: 8, md: 6 }, alignItems: 'center' }}>
 
-                        {/* Left — text */}
                         <Box ref={heroRef}>
                             <Box sx={{ display: 'inline-flex', alignItems: 'center', gap: 1, bgcolor: 'rgba(212,160,23,0.1)', border: '1px solid rgba(212,160,23,0.28)', borderRadius: '100px', px: 2.2, py: .75, mb: 3, opacity: heroVis ? 1 : 0, animation: heroVis ? 'ab_rise .6s ease both' : 'none' }}>
                                 <Box sx={{ width: 6, height: 6, borderRadius: '50%', bgcolor: colors.secondary.main, animation: 'ab_pulse 2s ease infinite' }} />
@@ -116,7 +207,6 @@ export default function AboutPage() {
                             </Box>
                         </Box>
 
-                        {/* Right — animated logo */}
                         <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', opacity: heroVis ? 1 : 0, animation: heroVis ? 'ab_right .9s cubic-bezier(.34,1.2,.64,1) .3s both' : 'none' }}>
                             <Box sx={{ position: 'relative', width: { xs: 220, md: 300 }, height: { xs: 220, md: 300 } }}>
                                 <Box sx={{ position: 'absolute', inset: '-18%', borderRadius: '50%', border: `1px dashed rgba(212,160,23,0.18)`, animation: 'ab_spin 22s linear infinite', pointerEvents: 'none' }}>
@@ -133,7 +223,6 @@ export default function AboutPage() {
                     </Box>
                 </Container>
 
-                {/* wave */}
                 <Box sx={{ position: 'absolute', bottom: -1, left: 0, right: 0, lineHeight: 0, zIndex: 2 }}>
                     <svg viewBox="0 0 1440 60" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" style={{ width: '100%', display: 'block' }}>
                         <path d="M0,30 C360,60 720,0 1080,36 C1260,52 1380,18 1440,30 L1440,60 L0,60 Z" fill={colors.background.default} />
@@ -161,7 +250,7 @@ export default function AboutPage() {
                 </Container>
             </Box>
 
-            {/* ══ VISION / MISSION / WHO WE ARE ══ */}
+            {/* ══ VISION / MISSION / ANTHEM / PRAYER / STORY — preview cards ══ */}
             <Box ref={pillarsRef} sx={{ bgcolor: 'white', py: { xs: 8, md: 12 }, position: 'relative', overflow: 'hidden' }}>
                 <Box sx={{ position: 'absolute', inset: 0, backgroundImage: `radial-gradient(${colors.divider} 1px, transparent 1px)`, backgroundSize: '24px 24px', opacity: .6, pointerEvents: 'none' }} />
                 <Container maxWidth="lg" sx={{ position: 'relative', zIndex: 1 }}>
@@ -177,17 +266,35 @@ export default function AboutPage() {
                         </Typography>
                     </Box>
 
-                    <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', md: 'repeat(3,1fr)' }, gap: 3 }}>
+                    <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', sm: '1fr 1fr', md: 'repeat(3,1fr)' }, gap: 3 }}>
                         {PILLARS.map((p, i) => {
                             const Icon = p.icon;
                             return (
-                                <Box key={p.title} sx={{ bgcolor: colors.background.default, borderRadius: '22px', p: { xs: 3, md: 4 }, border: `1px solid ${colors.divider}`, position: 'relative', overflow: 'hidden', opacity: pillarsVis ? 1 : 0, animation: pillarsVis ? `ab_rise .65s cubic-bezier(.34,1.2,.64,1) ${i * .12}s both` : 'none', transition: 'transform .35s cubic-bezier(.34,1.2,.64,1), box-shadow .3s', '&:hover': { transform: 'translateY(-10px)', boxShadow: `0 30px 65px rgba(10,16,40,0.1), 0 0 0 1px ${p.color}30` }, '&::before': { content: '""', position: 'absolute', top: 0, bottom: 0, width: '55%', left: '-80%', zIndex: 5, pointerEvents: 'none', background: 'linear-gradient(105deg,transparent 30%,rgba(255,255,255,0.7) 50%,transparent 70%)' }, '&:hover::before': { animation: 'ab_shimmer .6s ease forwards' } }}>
+                                <Box key={p.key} sx={{
+                                    bgcolor: colors.background.default, borderRadius: '22px', p: { xs: 3, md: 3.5 },
+                                    border: `1px solid ${colors.divider}`, position: 'relative', overflow: 'hidden',
+                                    display: 'flex', flexDirection: 'column',
+                                    opacity: pillarsVis ? 1 : 0, animation: pillarsVis ? `ab_rise .65s cubic-bezier(.34,1.2,.64,1) ${i * .1}s both` : 'none',
+                                    transition: 'transform .35s cubic-bezier(.34,1.2,.64,1), box-shadow .3s',
+                                    '&:hover': { transform: 'translateY(-10px)', boxShadow: `0 30px 65px rgba(10,16,40,0.1), 0 0 0 1px ${p.color}30` },
+                                    '&::before': { content: '""', position: 'absolute', top: 0, bottom: 0, width: '55%', left: '-80%', zIndex: 5, pointerEvents: 'none', background: 'linear-gradient(105deg,transparent 30%,rgba(255,255,255,0.7) 50%,transparent 70%)' },
+                                    '&:hover::before': { animation: 'ab_shimmer .6s ease forwards' },
+                                }}>
                                     <Box sx={{ position: 'absolute', top: 0, left: 0, right: 0, height: 3, background: `linear-gradient(90deg,${p.color},${p.color}55)` }} />
-                                    <Box sx={{ width: 54, height: 54, borderRadius: '16px', bgcolor: `${p.color}14`, border: `2px solid ${p.color}28`, display: 'flex', alignItems: 'center', justifyContent: 'center', mb: 2.5, animation: 'ab_pulse 3s ease infinite' }}>
-                                        <Icon sx={{ fontSize: 26, color: p.color }} />
+                                    <Box sx={{ width: 50, height: 50, borderRadius: '15px', bgcolor: `${p.color}14`, border: `2px solid ${p.color}28`, display: 'flex', alignItems: 'center', justifyContent: 'center', mb: 2.2, animation: 'ab_pulse 3s ease infinite' }}>
+                                        <Icon sx={{ fontSize: 24, color: p.color }} />
                                     </Box>
-                                    <Typography sx={{ fontFamily: typography.fontFamily.heading, fontSize: typography.fontSize.lg, fontWeight: 900, color: colors.text.primary, mb: 1.5 }}>{p.title}</Typography>
-                                    <Typography sx={{ fontFamily: typography.fontFamily.body, fontSize: typography.fontSize.sm, color: colors.text.secondary, lineHeight: 1.85 }}>{p.desc}</Typography>
+                                    <Typography sx={{ fontFamily: typography.fontFamily.heading, fontSize: typography.fontSize.lg, fontWeight: 900, color: colors.text.primary, mb: 1.3 }}>{p.title}</Typography>
+                                    <Typography sx={{ fontFamily: typography.fontFamily.body, fontSize: typography.fontSize.sm, color: colors.text.secondary, lineHeight: 1.8, mb: 2.5, flex: 1 }}>{p.preview}</Typography>
+                                    <Box onClick={() => setActivePillar(p)} sx={{
+                                        display: 'inline-flex', alignItems: 'center', gap: .8,
+                                        color: p.color, cursor: 'pointer',
+                                        fontFamily: typography.fontFamily.heading, fontSize: typography.fontSize.sm, fontWeight: 700,
+                                        transition: 'gap .2s ease', width: 'fit-content',
+                                        '&:hover': { gap: 1.4 },
+                                    }}>
+                                        Read More <ArrowForwardIcon sx={{ fontSize: 15 }} />
+                                    </Box>
                                 </Box>
                             );
                         })}
@@ -195,74 +302,13 @@ export default function AboutPage() {
                 </Container>
             </Box>
 
-            {/* ══ OUR STORY ══ */}
-            <Box ref={storyRef} sx={{ bgcolor: colors.background.default, py: { xs: 8, md: 12 }, position: 'relative', overflow: 'hidden' }}>
-                <Box sx={{ position: 'absolute', top: '-10%', right: '-4%', width: 400, height: 400, borderRadius: '50%', background: `radial-gradient(circle,${colors.secondary.main}08 0%,transparent 70%)`, pointerEvents: 'none' }} />
-                <Container maxWidth="lg" sx={{ position: 'relative', zIndex: 1 }}>
-
-                    <Box sx={{ textAlign: 'center', mb: { xs: 6, md: 8 }, opacity: storyVis ? 1 : 0, animation: storyVis ? 'ab_rise .6s ease both' : 'none' }}>
-                        <Box sx={{ display: 'inline-flex', alignItems: 'center', gap: 1.5, mb: 1.5 }}>
-                            <Box sx={{ width: 28, height: 3, borderRadius: 2, bgcolor: colors.secondary.main }} />
-                            <Typography sx={{ fontFamily: typography.fontFamily.body, fontSize: typography.fontSize.xs, fontWeight: 700, color: colors.secondary.main, letterSpacing: 2.5, textTransform: 'uppercase' }}>How It Began</Typography>
-                            <Box sx={{ width: 28, height: 3, borderRadius: 2, bgcolor: colors.secondary.main }} />
-                        </Box>
-                        <Typography sx={{ fontFamily: typography.fontFamily.accent, fontSize: { xs: '1.9rem', md: '2.6rem' }, fontWeight: 900, color: colors.text.primary, lineHeight: 1.12 }}>
-                            A Story of Faithful Obedience
-                        </Typography>
-                    </Box>
-
-                    <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', md: '1fr 1fr' }, gap: { xs: 5, md: 8 }, alignItems: 'start' }}>
-                        <Box sx={{ opacity: storyVis ? 1 : 0, animation: storyVis ? 'ab_left .7s ease .1s both' : 'none' }}>
-                            <Typography sx={{ fontFamily: typography.fontFamily.body, fontSize: typography.fontSize.base, color: colors.text.secondary, lineHeight: 1.9, mb: 2.5 }}>
-                                The founders and presidents of Jesus Partners Outreach found themselves ministering under deeply challenging conditions — where feeding, clothing, and training of children was a serious burden. Yet they pressed on, driven by a love for the Gospel and for the vulnerable.
-                            </Typography>
-                            <Typography sx={{ fontFamily: typography.fontFamily.body, fontSize: typography.fontSize.base, color: colors.text.secondary, lineHeight: 1.9, mb: 2.5 }}>
-                                In 2007, a missionary brother from the USA came for a medical mission in Nkier-Gboko and was moved to partner with the family and ministry. His commitment has been unwavering ever since — a living testimony of God's provision.
-                            </Typography>
-                            <Typography sx={{ fontFamily: typography.fontFamily.body, fontSize: typography.fontSize.base, color: colors.text.secondary, lineHeight: 1.9 }}>
-                                Inspired by James 1:27 and the generosity shown to them, God spoke to the founders to share with others as He had done for them. Over the years they have served widows, orphans, churches, and ministers — going out for Gospel Crusades, Revivals, praying for the sick, and assisting those in need.
-                            </Typography>
-                        </Box>
-
-                        <Box sx={{ opacity: storyVis ? 1 : 0, animation: storyVis ? 'ab_right .7s ease .2s both' : 'none' }}>
-                            <Typography sx={{ fontFamily: typography.fontFamily.body, fontSize: typography.fontSize.base, color: colors.text.secondary, lineHeight: 1.9, mb: 2.5 }}>
-                                In 2023, what had been years of passionate, Spirit-led ministry was formally organised and incorporated in Nigeria — and Jesus Partners Outreach was born as an institution.
-                            </Typography>
-                            <Typography sx={{ fontFamily: typography.fontFamily.body, fontSize: typography.fontSize.base, color: colors.text.secondary, lineHeight: 1.9, mb: 3 }}>
-                                Today, the ministry reaches widows, orphans, persecuted believers, and displaced communities — especially those affected by security crises and attacks in Northern Nigeria. With practical care, Gospel proclamation, education support, and ministerial training, Jesus Partners Outreach continues to be the hands and feet of Christ.
-                            </Typography>
-
-                            {/* Key partnerships list */}
-                            <Box sx={{ bgcolor: 'white', borderRadius: '16px', p: 3, border: `1px solid ${colors.divider}` }}>
-                                <Typography sx={{ fontFamily: typography.fontFamily.heading, fontSize: typography.fontSize.sm, fontWeight: 800, color: colors.text.primary, mb: 2, textTransform: 'uppercase', letterSpacing: 1 }}>
-                                    Our Areas of Partnership
-                                </Typography>
-                                {[
-                                    'Crusades & Revivals',
-                                    'Widows & Orphans Care',
-                                    'Medical Outreaches',
-                                    'Pastors & Children Support',
-                                    'Ministerial Training',
-                                ].map((item, i) => (
-                                    <Box key={item} sx={{ display: 'flex', alignItems: 'center', gap: 1.5, py: 1, borderBottom: i < 4 ? `1px solid ${colors.divider}` : 'none' }}>
-                                        <Box sx={{ width: 8, height: 8, borderRadius: '50%', bgcolor: colors.secondary.main, flexShrink: 0 }} />
-                                        <Typography sx={{ fontFamily: typography.fontFamily.body, fontSize: typography.fontSize.sm, color: colors.text.secondary, fontWeight: 500 }}>{item}</Typography>
-                                    </Box>
-                                ))}
-                            </Box>
-                        </Box>
-                    </Box>
-                </Container>
-            </Box>
-
-            {/* ══ CERTIFICATE ══ */}
+            {/* ══ CERTIFICATE — unchanged ══ */}
             <Box ref={certRef} sx={{ bgcolor: 'white', py: { xs: 8, md: 12 }, position: 'relative', overflow: 'hidden' }}>
                 <Box sx={{ position: 'absolute', inset: 0, backgroundImage: `radial-gradient(${colors.divider} 1px, transparent 1px)`, backgroundSize: '24px 24px', opacity: .5, pointerEvents: 'none' }} />
                 <Box sx={{ position: 'absolute', top: '10%', left: '-5%', width: 350, height: 350, borderRadius: '50%', background: `radial-gradient(circle,${colors.secondary.main}07 0%,transparent 70%)`, pointerEvents: 'none' }} />
                 <Box sx={{ position: 'absolute', bottom: '10%', right: '-5%', width: 300, height: 300, borderRadius: '50%', background: `radial-gradient(circle,${colors.accent.teal}07 0%,transparent 70%)`, pointerEvents: 'none' }} />
                 <Container maxWidth="md" sx={{ position: 'relative', zIndex: 1 }}>
 
-                    {/* heading */}
                     <Box sx={{ textAlign: 'center', mb: { xs: 5, md: 7 }, opacity: certVis ? 1 : 0, animation: certVis ? 'ab_rise .6s ease both' : 'none' }}>
                         <Box sx={{ display: 'inline-flex', alignItems: 'center', gap: 1.5, mb: 1.5 }}>
                             <Box sx={{ width: 28, height: 3, borderRadius: 2, bgcolor: colors.secondary.main }} />
@@ -304,7 +350,6 @@ export default function AboutPage() {
                                     <Box key={i} sx={{ position: 'absolute', width: 28, height: 28, borderRadius: '3px', ...style, pointerEvents: 'none' }} />
                                 ))}
 
-                                {/* label above */}
                                 <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 1.5, mb: 2.5 }}>
                                     <Box sx={{ flex: 1, height: '1px', background: `linear-gradient(90deg,transparent,${colors.secondary.main}60)` }} />
                                     <EmojiEventsIcon sx={{ color: colors.secondary.main, fontSize: 22 }} />
@@ -315,7 +360,6 @@ export default function AboutPage() {
                                     <Box sx={{ flex: 1, height: '1px', background: `linear-gradient(90deg,${colors.secondary.main}60,transparent)` }} />
                                 </Box>
 
-                                {/* certificate image */}
                                 <Box
                                     component="img"
                                     src="/outreach.jpeg"
@@ -329,7 +373,6 @@ export default function AboutPage() {
                                     }}
                                 />
 
-                                {/* label below */}
                                 <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 1.5, mt: 2.5 }}>
                                     <Box sx={{ flex: 1, height: '1px', background: `linear-gradient(90deg,transparent,${colors.secondary.main}60)` }} />
                                     <Typography sx={{ fontFamily: typography.fontFamily.body, fontSize: typography.fontSize.xs, fontWeight: 700, color: colors.text.secondary, letterSpacing: 1.5, textTransform: 'uppercase' }}>

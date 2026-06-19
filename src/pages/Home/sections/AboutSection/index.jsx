@@ -1,13 +1,14 @@
 import { useEffect, useRef, useState } from 'react';
-import { Box, Container, Typography, Stack } from '@mui/material';
+import { Box, Container, Typography } from '@mui/material';
 import { GlobalStyles } from '@mui/material';
 import { Link } from 'react-router-dom';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
-import { colors } from '../../../../theme';
 import {
     keyframes, wrapSx, bgPatternSx, orbSx,
+    gridSx, colSx,
     sectionLabelSx, labelBarSx, labelTextSx,
-    headingSx, headGoldSx, bodyTextSx,
+    columnHeadingSx, columnBodySx,
+    readMoreWrapSx, readMoreBtnSx, dividerSx,
 } from './styles';
 
 const useReveal = () => {
@@ -32,61 +33,57 @@ export default function AboutSection() {
             <GlobalStyles styles={keyframes} />
             <Box sx={wrapSx}>
                 <Box sx={bgPatternSx} />
-                <Box sx={orbSx('-10%', '-5%', undefined, undefined, 400, `${colors.secondary.main}0C`, '0s')} />
-                <Box sx={orbSx(undefined, undefined, '-8%', '-4%', 300, `${colors.accent.teal}08`, '3s')} />
+                <Box sx={orbSx('-10%', '-5%', undefined, undefined, 400, '0s')} />
+                <Box sx={orbSx(undefined, undefined, '-8%', '-4%', 300, '3s')} />
 
                 <Container maxWidth="lg" sx={{ position: 'relative', zIndex: 1 }}>
 
-                    <Box ref={ref} sx={{
-                        display: 'flex', flexDirection: { xs: 'column', md: 'row' },
-                        alignItems: { md: 'center' }, justifyContent: 'space-between',
-                        gap: 3, mb: 1,
-                        opacity: vis ? 1 : 0,
-                        animation: vis ? 'ab_rise .7s cubic-bezier(.34,1.2,.64,1) both' : 'none',
-                    }}>
-                        {/* Left — heading */}
-                        <Box>
+                    <Box ref={ref} sx={{ ...gridSx, opacity: vis ? 1 : 0, animation: vis ? 'ab_rise .7s cubic-bezier(.34,1.2,.64,1) both' : 'none' }}>
+
+                        {/* ── Left Column (6) — Preamble ── */}
+                        <Box sx={colSx}>
+                            <Box sx={sectionLabelSx}>
+                                <Box sx={labelBarSx} />
+                                <Typography sx={labelTextSx}>Preamble</Typography>
+                            </Box>
+                            <Typography sx={columnHeadingSx}>Preamble</Typography>
+                            <Typography sx={columnBodySx}>
+                                Our inspiration is drawn from Mark 16:15–20: "Go into all the world and preach the gospel to every creature… And they went out and preached everywhere, the Lord working with them confirming the word through accompanying signs."
+                            </Typography>
+                            <Typography sx={columnBodySx}>
+                                Our conviction is to obey and follow Jesus as partners, reaching out to the world with His gospel and ministering His love. In Matthew 28:19–20, Jesus commanded, "Go… and I will be with you always, to the end of the age." We are committed to this partnership with Jesus to minister to the nations.
+                            </Typography>
+                            <Typography sx={{ ...columnBodySx, mb: 0 }}>
+                                All partners are coworkers with one another and with Christ. What a privilege and blessed opportunity.
+                            </Typography>
+                        </Box>
+
+                        {/* ── Right Column (6) — Our Foundation ── */}
+                        <Box sx={colSx}>
                             <Box sx={sectionLabelSx}>
                                 <Box sx={labelBarSx} />
                                 <Typography sx={labelTextSx}>Who We Are</Typography>
-                                <Box sx={labelBarSx} />
                             </Box>
-                            <Typography sx={headingSx}>
-                                About{' '}
-                                <Box component="span" sx={headGoldSx}>Jesus Partners</Box>
-                                <br />Outreach
+                            <Typography sx={columnHeadingSx}>Our Foundation</Typography>
+                            <Typography sx={columnBodySx}>
+                                Jesus Partners Outreach is a Non-Governmental, Non-profit organization registered with the Corporate Affairs Commission in Nigeria, RC: 6922346.
+                            </Typography>
+                            <Typography sx={{ ...columnBodySx, mb: 0 }}>
+                                We are an outreach ministry dedicated to preaching the gospel of grace in Christ Jesus to a needy world. Ours is partnership with Jesus — the Anointed Savior, Healer, Deliverer; the hope of the hopeless and the answer to all life's questions.
                             </Typography>
                         </Box>
 
-                        {/* Right — text + Read More button */}
-                        <Box sx={{ maxWidth: 420 }}>
-                            <Typography sx={{ ...bodyTextSx, mb: 2.5 }}>
-                                Incorporated in Nigeria in 2023, Jesus Partners Outreach has been
-                                passionately serving widows, orphans, churches and ministers since 2007 —
-                                committed to sharing the love of Christ through crusades, medical
-                                outreaches, education assistance and ministerial training.
-                            </Typography>
-                            <Box component={Link} to="/about" sx={{
-                                display: 'inline-flex', alignItems: 'center', gap: 1,
-                                bgcolor: colors.secondary.main, color: 'white',
-                                px: 3, py: 1.4, borderRadius: '10px',
-                                textDecoration: 'none',
-                                fontFamily: 'inherit', fontSize: '0.85rem', fontWeight: 700,
-                                boxShadow: `0 8px 24px ${colors.secondary.main}44`,
-                                transition: 'all .3s cubic-bezier(.34,1.2,.64,1)',
-                                '&:hover': { transform: 'translateY(-3px) scale(1.04)', boxShadow: `0 14px 36px ${colors.secondary.main}55` }
-                            }}>
-                                Read More <ArrowForwardIcon sx={{ fontSize: 15 }} />
-                            </Box>
-                        </Box>
                     </Box>
 
-                    <Box sx={{
-                        height: 1, mt: 2,
-                        background: `linear-gradient(90deg, ${colors.secondary.main}60, transparent)`,
-                        opacity: vis ? 1 : 0,
-                        animation: vis ? 'ab_rise .5s ease .2s both' : 'none',
-                    }} />
+                    {/* Divider */}
+                    <Box sx={dividerSx} />
+
+                    {/* Read More button — centered */}
+                    <Box sx={readMoreWrapSx}>
+                        <Box component={Link} to="/about" sx={readMoreBtnSx}>
+                            Read More <ArrowForwardIcon sx={{ fontSize: 16 }} />
+                        </Box>
+                    </Box>
 
                 </Container>
             </Box>
