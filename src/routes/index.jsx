@@ -11,6 +11,7 @@ import GalleryPage from '../pages/Gallery';
 import ContactPage from '../pages/Contact';
 import BlogPage from '../pages/Blog';
 import ResourcesPage from '../pages/Resources';
+import DevotionalPage from '../pages/DevotionalPage';
 import GivePage from '../pages/Give';
 import NotFoundPage from '../pages/NotFoundPage';
 import LoginPage from '../pages/public/login';
@@ -39,12 +40,13 @@ const router = createBrowserRouter([
             { path: 'whatwedo', element: <WhatWeDoPage /> },
             { path: 'program', element: <ProgramPage /> },
             { path: 'about', element: <AboutPage /> },
-            {path: 'partners', element: <PartnerPage /> },
+            { path: 'partners', element: <PartnerPage /> },
             { path: 'programs', element: <ProgramsPage /> },
             { path: 'gallery', element: <GalleryPage /> },
             { path: 'contact', element: <ContactPage /> },
             { path: 'blog', element: <BlogPage /> },
             { path: 'resources', element: <ResourcesPage /> },
+            { path: 'devotional', element: <DevotionalPage /> },
             { path: 'give', element: <GivePage /> },
             { path: 'faq', element: <BlogPage /> },
             { path: 'terms', element: <BlogPage /> },

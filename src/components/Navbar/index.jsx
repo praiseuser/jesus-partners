@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import { Box, Container, Stack, Typography, IconButton, Drawer, Divider } from '@mui/material';
 import { GlobalStyles } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
+import MenuBookIcon from '@mui/icons-material/MenuBook';
 import CloseIcon from '@mui/icons-material/Close';
 import HomeIcon from '@mui/icons-material/Home';
 import ArticleIcon from '@mui/icons-material/Article';
@@ -33,6 +34,7 @@ const NAV_LINKS = [
     { label: 'About', path: '/about', icon: InfoIcon, color: colors.accent.red },
     { label: 'Gallery', path: '/gallery', icon: CollectionsIcon, color: colors.accent.purple },
     { label: 'Contact', path: '/contact', icon: ContactMailIcon, color: colors.accent.green },
+    { label: 'Devotional', path: '/devotional', icon: MenuBookIcon, color: colors.accent.green },
     { label: 'Current Programs', path: '/program', icon: ContactMailIcon, color: colors.accent.green },
     { label: 'Partner With Us', path: '/partners', icon: HandshakeIcon, color: colors.accent.teal },
 ];
