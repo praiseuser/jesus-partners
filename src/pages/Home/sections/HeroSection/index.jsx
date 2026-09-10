@@ -35,7 +35,6 @@ const bgSlideKeyframe = (index) => {
     const fadeOutStart = ((index + 1) * DISPLAY_SECS - FADE_SECS) / CYCLE * 100;
     const fadeOutEnd   = ((index + 1) * DISPLAY_SECS) / CYCLE * 100;
 
-    // clamp to 100
     const clamp = (v) => Math.min(v, 100);
 
     return {
@@ -48,7 +47,6 @@ const bgSlideKeyframe = (index) => {
     };
 };
 
-// Build a unique keyframe name + sx for each image layer
 const buildLayerSx = (imgNum, index) => {
     const kfName = `hero_bg_${index}`;
     return {
@@ -71,8 +69,6 @@ const buildLayerSx = (imgNum, index) => {
 };
 
 const LAYERS = GALLERY_IMAGES.map((num, i) => buildLayerSx(num, i));
-
-// Merge all keyframes into one object
 const allKeyframes = LAYERS.reduce((acc, l) => ({ ...acc, ...l.kf }), {});
 
 export default function HeroSection() {
@@ -81,12 +77,10 @@ export default function HeroSection() {
             <GlobalStyles styles={{ ...keyframes, ...allKeyframes }} />
             <Box sx={heroWrapSx}>
 
-                {/* Background image layers */}
                 {LAYERS.map((layer, i) => (
                     <Box key={GALLERY_IMAGES[i]} sx={layer.sx} />
                 ))}
 
-                {/* Overlays */}
                 {overlayLayersSx.map((sx, i) => <Box key={i} sx={sx} />)}
 
                 <Box sx={decoCircleSx(300, '-8%', undefined, '-6%', undefined, 0)} />
@@ -118,7 +112,8 @@ export default function HeroSection() {
                         <Box sx={dividerLineSx} />
 
                         <Stack direction={{ xs: 'column', sm: 'row' }} gap={8} justifyContent="center" marginTop={7} alignItems="center">
-                            <Box component={Link} to="/partners" sx={btnPrimarySx}>
+                            {/* CHANGED: was to="/partners", now to="/about" */}
+                            <Box component={Link} to="/about" sx={btnPrimarySx}>
                                 <FavoriteIcon sx={{ fontSize: 17 }} />
                                 Who We Are
                             </Box>

@@ -54,7 +54,6 @@ const STATS = [
     { value: '1000s', label: 'Lives Transformed', icon: PublicIcon, color: colors.accent.teal },
 ];
 
-// ── Pillars — short preview + full text shown in modal ───────────────
 const PILLARS = [
     {
         key: 'vision',
@@ -108,7 +107,6 @@ In 2023, we formally organized what we'd been passionately doing for years. Here
     },
 ];
 
-// ── Modal ──────────────────────────────────────────────────────────
 function PillarModal({ pillar, onClose }) {
     if (!pillar) return null;
     const Icon = pillar.icon;
@@ -123,7 +121,6 @@ function PillarModal({ pillar, onClose }) {
     return (
         <Box sx={{ position: 'fixed', inset: 0, zIndex: 9999, display: 'flex', alignItems: 'center', justifyContent: 'center', p: { xs: 1.5, md: 3 } }}>
             <Box onClick={onClose} sx={{ position: 'absolute', inset: 0, bgcolor: 'rgba(0,0,0,0.7)', backdropFilter: 'blur(6px)', animation: 'ab_fadeIn .2s ease both' }} />
-
             <Box sx={{
                 position: 'relative', width: '100%', maxWidth: 620, maxHeight: '85vh',
                 bgcolor: 'white', borderRadius: '22px', overflow: 'hidden',
@@ -132,7 +129,6 @@ function PillarModal({ pillar, onClose }) {
                 boxShadow: '0 40px 100px rgba(0,0,0,0.4)',
             }}>
                 <Box sx={{ height: 4, background: `linear-gradient(90deg,${pillar.color},${pillar.color}66)`, flexShrink: 0 }} />
-
                 <Box sx={{ px: { xs: 3, md: 4 }, py: 3, display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: 2, flexShrink: 0, borderBottom: `1px solid ${colors.divider}` }}>
                     <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.8 }}>
                         <Box sx={{ width: 46, height: 46, borderRadius: '14px', bgcolor: `${pillar.color}14`, border: `1.5px solid ${pillar.color}30`, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
@@ -146,7 +142,6 @@ function PillarModal({ pillar, onClose }) {
                         <CloseIcon sx={{ fontSize: 18, color: colors.text.secondary }} />
                     </Box>
                 </Box>
-
                 <Box sx={{ px: { xs: 3, md: 4 }, py: 3, overflowY: 'auto', '&::-webkit-scrollbar': { width: 4 }, '&::-webkit-scrollbar-thumb': { bgcolor: `${pillar.color}40`, borderRadius: 2 } }}>
                     {pillar.full.split('\n\n').map((para, i) => (
                         <Typography key={i} sx={{ fontFamily: typography.fontFamily.body, fontSize: typography.fontSize.base, color: colors.text.secondary, lineHeight: 1.95, mb: i < pillar.full.split('\n\n').length - 1 ? 2.2 : 0 }}>
@@ -161,6 +156,7 @@ function PillarModal({ pillar, onClose }) {
 
 export default function AboutPage() {
     const [heroRef, heroVis] = useReveal(0.05);
+    const [whoRef, whoVis] = useReveal(0.1);
     const [statsRef, statsVis] = useReveal();
     const [pillarsRef, pillarsVis] = useReveal();
     const [certRef, certVis] = useReveal();
@@ -181,7 +177,6 @@ export default function AboutPage() {
 
                 <Container maxWidth="lg" sx={{ position: 'relative', zIndex: 1 }}>
                     <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', md: '1fr 1fr' }, gap: { xs: 8, md: 6 }, alignItems: 'center' }}>
-
                         <Box ref={heroRef}>
                             <Box sx={{ display: 'inline-flex', alignItems: 'center', gap: 1, bgcolor: 'rgba(212,160,23,0.1)', border: '1px solid rgba(212,160,23,0.28)', borderRadius: '100px', px: 2.2, py: .75, mb: 3, opacity: heroVis ? 1 : 0, animation: heroVis ? 'ab_rise .6s ease both' : 'none' }}>
                                 <Box sx={{ width: 6, height: 6, borderRadius: '50%', bgcolor: colors.secondary.main, animation: 'ab_pulse 2s ease infinite' }} />
@@ -219,7 +214,6 @@ export default function AboutPage() {
                                 <Box component="img" src="/jesus1.png" alt="JPO" sx={{ width: '100%', height: '100%', objectFit: 'contain', position: 'relative', zIndex: 2, animation: 'ab_float 5s ease-in-out infinite', filter: `drop-shadow(0 20px 50px ${colors.secondary.main}40)` }} />
                             </Box>
                         </Box>
-
                     </Box>
                 </Container>
 
@@ -228,6 +222,98 @@ export default function AboutPage() {
                         <path d="M0,30 C360,60 720,0 1080,36 C1260,52 1380,18 1440,30 L1440,60 L0,60 Z" fill={colors.background.default} />
                     </svg>
                 </Box>
+            </Box>
+
+            {/* ══ WHO WE ARE — Preamble ══ */}
+            <Box ref={whoRef} sx={{ bgcolor: colors.background.default, pt: { xs: 8, md: 12 }, pb: { xs: 6, md: 8 } }}>
+                <Container maxWidth="md">
+                    <Box sx={{ textAlign: 'center' }}>
+
+                        {/* Label */}
+                        <Box sx={{
+                            display: 'inline-flex', alignItems: 'center', gap: 1.5, mb: 3,
+                            opacity: whoVis ? 1 : 0,
+                            animation: whoVis ? 'ab_rise .6s ease both' : 'none',
+                        }}>
+                            <Box sx={{ width: 28, height: 3, borderRadius: 2, bgcolor: colors.secondary.main }} />
+                            <Typography sx={{
+                                fontFamily: typography.fontFamily.body,
+                                fontSize: typography.fontSize.xs,
+                                fontWeight: 700,
+                                color: colors.secondary.main,
+                                letterSpacing: 2.5,
+                                textTransform: 'uppercase',
+                            }}>
+                                Who We Are
+                            </Typography>
+                            <Box sx={{ width: 28, height: 3, borderRadius: 2, bgcolor: colors.secondary.main }} />
+                        </Box>
+
+                        {/* Heading */}
+                        <Typography sx={{
+                            fontFamily: typography.fontFamily.accent,
+                            fontSize: { xs: '2.4rem', md: '3.2rem' },
+                            fontWeight: 900,
+                            color: colors.text.primary,
+                            lineHeight: 1.12,
+                            mb: 4,
+                            opacity: whoVis ? 1 : 0,
+                            animation: whoVis ? 'ab_rise .65s ease .1s both' : 'none',
+                        }}>
+                            Partnering with Jesus to Change Lives
+                        </Typography>
+
+                        {/* Preamble card */}
+                        <Box sx={{
+                            bgcolor: 'white',
+                            borderRadius: '24px',
+                            p: { xs: 3.5, md: 5 },
+                            border: `1px solid ${colors.divider}`,
+                            position: 'relative',
+                            overflow: 'hidden',
+                            textAlign: 'left',
+                            boxShadow: '0 8px 40px rgba(10,16,40,0.06)',
+                            opacity: whoVis ? 1 : 0,
+                            animation: whoVis ? 'ab_rise .7s ease .2s both' : 'none',
+                        }}>
+                            {/* Gold top bar */}
+                            <Box sx={{ position: 'absolute', top: 0, left: 0, right: 0, height: 4, background: `linear-gradient(90deg, ${colors.secondary.main}, ${colors.secondary.main}55)` }} />
+
+                            <Typography sx={{
+                                fontFamily: typography.fontFamily.body,
+                                fontSize: { xs: '1.2rem', md: '1.35rem' },
+                                color: colors.text.secondary,
+                                lineHeight: 2.1,
+                                mb: 2.5,
+                            }}>
+                                Jesus Partners Outreach is a Non-Governmental, Non-profit organization registered
+                                with the Corporate Affairs Commission in Nigeria,{' '}
+                                <Box component="span" sx={{ color: colors.secondary.main, fontWeight: 700 }}>
+                                    RC: 6922346
+                                </Box>
+                                .
+                            </Typography>
+
+                            <Typography sx={{
+                                fontFamily: typography.fontFamily.body,
+                                fontSize: { xs: '1.2rem', md: '1.35rem' },
+                                color: colors.text.secondary,
+                                lineHeight: 2.1,
+                            }}>
+                                We are an outreach ministry dedicated to preaching the gospel of grace in Christ Jesus
+                                to a needy world. Ours is partnership with Jesus — the Anointed Savior, Healer,
+                                Deliverer; the hope of the hopeless and the answer to all life's questions.
+                            </Typography>
+                        </Box>
+
+                        {/* Divider */}
+                        <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, mt: 6 }}>
+                            <Box sx={{ flex: 1, height: '1px', background: `linear-gradient(90deg, transparent, ${colors.divider})` }} />
+                            <Box sx={{ width: 8, height: 8, borderRadius: '50%', bgcolor: colors.secondary.main }} />
+                            <Box sx={{ flex: 1, height: '1px', background: `linear-gradient(90deg, ${colors.divider}, transparent)` }} />
+                        </Box>
+                    </Box>
+                </Container>
             </Box>
 
             {/* ══ STATS ══ */}
@@ -250,7 +336,7 @@ export default function AboutPage() {
                 </Container>
             </Box>
 
-            {/* ══ VISION / MISSION / ANTHEM / PRAYER / STORY — preview cards ══ */}
+            {/* ══ VISION / MISSION / ANTHEM / PRAYER / STORY ══ */}
             <Box ref={pillarsRef} sx={{ bgcolor: 'white', py: { xs: 8, md: 12 }, position: 'relative', overflow: 'hidden' }}>
                 <Box sx={{ position: 'absolute', inset: 0, backgroundImage: `radial-gradient(${colors.divider} 1px, transparent 1px)`, backgroundSize: '24px 24px', opacity: .6, pointerEvents: 'none' }} />
                 <Container maxWidth="lg" sx={{ position: 'relative', zIndex: 1 }}>
@@ -302,13 +388,12 @@ export default function AboutPage() {
                 </Container>
             </Box>
 
-            {/* ══ CERTIFICATE — unchanged ══ */}
+            {/* ══ CERTIFICATE ══ */}
             <Box ref={certRef} sx={{ bgcolor: 'white', py: { xs: 8, md: 12 }, position: 'relative', overflow: 'hidden' }}>
                 <Box sx={{ position: 'absolute', inset: 0, backgroundImage: `radial-gradient(${colors.divider} 1px, transparent 1px)`, backgroundSize: '24px 24px', opacity: .5, pointerEvents: 'none' }} />
                 <Box sx={{ position: 'absolute', top: '10%', left: '-5%', width: 350, height: 350, borderRadius: '50%', background: `radial-gradient(circle,${colors.secondary.main}07 0%,transparent 70%)`, pointerEvents: 'none' }} />
                 <Box sx={{ position: 'absolute', bottom: '10%', right: '-5%', width: 300, height: 300, borderRadius: '50%', background: `radial-gradient(circle,${colors.accent.teal}07 0%,transparent 70%)`, pointerEvents: 'none' }} />
                 <Container maxWidth="md" sx={{ position: 'relative', zIndex: 1 }}>
-
                     <Box sx={{ textAlign: 'center', mb: { xs: 5, md: 7 }, opacity: certVis ? 1 : 0, animation: certVis ? 'ab_rise .6s ease both' : 'none' }}>
                         <Box sx={{ display: 'inline-flex', alignItems: 'center', gap: 1.5, mb: 1.5 }}>
                             <Box sx={{ width: 28, height: 3, borderRadius: 2, bgcolor: colors.secondary.main }} />
@@ -325,22 +410,8 @@ export default function AboutPage() {
 
                     <Box sx={{ mx: 'auto', maxWidth: 600, position: 'relative', opacity: certVis ? 1 : 0, animation: certVis ? 'ab_rise .8s cubic-bezier(.34,1.2,.64,1) .15s both' : 'none' }}>
                         <Box sx={{ position: 'absolute', inset: '-12px', borderRadius: '28px', background: `linear-gradient(135deg,${colors.secondary.main}30,${colors.secondary.dark}10,${colors.secondary.main}20)`, filter: 'blur(18px)', pointerEvents: 'none' }} />
-
-                        <Box sx={{
-                            position: 'relative',
-                            borderRadius: '22px',
-                            p: '5px',
-                            background: `linear-gradient(135deg, ${colors.secondary.dark}, ${colors.secondary.main}, #fff8e1, ${colors.secondary.main}, ${colors.secondary.dark})`,
-                            boxShadow: `0 30px 80px rgba(10,16,40,0.18), 0 0 0 1px ${colors.secondary.main}40`,
-                        }}>
-                            <Box sx={{
-                                bgcolor: '#fffdf5',
-                                borderRadius: '18px',
-                                p: { xs: 2.5, md: 4 },
-                                border: `2px solid ${colors.secondary.main}22`,
-                                position: 'relative',
-                                overflow: 'hidden',
-                            }}>
+                        <Box sx={{ position: 'relative', borderRadius: '22px', p: '5px', background: `linear-gradient(135deg, ${colors.secondary.dark}, ${colors.secondary.main}, #fff8e1, ${colors.secondary.main}, ${colors.secondary.dark})`, boxShadow: `0 30px 80px rgba(10,16,40,0.18), 0 0 0 1px ${colors.secondary.main}40` }}>
+                            <Box sx={{ bgcolor: '#fffdf5', borderRadius: '18px', p: { xs: 2.5, md: 4 }, border: `2px solid ${colors.secondary.main}22`, position: 'relative', overflow: 'hidden' }}>
                                 {[
                                     { top: 10, left: 10, borderTop: `3px solid ${colors.secondary.main}`, borderLeft: `3px solid ${colors.secondary.main}` },
                                     { top: 10, right: 10, borderTop: `3px solid ${colors.secondary.main}`, borderRight: `3px solid ${colors.secondary.main}` },
@@ -349,7 +420,6 @@ export default function AboutPage() {
                                 ].map((style, i) => (
                                     <Box key={i} sx={{ position: 'absolute', width: 28, height: 28, borderRadius: '3px', ...style, pointerEvents: 'none' }} />
                                 ))}
-
                                 <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 1.5, mb: 2.5 }}>
                                     <Box sx={{ flex: 1, height: '1px', background: `linear-gradient(90deg,transparent,${colors.secondary.main}60)` }} />
                                     <EmojiEventsIcon sx={{ color: colors.secondary.main, fontSize: 22 }} />
@@ -359,20 +429,7 @@ export default function AboutPage() {
                                     <EmojiEventsIcon sx={{ color: colors.secondary.main, fontSize: 22 }} />
                                     <Box sx={{ flex: 1, height: '1px', background: `linear-gradient(90deg,${colors.secondary.main}60,transparent)` }} />
                                 </Box>
-
-                                <Box
-                                    component="img"
-                                    src="/outreach.jpeg"
-                                    alt="Jesus Partners Outreach Certificate of Incorporation"
-                                    sx={{
-                                        width: '100%',
-                                        height: 'auto',
-                                        display: 'block',
-                                        borderRadius: '10px',
-                                        boxShadow: '0 8px 32px rgba(10,16,40,0.12)',
-                                    }}
-                                />
-
+                                <Box component="img" src="/outreach.jpeg" alt="Jesus Partners Outreach Certificate of Incorporation" sx={{ width: '100%', height: 'auto', display: 'block', borderRadius: '10px', boxShadow: '0 8px 32px rgba(10,16,40,0.12)' }} />
                                 <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 1.5, mt: 2.5 }}>
                                     <Box sx={{ flex: 1, height: '1px', background: `linear-gradient(90deg,transparent,${colors.secondary.main}60)` }} />
                                     <Typography sx={{ fontFamily: typography.fontFamily.body, fontSize: typography.fontSize.xs, fontWeight: 700, color: colors.text.secondary, letterSpacing: 1.5, textTransform: 'uppercase' }}>
@@ -383,7 +440,6 @@ export default function AboutPage() {
                             </Box>
                         </Box>
                     </Box>
-
                 </Container>
             </Box>
 
@@ -405,6 +461,7 @@ export default function AboutPage() {
                 </Container>
             </Box>
 
+            {/* ══ CTA ══ */}
             <Box ref={ctaRef} sx={{ background: `linear-gradient(120deg,${colors.primary.dark} 0%,#0F3460 55%,${colors.primary.light} 100%)`, py: { xs: 8, md: 11 }, position: 'relative', overflow: 'hidden' }}>
                 <Box sx={{ position: 'absolute', inset: 0, backgroundImage: `radial-gradient(rgba(255,255,255,0.04) 1px, transparent 1px)`, backgroundSize: '22px 22px', pointerEvents: 'none' }} />
                 <Container maxWidth="md" sx={{ position: 'relative', zIndex: 1, textAlign: 'center' }}>

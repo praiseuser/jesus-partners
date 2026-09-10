@@ -3,9 +3,13 @@ import MainLayout from '../layout/MainLayout';
 import AdminLayout from '../layout/AdminLayout';
 import HomePage from '../pages/Home';
 import WhatWeDoPage from '../pages/Whatwedo';
+import ProgramDetailPage from '../pages/ProgramDetailPage';
+import MandatePage from '../pages/MandatePage';
+import MandateDetailPage from '../pages/MandateDetailPage';
 import ProgramPage from '../pages/CurrentPrograms';
 import AboutPage from '../pages/About';
 import PartnerPage from '../pages/Partnerwithus';
+import PartnerDetailPage from '../pages/PartnerDetailPage';
 import ProgramsPage from '../pages/Programs';
 import GalleryPage from '../pages/Gallery';
 import ContactPage from '../pages/Contact';
@@ -38,9 +42,13 @@ const router = createBrowserRouter([
         children: [
             { index: true, element: <HomePage /> },
             { path: 'whatwedo', element: <WhatWeDoPage /> },
+            { path: 'whatwedo/mandate', element: <MandatePage /> },
+            { path: 'whatwedo/mandate/:id', element: <MandateDetailPage /> },
+            { path: 'whatwedo/:id', element: <ProgramDetailPage /> },
             { path: 'program', element: <ProgramPage /> },
             { path: 'about', element: <AboutPage /> },
             { path: 'partners', element: <PartnerPage /> },
+            { path: 'partners/:id', element: <PartnerDetailPage /> },
             { path: 'programs', element: <ProgramsPage /> },
             { path: 'gallery', element: <GalleryPage /> },
             { path: 'contact', element: <ContactPage /> },
