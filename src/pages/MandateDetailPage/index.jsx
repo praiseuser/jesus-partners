@@ -5,7 +5,7 @@ import { Link, useParams } from 'react-router-dom';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
-import { MANDATE } from '../Mandatepage';
+import { MANDATE } from '../MandatePage';
 import { colors, typography } from '../../theme';
 
 const keyframes = {
