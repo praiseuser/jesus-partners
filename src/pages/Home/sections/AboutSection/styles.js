@@ -57,7 +57,6 @@ export const bgPatternSx = {
   backgroundSize: "28px 28px",
 };
 
-// Simplified orb helper — picks accent color + opacity internally
 export const orbSx = (top, left, right, bottom, size, delay = "0s") => ({
   position: "absolute",
   top,
@@ -72,28 +71,21 @@ export const orbSx = (top, left, right, bottom, size, delay = "0s") => ({
   animation: `ab_imgGlow 6s ease-in-out ${delay} infinite`,
 });
 
-/* ── 6 / 6 Grid layout ── */
-export const gridSx = {
-  display: "grid",
-  gridTemplateColumns: { xs: "1fr", md: "1fr 1fr" },
-  gap: { xs: 5, md: 7 },
-  alignItems: "start",
-};
-
-export const colSx = {
-  display: "flex",
-  flexDirection: "column",
+/* ── Section header (centered) ── */
+export const sectionHeaderSx = {
+  textAlign: "center",
+  mb: { xs: 5, md: 8 },
 };
 
 export const sectionLabelSx = {
   display: "inline-flex",
   alignItems: "center",
-  gap: 1.2,
+  gap: 1.5,
   mb: 1.5,
 };
 
 export const labelBarSx = {
-  width: 28,
+  width: 30,
   height: 3,
   borderRadius: 2,
   bgcolor: colors.secondary.main,
@@ -101,29 +93,186 @@ export const labelBarSx = {
 
 export const labelTextSx = {
   fontFamily: typography.fontFamily.body,
-  fontSize: typography.fontSize.xs,
-  fontWeight: 700,
+  fontSize: { xs: "0.85rem", md: "0.9rem" },
+  fontWeight: 800,
   letterSpacing: 2.5,
   textTransform: "uppercase",
   color: colors.secondary.main,
 };
 
-export const columnHeadingSx = {
+export const sectionTitleSx = {
   fontFamily: typography.fontFamily.accent,
-  fontSize: { xs: "1.7rem", md: "2.1rem" },
+  fontSize: { xs: "2.2rem", md: "3rem" },
   fontWeight: 900,
   color: colors.text.primary,
-  lineHeight: 1.15,
+  lineHeight: 1.1,
   letterSpacing: "-0.5px",
-  mb: 2,
 };
 
-export const columnBodySx = {
+/* ── 2-column grid ── */
+export const gridSx = {
+  display: "grid",
+  gridTemplateColumns: { xs: "1fr", md: "1fr 1fr" },
+  gap: { xs: 3.5, md: 4 },
+  alignItems: "stretch",
+};
+
+/* ── Shared card chrome ── */
+const cardBase = {
+  position: "relative",
+  overflow: "hidden",
+  borderRadius: { xs: "24px", md: "28px" },
+  p: { xs: 3, sm: 4, md: 5 },
+  display: "flex",
+  flexDirection: "column",
+};
+
+/* Left: dark Preamble card */
+export const preambleCardSx = {
+  ...cardBase,
+  bgcolor: colors.primary.dark,
+  border: "1px solid rgba(212,160,23,0.25)",
+  boxShadow: "0 24px 60px rgba(10,16,40,0.25)",
+};
+
+export const cardDotsSx = {
+  position: "absolute",
+  inset: 0,
+  pointerEvents: "none",
+  backgroundImage:
+    "radial-gradient(rgba(212,160,23,0.06) 1px, transparent 1px)",
+  backgroundSize: "22px 22px",
+};
+
+export const cardGlowSx = {
+  position: "absolute",
+  top: "-20%",
+  right: "-15%",
+  width: 320,
+  height: 320,
+  borderRadius: "50%",
+  background: `radial-gradient(circle, ${colors.secondary.main}22 0%, transparent 70%)`,
+  pointerEvents: "none",
+};
+
+/* Right: light Foundation card */
+export const foundationCardSx = {
+  ...cardBase,
+  bgcolor: "white",
+  border: `1px solid ${colors.divider}`,
+  boxShadow: "0 20px 50px rgba(10,16,40,0.08)",
+};
+
+export const cardTagSx = (dark) => ({
+  display: "inline-flex",
+  alignItems: "center",
+  gap: 1.2,
+  mb: 1.5,
+  position: "relative",
+  zIndex: 1,
+  "& .tag-text": {
+    fontFamily: typography.fontFamily.body,
+    fontSize: "0.9rem",
+    fontWeight: 800,
+    letterSpacing: 2.2,
+    textTransform: "uppercase",
+    color: dark ? colors.secondary.light : colors.secondary.main,
+  },
+});
+
+export const cardHeadingSx = (dark) => ({
+  fontFamily: typography.fontFamily.accent,
+  fontSize: { xs: "1.9rem", md: "2.4rem" },
+  fontWeight: 900,
+  color: dark ? "white" : colors.text.primary,
+  lineHeight: 1.15,
+  letterSpacing: "-0.5px",
+  mb: 3,
+  position: "relative",
+  zIndex: 1,
+});
+
+export const bodyCopySx = (dark) => ({
   fontFamily: typography.fontFamily.body,
-  fontSize: typography.fontSize.base,
+  fontSize: { xs: "1.08rem", md: "1.15rem" },
+  fontWeight: 500,
+  color: dark ? "rgba(255,255,255,0.82)" : colors.text.secondary,
+  lineHeight: 1.85,
+  mb: 2.5,
+  position: "relative",
+  zIndex: 1,
+});
+
+/* Scripture highlight inside the Preamble card */
+export const scriptureBlockSx = {
+  position: "relative",
+  zIndex: 1,
+  bgcolor: "rgba(212,160,23,0.1)",
+  borderLeft: `4px solid ${colors.secondary.main}`,
+  borderRadius: "0 18px 18px 0",
+  px: { xs: 2.5, md: 3.5 },
+  py: { xs: 2.5, md: 3 },
+  mb: 3,
+};
+
+export const scriptureTextSx = {
+  fontFamily: typography.fontFamily.accent,
+  fontSize: { xs: "1.2rem", md: "1.35rem" },
+  fontWeight: 700,
+  fontStyle: "italic",
+  color: "white",
+  lineHeight: 1.65,
+};
+
+export const scriptureRefSx = {
+  fontFamily: typography.fontFamily.heading,
+  fontSize: "1rem",
+  fontWeight: 800,
+  color: colors.secondary.light,
+  mt: 1.5,
+};
+
+/* Closing line highlight */
+export const closingLineSx = (dark) => ({
+  position: "relative",
+  zIndex: 1,
+  mt: "auto",
+  pt: 2.5,
+  borderTop: `1px solid ${dark ? "rgba(255,255,255,0.15)" : colors.divider}`,
+  fontFamily: typography.fontFamily.heading,
+  fontSize: { xs: "1.1rem", md: "1.2rem" },
+  fontWeight: 800,
+  color: dark ? colors.secondary.light : colors.text.primary,
+  lineHeight: 1.6,
+});
+
+/* Registration badge in the Foundation card */
+export const rcBadgeSx = {
+  display: "flex",
+  alignItems: "center",
+  gap: 1.8,
+  bgcolor: `${colors.secondary.main}12`,
+  border: `1.5px solid ${colors.secondary.main}40`,
+  borderRadius: "18px",
+  px: { xs: 2, md: 2.5 },
+  py: 1.8,
+  mb: 3,
+};
+
+export const rcBadgeLabelSx = {
+  fontFamily: typography.fontFamily.body,
+  fontSize: "0.85rem",
+  fontWeight: 700,
   color: colors.text.secondary,
-  lineHeight: 1.9,
-  mb: 2,
+  lineHeight: 1.3,
+};
+
+export const rcBadgeValueSx = {
+  fontFamily: typography.fontFamily.accent,
+  fontSize: { xs: "1.2rem", md: "1.35rem" },
+  fontWeight: 900,
+  color: colors.text.primary,
+  lineHeight: 1.25,
 };
 
 /* ── Divider + Read More ── */
@@ -145,12 +294,12 @@ export const readMoreBtnSx = {
   gap: 1,
   bgcolor: colors.secondary.main,
   color: "white",
-  px: 4,
-  py: 1.6,
-  borderRadius: "10px",
+  px: { xs: 4.5, md: 5.5 },
+  py: { xs: 1.8, md: 2 },
+  borderRadius: "999px",
   textDecoration: "none",
   fontFamily: typography.fontFamily.heading,
-  fontSize: typography.fontSize.sm,
+  fontSize: "1.1rem",
   fontWeight: 800,
   letterSpacing: 0.5,
   boxShadow: `0 10px 30px ${colors.secondary.main}44`,
@@ -162,6 +311,10 @@ export const readMoreBtnSx = {
 };
 
 /* ── Legacy exports kept in case other files still import these ── */
+export const colSx = { display: "flex", flexDirection: "column" };
+export const columnHeadingSx = cardHeadingSx(false);
+export const columnBodySx = bodyCopySx(false);
+export const bodyTextSx = columnBodySx;
 export const headingSx = columnHeadingSx;
 export const headGoldSx = {
   background: `linear-gradient(120deg, ${colors.secondary.dark}, ${colors.secondary.main}, ${colors.secondary.light})`,
@@ -171,4 +324,3 @@ export const headGoldSx = {
   backgroundClip: "text",
   animation: "ab_gradShift 4s ease infinite",
 };
-export const bodyTextSx = columnBodySx;

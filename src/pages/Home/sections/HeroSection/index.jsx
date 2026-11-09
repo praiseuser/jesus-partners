@@ -1,49 +1,39 @@
-import { Box, Container, Stack, Typography } from '@mui/material';
+import { Box, Container, Typography } from '@mui/material';
 import { GlobalStyles } from '@mui/material';
 import { Link } from 'react-router-dom';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import PlayCircleIcon from '@mui/icons-material/PlayCircle';
-import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import { typography } from '../../../../theme';
 import {
-    keyframes, heroWrapSx, overlayLayersSx, decoCircleSx,
-    particleSx, contentWrapSx, eyebrowSx, eyebrowDotSx, eyebrowTextSx,
+    keyframes, heroWrapSx, overlayLayersSx, contentWrapSx,
+    eyebrowSx, eyebrowLineSx, eyebrowTextSx,
     titleSx, titleGoldSx, subtitleSx, wordGoldSx, dividerLineSx,
-    btnPrimarySx, btnSecSx, scrollIndicatorSx,
+    buttonsRowSx, btnPrimarySx, btnSecSx,
+    scrollIndicatorSx, scrollTrackSx, scrollDotSx,
 } from './styles';
-
-const PARTICLES = [
-    { left: '10%', delay: 0,   dur: 6   },
-    { left: '25%', delay: 1.5, dur: 8   },
-    { left: '42%', delay: 0.8, dur: 7   },
-    { left: '60%', delay: 2.2, dur: 9   },
-    { left: '75%', delay: 0.3, dur: 6.5 },
-    { left: '88%', delay: 1.8, dur: 7.5 },
-];
 
 const GALLERY_IMAGES = [79, 72, 51];
 
-const DISPLAY_SECS  = 20;                   
-const FADE_SECS     = 1.5;                        
-const TOTAL         = GALLERY_IMAGES.length;
-const CYCLE         = TOTAL * DISPLAY_SECS;      
-
+const DISPLAY_SECS = 20;
+const FADE_SECS = 1.5;
+const TOTAL = GALLERY_IMAGES.length;
+const CYCLE = TOTAL * DISPLAY_SECS;
 
 const bgSlideKeyframe = (index) => {
-    const fadeInStart  = (index * DISPLAY_SECS) / CYCLE * 100;
-    const fadeInEnd    = ((index * DISPLAY_SECS) + FADE_SECS) / CYCLE * 100;
+    const fadeInStart = (index * DISPLAY_SECS) / CYCLE * 100;
+    const fadeInEnd = ((index * DISPLAY_SECS) + FADE_SECS) / CYCLE * 100;
     const fadeOutStart = ((index + 1) * DISPLAY_SECS - FADE_SECS) / CYCLE * 100;
-    const fadeOutEnd   = ((index + 1) * DISPLAY_SECS) / CYCLE * 100;
+    const fadeOutEnd = ((index + 1) * DISPLAY_SECS) / CYCLE * 100;
 
     const clamp = (v) => Math.min(v, 100);
 
     return {
-        '0%':                              { opacity: index === 0 ? 1 : 0 },
-        [`${clamp(fadeInStart).toFixed(2)}%`]:  { opacity: index === 0 ? 1 : 0 },
-        [`${clamp(fadeInEnd).toFixed(2)}%`]:    { opacity: 1 },
+        '0%': { opacity: index === 0 ? 1 : 0 },
+        [`${clamp(fadeInStart).toFixed(2)}%`]: { opacity: index === 0 ? 1 : 0 },
+        [`${clamp(fadeInEnd).toFixed(2)}%`]: { opacity: 1 },
         [`${clamp(fadeOutStart).toFixed(2)}%`]: { opacity: 1 },
-        [`${clamp(fadeOutEnd).toFixed(2)}%`]:   { opacity: 0 },
-        '100%':                            { opacity: 0 },
+        [`${clamp(fadeOutEnd).toFixed(2)}%`]: { opacity: 0 },
+        '100%': { opacity: 0 },
     };
 };
 
@@ -60,9 +50,9 @@ const buildLayerSx = (imgNum, index) => {
             backgroundPosition: 'center',
             backgroundRepeat: 'no-repeat',
             opacity: index === 0 ? 1 : 0,
-            animation: `${kfName} ${CYCLE}s linear infinite`,
-            animationDelay: '0s',
-            willChange: 'opacity',
+            // crossfade + a slow gentle zoom so the photos feel alive
+            animation: `${kfName} ${CYCLE}s linear infinite, hero_zoom 26s ease-in-out infinite alternate`,
+            willChange: 'opacity, transform',
             zIndex: 0,
         },
     };
@@ -83,24 +73,17 @@ export default function HeroSection() {
 
                 {overlayLayersSx.map((sx, i) => <Box key={i} sx={sx} />)}
 
-                <Box sx={decoCircleSx(300, '-8%', undefined, '-6%', undefined, 0)} />
-                <Box sx={decoCircleSx(200, undefined, undefined, '-4%', '5%', 1.5)} />
-                <Box sx={decoCircleSx(150, '20%', undefined, undefined, '-5%', 0.8)} />
-
-                {PARTICLES.map((p, i) => <Box key={i} sx={particleSx(p.left, p.delay, p.dur)} />)}
-
                 <Container maxWidth="lg">
                     <Box sx={contentWrapSx}>
 
-                        <Box sx={{ display: 'flex', justifyContent: 'center', mb: 0 }}>
-                            <Box sx={eyebrowSx}>
-                                <Box sx={eyebrowDotSx} />
-                                <Typography sx={eyebrowTextSx}>Incorporated in Nigeria · Serving Since 2007</Typography>
-                            </Box>
+                        <Box sx={eyebrowSx}>
+                            <Box sx={eyebrowLineSx} />
+                            <Typography sx={eyebrowTextSx}>Incorporated in Nigeria · Serving Since 2007</Typography>
+                            <Box sx={eyebrowLineSx} />
                         </Box>
 
-                        <Typography sx={titleSx}>
-                            Jesus Partners{' '}
+                        <Typography component="h1" sx={titleSx}>
+                            Jesus Partners
                             <Box component="span" sx={titleGoldSx}>Outreach</Box>
                         </Typography>
 
@@ -111,25 +94,26 @@ export default function HeroSection() {
 
                         <Box sx={dividerLineSx} />
 
-                        <Stack direction={{ xs: 'column', sm: 'row' }} gap={8} justifyContent="center" marginTop={7} alignItems="center">
-                            {/* CHANGED: was to="/partners", now to="/about" */}
+                        <Box sx={buttonsRowSx}>
                             <Box component={Link} to="/about" sx={btnPrimarySx}>
-                                <FavoriteIcon sx={{ fontSize: 17 }} />
+                                <FavoriteIcon sx={{ fontSize: 20 }} />
                                 Who We Are
                             </Box>
                             <Box component={Link} to="/whatwedo" sx={btnSecSx}>
-                                <PlayCircleIcon sx={{ fontSize: 17 }} />
+                                <PlayCircleIcon sx={{ fontSize: 20 }} />
                                 What We Do
                             </Box>
-                        </Stack>
+                        </Box>
                     </Box>
                 </Container>
 
                 <Box sx={scrollIndicatorSx} onClick={() => window.scrollBy({ top: window.innerHeight, behavior: 'smooth' })}>
-                    <Typography sx={{ fontFamily: typography.fontFamily.body, fontSize: '0.6rem', color: 'rgba(255,255,255,0.45)', letterSpacing: 2.5, textTransform: 'uppercase' }}>
+                    <Typography sx={{ fontFamily: typography.fontFamily.body, fontSize: '0.75rem', fontWeight: 700, color: 'rgba(255,255,255,0.7)', letterSpacing: 2.5, textTransform: 'uppercase' }}>
                         Scroll
                     </Typography>
-                    <KeyboardArrowDownIcon sx={{ fontSize: 20, color: 'rgba(255,255,255,0.45)' }} />
+                    <Box sx={scrollTrackSx}>
+                        <Box sx={scrollDotSx} />
+                    </Box>
                 </Box>
 
             </Box>
